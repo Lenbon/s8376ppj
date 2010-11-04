@@ -11,6 +11,7 @@
  * Sprawdzić swoją odpowiedź pisząc program, który pokazuje wyniki operacji.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie11 {
 	public static void main(String[] args) {

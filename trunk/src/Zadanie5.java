@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
  * w postaci schematu blokowego oraz w pseudo-kodzie.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie5 {
 	public static void main(String[] args) {

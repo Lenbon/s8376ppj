@@ -6,6 +6,7 @@
  * double) w programie.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie13 {
 	public static void main(String[] args) {

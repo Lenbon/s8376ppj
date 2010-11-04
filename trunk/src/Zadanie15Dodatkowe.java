@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
  * ilosci testow
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie15Dodatkowe {
 	public static void main(String[] args) {

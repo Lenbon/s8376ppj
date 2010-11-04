@@ -8,7 +8,8 @@ import java.io.InputStreamReader;
  * Opracować algorytm, który oblicza silnię (n!) podanej liczby n. Przedstawić
  * go w postaci schematu blokowego oraz w pseudo-kodzie.
  * 
- * @author filip *
+ * @author s8376
+ * @version $Revision$
  */
 public class Zadanie4 {
 	public static void main(String[] args) {

@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
  * wejściowe i wyjściowe podać w oknach dialogowych.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie14 {
 	public static void main(String[] args) {

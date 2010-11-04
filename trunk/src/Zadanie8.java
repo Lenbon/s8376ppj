@@ -8,6 +8,7 @@
  * reszta z dzielenia x/y = wynik dzielenia całkowitego
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie8 {
 	public static void main(String[] args) {

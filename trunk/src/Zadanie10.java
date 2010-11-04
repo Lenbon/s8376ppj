@@ -6,18 +6,11 @@
  * inicjacji odpowiedniej zmiennej (typu int) w programie.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie10 {
 	public static void main(String[] args) {
-		// FIXME do zrobienia
-		int in = 999;
-		int out = 99;
-
-		do {
-			++out;
-		} while (in - out != 198 && in - out != -198 && out < 1000);
-
-		System.out.println("Wejście: " + in + "\nWyjście: " + out);
-
+		int number = 907;
+		System.out.println("Wynik: in " + number + "; out " + (number % 10) + ((number % 100) / 10) + (number / 100));
 	}
 }

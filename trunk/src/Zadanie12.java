@@ -4,6 +4,7 @@
  * Napisać program pokazujący kody wszystkich polskich liter.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie12 {
 	public static void main(String[] args) {

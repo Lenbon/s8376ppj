@@ -6,6 +6,7 @@
  * obliczony przez program.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie7 {
 	public static void main(String[] args) {

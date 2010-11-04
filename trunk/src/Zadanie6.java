@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
  * algorytm w pseudo-kodzie.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie6 {
 	public static void main(String[] args) {

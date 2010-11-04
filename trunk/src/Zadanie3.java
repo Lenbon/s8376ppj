@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
  * oraz w pseudo-kodzie.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie3 {
 	public static void main(String[] args) {

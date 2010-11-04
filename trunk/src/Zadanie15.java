@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
  * oknach dialogowych.
  * 
  * @author s8376
+ * @version $Revision$
  */
 public class Zadanie15 {
 	/**

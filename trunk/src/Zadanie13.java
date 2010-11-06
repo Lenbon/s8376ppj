@@ -23,7 +23,7 @@ public class Zadanie13 {
 		if (delta < 0 ) {
 			System.out.println("Funkcja nie ma miejsc zerowych.");
 		} else if (delta == 0) {
-			double x0 = -b / 2 * a;
+			double x0 = -b / (2 * a);
 			System.out.println("Funkcja ma jedno miejsce zerowe: x0 = " + x0);
 		} else {
 			double x1 = (-b - Math.sqrt(delta)) / (2 * a);

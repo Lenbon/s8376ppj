@@ -3,6 +3,7 @@ package school;
 /**
  * Point
  * 
+ * @package school
  * @author s8376
  * @version $Revision$
  */

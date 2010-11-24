@@ -48,7 +48,7 @@ public class Circle {
 	 * @param int r
 	 */
 	public Circle(Point p, int r) {
-		++_ilosc;
+		_nr = ++_ilosc;
 		_center = p;
 		_radius = r;
 	}
@@ -81,8 +81,15 @@ public class Circle {
 		return _nr;
 	}
 
+	/**
+	 * Sprawdza, czy punkt jest wewnatrz kola
+	 * 
+	 * @param Point
+	 *            p
+	 * @return boolean
+	 */
 	public boolean inside(Point p) {
-		if (this._radius < Math.sqrt((p.getX() - this._center.getX())
+		if (this._radius >= Math.sqrt((p.getX() - this._center.getX())
 				* (p.getX() - this._center.getX())
 				+ (p.getY() - this._center.getY())
 				* (p.getY() - this._center.getY()))) {

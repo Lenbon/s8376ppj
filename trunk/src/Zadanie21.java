@@ -13,6 +13,10 @@ import java.io.InputStreamReader;
  * @version $Revision$
  */
 public class Zadanie21 {
+	/**
+	 * @param message
+	 * @return String
+	 */
 	protected int _input(String message) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println(message);
@@ -31,23 +35,23 @@ public class Zadanie21 {
 		
 		return input;
 	}
+	/**
+	 * Zwraca NWD
+	 * 
+	 * @param int a
+	 * @param int b
+	 * @return int
+	 */
 	protected int _nwd(int a, int b) {
-		if (a < b) {
-			int buffeur = a;
-			a = b;
-			b = buffeur;
-		}
-	
-		int nwd = a % b;
-		if (nwd == 0) {
-			nwd = b;
-		} else {
-			while (b % nwd != 0) {
-				nwd = b % nwd;
-			}
-		}
+		int nwd = 0;
 
-		return nwd;
+		do {
+			nwd = a % b;
+			a = b;
+			b = nwd;
+		} while (nwd != 0);
+		
+		return a;
 	}
 	public static void main(String[] args) {
 		Zadanie21 nwd = new Zadanie21();

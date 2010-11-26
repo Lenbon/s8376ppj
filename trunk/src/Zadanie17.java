@@ -12,29 +12,39 @@ import javax.swing.JOptionPane;
  */
 public class Zadanie17 {
 	public static void main(String[] args) {
-//		String calculation = JOptionPane.showInputDialog("Kalkulator");
-		
-		String calculation = "12.3+12.3";
-		
-		boolean isCorrect = false;
-		boolean isParsedFirst = false;
-		boolean isParsedChar = false;
-		boolean isParsedSecond = false;
-		
-		int length = calculation.length();
-		
+		String calculation = JOptionPane.showInputDialog("Kalkulator - akceptuje wyrażenie: AA.AA + BB.BB");
+
 		try {
-			for (int x = 0; x < length; ++x) {
-				
-				
-				
-				
-				
-				throw new Exception("Źle!!");
-				
-//				double first;
-//				double second;
+			String operator;
+			if (calculation.contains("+")) {
+				operator = "+";
+			} else if (calculation.contains("-")) {
+				operator = "-";
+			} else if (calculation.contains("*")) {
+				operator = "*";
+			} else if (calculation.contains("/")) {
+				operator = "/";
+			} else {
+				throw new Exception("Nie podano operatora operacji");
 			}
+
+			double first = Double.parseDouble(calculation.substring(0, calculation.indexOf(operator)));
+			double second = Double.parseDouble(calculation.substring(calculation.indexOf(operator) + 1));
+			double result;
+
+			if (operator == "+") {
+				result = first + second;
+			} else if (operator == "-") {
+				result = first - second;
+			} else if (operator == "*") {
+				result = first * second;
+			} else if (operator == "/") {
+				result = first / second;
+			} else {
+				throw new Exception("Nie podano operatora operacji");
+			}
+			
+			JOptionPane.showMessageDialog(null, "Wynik: " + first + " " + operator + " " + second + " = " + result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

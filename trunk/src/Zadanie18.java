@@ -1,4 +1,6 @@
-import javax.swing.JOptionPane;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Zadanie 18
@@ -13,29 +15,61 @@ import javax.swing.JOptionPane;
  */
 public class Zadanie18 {
 	public static void main(String[] args) {
-		String input;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		input = JOptionPane.showInputDialog("Podaj pierwszy parametr:");
-		boolean first = Boolean.parseBoolean(input);
+		try {
+			String input;
+			boolean result = false;
 
-		input = JOptionPane.showInputDialog("Podaj drugi parametr:");
-		boolean second = Boolean.parseBoolean(input);
+			System.out.println("Podaj pierwszą wartość (TRUE / FALSE):");
+			input = br.readLine().trim();
+			boolean first = input.equals("TRUE") ? true : false;
 
-		String operation = JOptionPane.showInputDialog("Podaj typ operacji:");
+			System.out.println("Podaj drugą wartość (TRUE / FALSE):");
+			input = br.readLine().trim();
+			boolean second = input.equals("TRUE") ? true : false;
 
-		//enum operation = {"negation", "and", "or", "implication", "ifAndOnlyIf"};
+			System.out.println("Podaj rodzaj operacji (NOT, AND, OR, IMP, IAOI):");
+			String operator = br.readLine().trim();
 
-		switch (operation) {
-		case "negation":// negacja
-			break;
-		case "and": // i
-			break;
-		case "or": // lub
-			break;
-		case "implication": // implikacja
-			break;
-		case "ifAndOnlyIf": // równoważność
-			break;
+			if (operator.equals("NOT")) {
+				if (first == false) {
+					result = true;
+				}
+			} else if (operator.equals("AND")) {
+				if (first == true && second == true) {
+					result = true;
+				}
+			} else if (operator.equals("OR")) {
+				if (first == true || second == true) {
+					result = true;
+				}
+			} else if (operator.equals("IMP")) { // IMPlikacja
+				if (first == second) {
+					result = true;
+				} else if (first == false && second == true ) {
+					result = true;
+				}
+			} else if (operator.equals("IAOI")) { // If And Only If
+				if (first == second) {
+					result = true;
+				}
+			} else {
+				throw new Exception("Nieobsługiwany typ operacji");
+			}
+			
+			String message = "Wynik: ";
+			
+			message += first == true ? "TRUE" : "FALSE";
+			message += " " + operator + " ";
+			message += second == true ? "TRUE" : "FALSE";
+			message += " = " + (result == true ? "TRUE" : "FALSE");
+			
+			System.out.println(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

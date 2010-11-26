@@ -15,16 +15,14 @@ import java.io.InputStreamReader;
  */
 public class Zadanie16 {
 	public static void main(String[] args) {
-//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//		String inputString = "";
-//		System.out.println("Podaj ciąg: ");
-//		try {
-//			inputString = br.readLine();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-
-		String inputString = "abcdefg0123456789ABCDEFG";
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String inputString = "";
+		System.out.println("Podaj ciąg: ");
+		try {
+			inputString = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		int status;
 		int stringLenght = inputString.length();

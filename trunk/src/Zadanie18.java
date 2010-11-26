@@ -29,7 +29,8 @@ public class Zadanie18 {
 			input = br.readLine().trim();
 			boolean second = input.equals("TRUE") ? true : false;
 
-			System.out.println("Podaj rodzaj operacji (NOT, AND, OR, IMP, IAOI):");
+			System.out
+					.println("Podaj rodzaj operacji (NOT, AND, OR, IMP, IAOI):");
 			String operator = br.readLine().trim();
 
 			if (operator.equals("NOT")) {
@@ -47,7 +48,7 @@ public class Zadanie18 {
 			} else if (operator.equals("IMP")) { // IMPlikacja
 				if (first == second) {
 					result = true;
-				} else if (first == false && second == true ) {
+				} else if (first == false && second == true) {
 					result = true;
 				}
 			} else if (operator.equals("IAOI")) { // If And Only If
@@ -57,14 +58,14 @@ public class Zadanie18 {
 			} else {
 				throw new Exception("Nieobsługiwany typ operacji");
 			}
-			
+
 			String message = "Wynik: ";
-			
+
 			message += first == true ? "TRUE" : "FALSE";
 			message += " " + operator + " ";
 			message += second == true ? "TRUE" : "FALSE";
 			message += " = " + (result == true ? "TRUE" : "FALSE");
-			
+
 			System.out.println(message);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -69,14 +69,14 @@ public class Zadanie26 {
 //			f1.show(); // 15/5 = 3
 
 			f2.setDenominator(-2);
-//			f2.show(); // 3/-2 = -(1+1/2) = -1.5
-//
+//			f2.show(); // 3/-2 = -(1+1/2) = -1.5 // FIXME
+
 			f3.setNumerator(20);
 			f3.setDenominator(4);
 //			f3.show(); // 20/4 = 5
-//			
-			f2.setDenominator(2);
-			f3.greater(f2).show(); // 20/4 = 5
+
+//			f2.setDenominator(2);
+//			f3.greater(f2).show(); // 20/4 = 5
 
 			f3.simplify().show(); // 20/4 = 5
 

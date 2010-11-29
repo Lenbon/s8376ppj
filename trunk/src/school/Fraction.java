@@ -191,6 +191,8 @@ public class Fraction {
 	 * @return void
 	 */
 	public void show() {
+		int integer = 0;
+		int numerator = 0;
 		String value = "";
 
 		try {
@@ -201,31 +203,28 @@ public class Fraction {
 			}
 			
 			if (getNumerator() > getDenominator()) {
-				setInteger(getInteger() + (getNumerator() / getDenominator()));
-				setNumerator(getNumerator() % getDenominator());
+				integer = getNumerator() / getDenominator();
+				numerator = getNumerator() % getDenominator();
 				
-				if (getInteger() != 0 && getNumerator() != 0) {
-					toLog("" + getInteger() + " + " + getNumerator() + "/" + getDenominator());
+				if (integer != 0 && numerator != 0) {
+					toLog("" + integer + "+" + numerator + "/" + getDenominator());
 				}
 			}
 			
 			boolean flagCut = false;
 			double result;
 
-			if (getInteger() != 0 && getNumerator() == 0) { // wynik to liczba calkowita po skroceniu ulamka
-				value += getInteger();
-			} else if (getInteger() != 0 && getNumerator() != 0) { // wynik to liczba calkowita oraz ulamek
-				result = (double) getInteger() + (double) getNumerator() / (double) getDenominator();
-				flagCut = getInteger() * getNumerator() % getDenominator() == 0 ? true : false; // czy uciac zero po kropce, jesli nie ma ulamka
-//				value += getInteger() + " + " + getNumerator() + " / " + getDenominator() + " = " + (flagCut ? (int) result : result);
-				value += (flagCut ? (int) result : result);
-			} else if (getInteger() == 0 && getNumerator() != 0) { // wynik to ulamek
+			if (integer != 0 && numerator == 0) { // wynik to liczba calkowita po skroceniu ulamka
+				value += integer;
+			} else if (integer != 0 && numerator != 0) { // wynik to liczba calkowita oraz ulamek
 				result = (double) getNumerator() / (double) getDenominator();
 				flagCut = getNumerator() % getDenominator() == 0 ? true : false; // czy uciac zero po kropce, jesli nie ma ulamka
-//				value += getNumerator() + " / " + getDenominator() + " = " + (flagCut ? (int) result : result);
+				value += (flagCut ? (int) result : result);
+			} else if (integer == 0 && numerator != 0) { // wynik to ulamek
+				result = (double) getNumerator() / (double) getDenominator();
+				flagCut = getNumerator() % getDenominator() == 0 ? true : false; // czy uciac zero po kropce, jesli nie ma ulamka
 				value += (flagCut ? (int) result : result);
 			}
-
 		} catch (Exception e) {
 			value = e.getMessage();
 		}

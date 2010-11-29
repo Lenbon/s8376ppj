@@ -12,17 +12,13 @@ public class Fraction {
 	 */
 	protected int _denominator;
 	/**
-	 * Czesc calkowita
-	 */
-	protected int _integer = 0;
-	/**
 	 * Licznik
 	 */
 	protected int _numerator;
 	/**
 	 * Log dzialan
 	 */
-	protected String _log = "";
+	protected static String _log = "";
 
 	/**
 	 * Tworzy ułamek a/b, gdzie a,b są liczbami całkowitymi
@@ -46,23 +42,15 @@ public class Fraction {
 	}
 
 	/**
-	 * Dodaje porcje do logu
-	 * 
-	 * @param String log
-	 * @return void
-	 */
-	protected void toLog(String log) {
-		_log += (_log != "" ? " = " : "") + log;
-	}
-
-	/**
 	 * Zwraca nowy ułamek bedący wynikiem dodawania dwóch ułamków
 	 * 
 	 * @param Fraction f
 	 * @return Fraction
 	 */
 	public Fraction add(Fraction f) {
-		return new Fraction(1); // FIXME
+		NWW nww = new NWW();
+		int multiple = nww.calculate(getDenominator(), f.getDenominator());
+		return new Fraction((multiple / getDenominator()) * getNumerator() + (multiple / f.getDenominator()) * f.getNumerator(), multiple);
 	}
 
 	/**
@@ -72,7 +60,7 @@ public class Fraction {
 	 * @return Fraction
 	 */
 	public Fraction div(Fraction f) {
-		return new Fraction(this.getDenominator() * f.getNumerator(), this.getNumerator() * f.getDenominator());
+		return new Fraction(getNumerator() * f.getDenominator(), getDenominator() * f.getNumerator());
 	}
 
 	/**
@@ -85,14 +73,14 @@ public class Fraction {
 	}
 	
 	/**
-	 * Zwraca czesc calkowita
+	 * Zwraca zawartosc loga
 	 * 
-	 * @return int
+	 * @return String
 	 */
-	public int  getInteger() {
-		return _integer;
+	public String getLog() {
+		return _log;
 	}
-
+	
 	/**
 	 * Zwraca licznik
 	 * 
@@ -138,7 +126,16 @@ public class Fraction {
 	 * @return Fraction
 	 */
 	public Fraction mult(Fraction f) {
-		return new Fraction(1); // FIXME
+		return new Fraction(getNumerator() * f.getNumerator(), getDenominator() * f.getDenominator());
+	}
+	
+	/**
+	 * Czysci zawartosc loga
+	 * 
+	 * @return void
+	 */
+	public void resetLog() {
+		_log = "";
 	}
 
 	/**
@@ -151,18 +148,20 @@ public class Fraction {
 	}
 
 	/**
-	 * Ustawia czesc calkowita ulamka
+	 * Ustawia zawartosc loga
 	 * 
-	 * @param value
+	 * @param String log
+	 * @return void
 	 */
-	public void setInteger(int value) {
-		_integer = value;
+	public void setLog(String log) {
+		_log = log; 
 	}
-
+	
 	/**
 	 * Zmienia licznik danego ułamka
 	 * 
 	 * @param int value
+	 * @return void
 	 */
 	public void setNumerator(int value) {
 		_numerator = value;
@@ -174,15 +173,9 @@ public class Fraction {
 	 * @return Fraction
 	 */
 	public Fraction simplify() {
-		Fraction f = new Fraction(getNumerator(), getDenominator());
-		f.setInteger(getInteger());
 		NWD nwd = new NWD();
-		
-		int divisor = nwd.calculate(f.getNumerator(), f.getDenominator());
-		f.setNumerator(f.getNumerator() / divisor);
-		f.setDenominator(f.getDenominator() / divisor);
-	
-		return f;
+		int divisor = nwd.calculate(getNumerator(), getDenominator());
+		return new Fraction(getNumerator() / divisor, getDenominator() / divisor);
 	}
 
 	/**
@@ -192,6 +185,7 @@ public class Fraction {
 	 */
 	public void show() {
 		int integer = 0;
+		boolean negative = false;
 		int numerator = 0;
 		String value = "";
 
@@ -202,13 +196,28 @@ public class Fraction {
 				throw new Exception("ERROR");
 			}
 			
+			// wyciagniecie czesci calkowitej
 			if (getNumerator() > getDenominator()) {
+				
+				if ((getNumerator() < 0 && getDenominator() > 0) || (getNumerator() > 0 && getDenominator() < 0)) {
+					negative = true;
+				}
+				
 				integer = getNumerator() / getDenominator();
 				numerator = getNumerator() % getDenominator();
 				
 				if (integer != 0 && numerator != 0) {
-					toLog("" + integer + "+" + numerator + "/" + getDenominator());
+					toLog("" + (negative ? "-(" : "") + integer + "+" + numerator + "/" + getDenominator() + (negative ? ")" : ""));
 				}
+			} else {
+				numerator = getNumerator();
+			}
+			
+			// skrocenie ulamka
+			NWD nwd = new NWD();
+			int multiple = nwd.calculate(numerator, getDenominator());
+			if (multiple > 1) {
+				toLog("" + (integer != 0 ? integer + "+" : "") + (numerator / multiple) + "/" + (getDenominator() / multiple));
 			}
 			
 			boolean flagCut = false;
@@ -231,7 +240,7 @@ public class Fraction {
 
 		toLog(value);
 		System.out.println(_log);
-		_log = ""; // reset log
+		resetLog();
 	}
 
 	/**
@@ -241,9 +250,21 @@ public class Fraction {
 	 * @return Fraction
 	 */
 	public Fraction sub(Fraction f) {
-		return new Fraction(1); // FIXME
+		NWW nww = new NWW();
+		int multiple = nww.calculate(getDenominator(), f.getDenominator());
+		return new Fraction((multiple / getDenominator()) * getNumerator() - (multiple / f.getDenominator()) * f.getNumerator(), multiple);
 	}
 
+	/**
+	 * Dodaje porcje do logu
+	 * 
+	 * @param String log
+	 * @return void
+	 */
+	public void toLog(String log) {
+		_log += (_log != "" ? " = " : "") + log;
+	}
+	
 	/**
 	 * Oblicza wartość ułamka
 	 * 
@@ -254,11 +275,7 @@ public class Fraction {
 		if (_denominator == 0) {
 			throw new Exception("ERROR");
 		}
-
-		if (getInteger() != 0) {
-			return (double) getInteger() * getNumerator() / getDenominator();
-		} else {
-			return (double) getNumerator() / getDenominator();	
-		}
+			
+		return (double) getNumerator() / getDenominator();	
 	}
 }

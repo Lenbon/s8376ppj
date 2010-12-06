@@ -43,8 +43,7 @@ public class Circle {
 	}
 
 	/**
-	 * @param Point
-	 *            p
+	 * @param Point p
 	 * @param int r
 	 */
 	public Circle(Point p, int r) {
@@ -84,15 +83,11 @@ public class Circle {
 	/**
 	 * Sprawdza, czy punkt jest wewnatrz kola
 	 * 
-	 * @param Point
-	 *            p
+	 * @param Point p
 	 * @return boolean
 	 */
 	public boolean inside(Point p) {
-		if (this._radius >= Math.sqrt((p.getX() - this._center.getX())
-				* (p.getX() - this._center.getX())
-				+ (p.getY() - this._center.getY())
-				* (p.getY() - this._center.getY()))) {
+		if (getRadius() >= p.distance(getCenter())) {
 			return true;
 		} else {
 			return false;
@@ -102,8 +97,7 @@ public class Circle {
 	/**
 	 * Sprawdza, czy nasz okrag jest wiekszy niz okrag c
 	 * 
-	 * @param Circle
-	 *            c
+	 * @param Circle c
 	 * @return boolean
 	 */
 	public boolean isBigger(Circle c) {
@@ -135,8 +129,7 @@ public class Circle {
 	/**
 	 * Ustawia srodek okregu
 	 * 
-	 * @param Point
-	 *            c
+	 * @param Point c
 	 * @return void
 	 */
 	public void setCenter(Point c) {

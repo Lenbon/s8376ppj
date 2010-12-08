@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,7 +32,6 @@ public class Zadanie31 {
 	public static void main(String[] args) {
 		String input = "";
 		ArrayList<String> list = new ArrayList<String>();
-		String[] array;
 		
 		while (true) {
 			input = JOptionPane.showInputDialog("Podaj ciąg znaków:");
@@ -39,12 +39,9 @@ public class Zadanie31 {
 				break;
 			}
 			list.add(input);
-		
-//			array = (String[]) list.toArray();
-//			
-////			Arrays.sort(list.toArray()
-			
-	        System.out.println(Arrays.toString(list.toArray()));
+
+			Collections.sort(list);
+	        System.out.println(input + "\n" + Arrays.toString(list.toArray()));
 		}
 	}
 }

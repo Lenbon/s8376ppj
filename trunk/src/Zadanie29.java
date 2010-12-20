@@ -18,8 +18,6 @@ public class Zadanie29 {
 //-2 0 -1
 //1 2 -2
 		
-		
-		
 		int[][] tab = new int[3][3];
 		
 		for (int y = 0; y < 3; ++y) {
@@ -35,10 +33,17 @@ public class Zadanie29 {
 		int max = 0;
 		
 		boolean rowBreak = false;
+		boolean init = true;
 		
 		for (int[] val : tab) {
 			rowBreak = false;
 			for (int subVal : val) {
+				if (init == true) {
+					min = subVal;
+					max = subVal;
+					init = false;
+				}
+
 				sumAll += subVal;
 				multiplication *= subVal;
 				min = subVal < min ? subVal : min;

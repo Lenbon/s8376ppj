@@ -1,5 +1,5 @@
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -21,6 +21,7 @@ public class Zadanie41 {
 		String message = "";
 		int counter;
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
 		while (true) {
 			input = JOptionPane.showInputDialog(message + "Wprowadź ciąg znaków");
 			
@@ -37,8 +38,15 @@ public class Zadanie41 {
 						map.put("" + input.charAt(x), 1);
 					}
 				}
+
+				Set<String> set = map.keySet();
+				for (Object val : set.toArray()) {
+					if (map.get(val) == 1) {
+						counter++;
+					}
+				}
+
 				message = "Ilość pojedyńczych znaków: " + counter + " (" + chars;
-System.out.println(map.toString());
 				map.clear();
 			}
 		}

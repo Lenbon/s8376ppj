@@ -1,4 +1,3 @@
-import java.io.IOError;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,13 +19,13 @@ import javax.swing.JOptionPane;
 public class Zadanie30 {
 	public static void main(String[] args) {
 		boolean flag = false;
-		int n = 0;
+		int x, y, n = 0;
 		
 		do {
 			try {
 				n = Integer.parseInt(JOptionPane.showInputDialog("Podaj liczbę n:"));
-				if (n <= 0) {
-					throw new Exception("n musi być większe od 0");
+				if (n <= 0 || n > 25) {
+					throw new Exception("n musi być w większe od 0 i mniejsze od 25");
 				}
 				flag = true;
 			} catch (Exception e) {
@@ -35,17 +34,14 @@ public class Zadanie30 {
 			}			
 		} while (flag == false);
 		
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int x = 1; x <= n; ++x) {
-			list.add(x);
+		ArrayList<Integer> set = new ArrayList<Integer>();
+		for (int s = 1; s <= n; ++s) {
+			set.add(s);
 		}
-
-		int counter, x, y;
-		String input;
-		HashMap<Integer, String> hash = new HashMap<Integer, String>();
 		
-		flag = false;
-		counter = 1;
+		String input;
+		ArrayList<HashMap<Integer, Integer>> list = new ArrayList<HashMap<Integer, Integer>>();
+		
 		do {
 			try {
 				input = JOptionPane.showInputDialog("Podaj zbior liczb (format: x,y;z,w):");
@@ -57,29 +53,35 @@ public class Zadanie30 {
 					if (x < 0 || y < 0 || x > n || y > n) {
 						throw new Exception("Liczby wykraczają poza zbiór 0 - " + n);
 					}
-					hash.put(counter, val);
-					++counter;
+					HashMap<Integer, Integer> pair = new HashMap<Integer, Integer>();
+					pair.put(1, x);
+					pair.put(2, y);
+					list.add(pair);
 					flag = true;
 				}
-			} catch (IOError e) {
-				JOptionPane.showMessageDialog(null, "Podany ciąg znaków nie jest poprawny");
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			} 
+				JOptionPane.showMessageDialog(null, "Podany ciąg znaków nie jest poprawny");
+				flag = false;
+			}
 		} while (flag == false);
 
+		System.out.println(set.toString());
 		System.out.println(list.toString());
-		System.out.println(hash.toString());
 		
-		boolean isReflexiveRelation = true;
-		boolean isSymmetricRelation = true;
-		
-		for (Integer val : hash.keySet()) {
-			System.out.println(hash.get(val));
-			for (Integer subval : hash.keySet()) {
-				
-				
-				
+		for (x = 1; x <= n; x++) {
+			for (HashMap<Integer, Integer> val : list) {
+				if (val.get(1).equals(x) && val.get(2).equals(x)) {
+					// relacja zwrotna: x,x
+					System.out.println("znalazłem relację zwrotną: " + val.get(1) + ", " + val.get(2));
+				}
+				if (val.get(1).equals(x) && !val.get(2).equals(x)) {
+					for (HashMap<Integer, Integer> subVal: list) {
+						if (subVal.get(1).equals(val.get(2)) && subVal.get(2).equals(x)) {
+							// relacja symetryczna: x,y y,x
+							System.out.println("znalazłem relację symetryczną: " + val.get(2) + ", " + x + " " + subVal.get(1) + ", " + subVal.get(2));
+						}
+					}
+				}
 			}
 		}
 	}

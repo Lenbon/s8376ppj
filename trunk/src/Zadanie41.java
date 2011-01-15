@@ -23,7 +23,7 @@ public class Zadanie41 {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		while (true) {
-			input = JOptionPane.showInputDialog(message + "Wprowadź ciąg znaków");
+			input = JOptionPane.showInputDialog(message + (message.length() > 0 ? "\n" : "") + "Wprowadź ciąg znaków");
 			
 			if (input == null || input.equals("Koniec")) {
 				break;
@@ -43,10 +43,11 @@ public class Zadanie41 {
 				for (Object val : set.toArray()) {
 					if (map.get(val) == 1) {
 						counter++;
+						chars += (chars.length() > 0 ? ", " : "") + val;
 					}
 				}
 
-				message = "Ilość pojedyńczych znaków: " + counter + " (" + chars;
+				message = "Ilość pojedyńczych znaków: " + counter + " (" + chars + ")";
 				map.clear();
 			}
 		}

@@ -68,21 +68,14 @@ public class Zadanie30 {
 		System.out.println(set.toString());
 		System.out.println(list.toString());
 		
+		boolean flagRelSym = false, flagRelReturn = true;
+		
 		for (x = 1; x <= n; x++) {
 			for (HashMap<Integer, Integer> val : list) {
-				if (val.get(1).equals(x) && val.get(2).equals(x)) {
-					// relacja zwrotna: x,x
-					System.out.println("znalazłem relację zwrotną: " + val.get(1) + ", " + val.get(2));
-				}
-				if (val.get(1).equals(x) && !val.get(2).equals(x)) {
-					for (HashMap<Integer, Integer> subVal: list) {
-						if (subVal.get(1).equals(val.get(2)) && subVal.get(2).equals(x)) {
-							// relacja symetryczna: x,y y,x
-							System.out.println("znalazłem relację symetryczną: " + val.get(2) + ", " + x + " " + subVal.get(1) + ", " + subVal.get(2));
-						}
-					}
-				}
+//				if (val.get(1).equals(x));
 			}
 		}
+		System.out.println("W zbiorze " + (!flagRelReturn ? "NIE " : "") + "występuje relacja zwrotna " 
+				+ "oraz " + (!flagRelSym ? "NIE " : "") + "występuje relacja symetryczna");
 	}
 }

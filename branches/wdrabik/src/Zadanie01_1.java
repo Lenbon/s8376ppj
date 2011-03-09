@@ -28,7 +28,7 @@ import Zadanie1.*;
  * @author s8376
  * @version $Revision$
  */
-public class Zadanie1 {
+public class Zadanie01_1 {
 	public static double[] getInput() {
 		String input, dialogTitle = "";
 		boolean inputFlag = false;

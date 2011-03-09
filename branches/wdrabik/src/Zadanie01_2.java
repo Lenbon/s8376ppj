@@ -22,7 +22,7 @@ import Zadanie2.*;
  * @author s8376
  * @version $Revision$
  */
-public class Zadanie2 {
+public class Zadanie01_2 {
 	public static void main(String[] args) {
 		try {
 			

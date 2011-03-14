@@ -21,6 +21,7 @@ public class EngineVehicle extends Vehicle {
 			return;
 //			throw new Exception("Ilość paliwa przekracza pojemność zbiornika");
 		}
+		fuelTankQuantity += quantity;
 	}
 	public String getRegisterNumber() {
 		return registerNumber;

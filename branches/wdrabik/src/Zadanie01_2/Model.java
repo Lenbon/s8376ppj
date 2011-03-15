@@ -29,6 +29,7 @@ public class Model {
 				if (line.length() > 0) {
 					array = line.split("[;]+");
 					table = new Hashtable<String, String>();
+					
 					table.put("cardNum", array[0]);
 					table.put("pin", array[1]);
 					table.put("balance", array[2]);
@@ -36,13 +37,13 @@ public class Model {
 					table.put("limitPerDay", array[4]);
 					table.put("counterDay", array[5]);
 					table.put("timeLastUsage", array[6]);
+					
 					storage.add(table);
 				}
 			}
 			
 			br.close();
 		} catch (Exception e) {
-			System.out.println(e);
 			throw new Exception("Błąd połączenia z bazą danych");
 		}
 	}
@@ -62,6 +63,9 @@ public class Model {
 			throw new Exception("Błąd połączenia z bazą danych");
 		}
 		
+		write();
+	}
+	public void write() throws Exception {
 		String sep = ";";
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter(path));

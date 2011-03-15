@@ -57,39 +57,43 @@ public class Zadanie01_2 {
 				
 				inputFlag = false;
 				titleMessage = "";
+				double inputDouble;
 				while (inputFlag == false) {
 					try {
 						input = JOptionPane.showInputDialog((titleMessage.length() > 0 ? titleMessage + "\n" : "") + "Podaj kwotę do pobrania");
 
-						if (Double.parseDouble(input) % 100 != 0) {
+						try {
+							inputDouble = Double.parseDouble(input);	
+						} catch (NumberFormatException e) {
+							throw new Exception("Nieprawidłowy format kwoty");
+						}
+						
+						if (inputDouble % 100 != 0) {
 							throw new Exception("Bankomat wypłaca jedynie banknoty o niminale 100" + faceValue);
 						}
 
-						if (Double.parseDouble(input) > Double.parseDouble(account.get("balance"))) {
+						if (inputDouble > Double.parseDouble(account.get("balance"))) {
 							throw new Exception("Podana kwota przewyższa dostępny stan konta: " + account.get("balance") + faceValue);
 						}
 						
-						if (Double.parseDouble(input) > Double.parseDouble(account.get("limitPerOnce"))){
+						if (inputDouble > Double.parseDouble(account.get("limitPerOnce"))){
 							throw new Exception("Podana kwota przewyższa jednorazowy limit wypłaty: " + account.get("limitPerOnce") + faceValue);
 						}
 						
-						if (Double.parseDouble(input) > Double.parseDouble(account.get("limitPerDay")) - Double.parseDouble(account.get("counterDay"))){
+						if (inputDouble > Double.parseDouble(account.get("limitPerDay")) - Double.parseDouble(account.get("counterDay"))){
 							throw new Exception("Przekroczono dzienny limit wypłaty: " + account.get("limitPerDay") + faceValue);
 						}
 
 						inputFlag = true;
 						
-						account.put("counterDay", "" + (Double.parseDouble(account.get("counterDay")) + Double.parseDouble(input)));
+						account.put("counterDay", "" + (Double.parseDouble(account.get("counterDay")) + inputDouble));
 						
 						calendar = Calendar.getInstance();
 						account.put("timeLastUsage", "" + calendar.getTime());
 						
-						JOptionPane.showMessageDialog(null, "Wypłacono kwotę: " + Double.parseDouble(input) + faceValue);
+						JOptionPane.showMessageDialog(null, "Wypłacono kwotę: " + inputDouble + faceValue);
 						
 						model.setAccount();
-					} catch (NumberFormatException e) {
-						titleMessage = "Nieprawidłowy format kwoty";
-						inputFlag = false;
 					} catch (Exception e) {
 						titleMessage = e.getMessage();
 						inputFlag = false;

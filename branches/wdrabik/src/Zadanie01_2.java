@@ -1,4 +1,7 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Hashtable;
 
 import javax.swing.JOptionPane;
@@ -23,8 +26,36 @@ import Zadanie01_2.*;
  */
 public class Zadanie01_2 {
 	public static void main(String[] args) {
+		try {
+//			String dateFromModel = "201103151108";
+//			
+//			
+//	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+//
+//	        StringBuilder dateStringModel = new StringBuilder(dateFormat.format(dateFormat.parse(dateFromModel)));
+//	        
+//	        
+//	 
+//	        System.out.println("DEBUG: " + dateStringModel + " / " + dateStringNow);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+//		System.out.println(calendar.get(Calendar.DAY_OF_WEEK));
+		
+//		calendar = Calendar.
+		
+		
+		System.exit(0);
+		
+		
 		boolean inputFlag;
-		Calendar calendar;
+		
+		Date dateNow, dateModel;
+		String dateFormat = "yyyyMMddHHmm";
+		
 		int pinCounter = 3;
 		String input, titleMessage, faceValue = "PLN";
 		Model model = new Model("Files/Zadanie2Storage.txt");
@@ -58,8 +89,22 @@ public class Zadanie01_2 {
 				inputFlag = false;
 				titleMessage = "";
 				double inputDouble;
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 				while (inputFlag == false) {
 					try {
+						
+						Calendar calendarNow = Calendar.getInstance();
+						Calendar calendarModel = Calendar.getInstance();
+						
+						
+						calendarModel.
+						
+						dateNow = new Date();
+						dateNow.compareTo(dateModel)
+						// RESET LICZNIKA
+						dateModel = simpleDateFormat.parse(account.get("timeLastUsage"));
+
+						
 						input = JOptionPane.showInputDialog((titleMessage.length() > 0 ? titleMessage + "\n" : "") + "Podaj kwotę do pobrania");
 
 						try {
@@ -87,12 +132,12 @@ public class Zadanie01_2 {
 						inputFlag = true;
 						
 						account.put("counterDay", "" + (Double.parseDouble(account.get("counterDay")) + inputDouble));
-						
-						calendar = Calendar.getInstance();
-						account.put("timeLastUsage", "" + calendar.getTime());
-						
+
+						StringBuilder dateStringNow = new StringBuilder(simpleDateFormat.format(dateNow));
+						account.put("timeLastUsage", dateStringNow.toString());
+
 						JOptionPane.showMessageDialog(null, "Wypłacono kwotę: " + inputDouble + faceValue);
-						
+
 						model.setAccount();
 					} catch (Exception e) {
 						titleMessage = e.getMessage();

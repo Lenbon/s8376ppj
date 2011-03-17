@@ -1,8 +1,10 @@
+import java.util.*;
+import static java.util.Calendar.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Hashtable;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JOptionPane;
 
@@ -26,31 +28,6 @@ import Zadanie01_2.*;
  */
 public class Zadanie01_2 {
 	public static void main(String[] args) {
-		try {
-//			String dateFromModel = "201103151108";
-//			
-//			
-//	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
-//
-//	        StringBuilder dateStringModel = new StringBuilder(dateFormat.format(dateFormat.parse(dateFromModel)));
-//	        
-//	        
-//	 
-//	        System.out.println("DEBUG: " + dateStringModel + " / " + dateStringNow);
-			
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
-		
-//		System.out.println(calendar.get(Calendar.DAY_OF_WEEK));
-		
-//		calendar = Calendar.
-		
-		
-		System.exit(0);
-		
-		
 		boolean inputFlag;
 		
 		Date dateNow, dateModel;

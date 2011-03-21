@@ -1,5 +1,3 @@
-import javax.swing.JOptionPane;
-
 /**
  * Zadanie 15 dodatkowe
  * 

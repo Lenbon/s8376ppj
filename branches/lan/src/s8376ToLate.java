@@ -72,7 +72,7 @@ public class s8376ToLate {
 		}
 		
 //		int (columnNumberWithMost) {
-//			
+System.out.println(columnNumberWithMost); // FIXME
 //		}
 		
 		System.out.println("Wynik:\n"

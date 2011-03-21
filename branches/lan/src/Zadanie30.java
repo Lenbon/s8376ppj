@@ -73,6 +73,7 @@ public class Zadanie30 {
 		for (x = 1; x <= n; x++) {
 			for (HashMap<Integer, Integer> val : list) {
 //				if (val.get(1).equals(x))
+				System.out.println(val); // FIXME
 			}
 		}
 		System.out.println("W zbiorze " + (!flagRelReturn ? "NIE " : "") + "występuje relacja zwrotna " 

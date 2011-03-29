@@ -81,7 +81,7 @@ import zadanie04_1.*;
  * UWAGA. W sklepie mogą być owoce, których zapomniano dodać do cennika. Wtedy przy kasie są one usuwane z naszego koszyka.
  * 
  * @author s8376
- * @veersion $Revision$
+ * @version $Revision$
  */
 public class Zadanie04_1 {
 	public static void main(String[] args)  {

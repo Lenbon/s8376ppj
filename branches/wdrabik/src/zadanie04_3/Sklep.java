@@ -1,12 +1,5 @@
 package zadanie04_3;
 
-import zadanie04_2.Agrest;
-import zadanie04_2.Banany;
-import zadanie04_2.Koszyk;
-import zadanie04_2.Mandarynki;
-import zadanie04_2.Torba;
-import zadanie04_2.Truskawki;
-
 public class Sklep {
 	private Kasa kasa;
 	public Sklep() {
@@ -26,8 +19,8 @@ public class Sklep {
 
 		// FIXME przepisanie zakupow z kontenera do koszyka
 		
-		for (Product val : shopping) {
-			koszyk.add(val);
+		for (Owoce val : shopping) {
+			koszyk.add((Product) val);
 		}
 
 		koszyk.showContent();

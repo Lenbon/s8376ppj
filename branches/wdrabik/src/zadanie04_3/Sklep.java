@@ -13,13 +13,11 @@ public class Sklep {
 	}
  
 	// tu definicja metody zakupy(....)
-	public void zakupy(String owner, Owoce[] shopping) {
+	public <T> void zakupy(String owner, T[] shopping) {
 		Koszyk koszyk = new Koszyk();
 		System.out.println(owner + " bierze " + koszyk);
 
-		// FIXME przepisanie zakupow z kontenera do koszyka
-		
-		for (Owoce val : shopping) {
+		for (T val : shopping) {
 			koszyk.add((Product) val);
 		}
 

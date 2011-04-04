@@ -1,97 +1,32 @@
-import zadanie04_2.*;
-
 /**
- * Zadanie 2
+ * Zadanie- 1: znajdywanie hasła
  * 
- * (sklep owocowy B - max 7 punktów)
+ * ( max. 10 p)
  * 
- * Napisać aplikację, która symuluje zakupy w sklepie z owocami.
- * Aplikacja wymaga zdefiniowania kilku klas i umiejętnego ich użycia, w taki sposób by następujący program działał poprawnie.
- * Uwaga: w pokazanym tekście programu  występują odwołania do klas: Cennik, Koszyk, Truskawki, Banany, Agrest, Mandarynki, Kasa, Torba, ale nie występuje jeszcze dwie ważne klasy potrzebne do spełnienia wymagań postawionych przed programem.
+ * W firmie pracuje kilka osób. Któraś z nich zabezpieczyła hasłem dostęp do komputera z danymi o wynalazku.
+ * Wiadomo, że hasło zawiera inicjały osoby i następujące po nich 6 cyfr.
+ * Dwie siatki szpiegowskie próbują złamać hasło.
+ * Jedna  z nich stosuje automatyczny kod, który generuje wszystkie możliwe kombinacje: inicjały i sześć dowolnych cyfr, opierając się przy tym tylko na znajomości inicjałów pracowników.
+ * Druga uzyskała informację, że cyfry zawsze oznaczają RRMMDD - rok, miesiąc, dzień urodzenia pracownika i próbuje złamać hasło "ręcznie", wprowadzając kolejne możliwe warianty hasła.
  * 
- * class Sklep  {
- *     private Kasa kasa;
- *     Sklep() {
- *         // Na poczatku dnia ustalany jest cennik
- *         // i otwierana jest kasa
- *         Cennik cennik = Cennik.getCennik();
- *         cennik.set("Truskawki", 5);
- *         cennik.set("Banany", 6);
- *         cennik.set("Agrest", 7);
- *         kasa = new Kasa();
- *     }
- *     public void zakupyDemo(String osoba) {
- *         // Podana osoba wchodzi do sklepu i bierze koszyk
- *         // Każdy koszyk ma swój numer
- *         // Liczba koszyków jest nieograniczona
- *         
- *         Koszyk koszyk = new Koszyk();
- *         System.out.println(osoba + " bierze " + koszyk);
- *         
- *         // Dodaje do koszyka kilo truskawek
- *         // pol kilo bananow, cwierc kilo agrestu
- *         // i 2 kilo mandarynek
- *         koszyk.add(new Truskawki(1));
- *         koszyk.add(new Banany(0.5));
- *         koszyk.add(new Agrest(0.25));
- *         koszyk.add(new Mandarynki(2));  // dziwnym trafem sprzedawca zapomnial
- *         // ustalic ich ceny, ale kupujacy o tym nie wie
- *         
- *         // podchodzi do kasy
- *         // pokazuje zawartość koszyka
- *         // a kasa go rozlicza wg ustalonego cennika
- *         
- *         koszyk.showContent();
- *         kasa.printBill(koszyk);  // wydruk rachunku
- *         
- *         // placi i ...
- *         // przeklada zawartosc koszyka do torby
- *         Torba torba = new Torba(osoba);
- *         torba.loadFrom(koszyk);
- *         
- *         // Przychodzi do domu i pokazuje co kupil(a)
- *         torba.showContent();
- *     }
- * }
+ * Napisać program, który:
  * 
- * // Klasa testująca klasę Sklep
- * class Test {
- *     public static void main(String[] args)  {
- *         Sklep s = new Sklep();
- *         s.zakupyDemo("Janek");
- *     }
- *     
- * Wydruk:
- * Janek bierze koszyk sklepowy nr 1
- * Zawartość pojemnika "koszyk sklepowy nr 1" :
- * Truskawki 1.0 kg
- * Banany 0.5 kg
- * Agrest 0.25 kg
- * Mandarynki 2.0 kg
- * Kasa - rachunek za [ koszyk sklepowy nr 1 ] :
- * Truskawki 1.0 kg * 5.0 zl/kg  = 5.0 zl
- * Banany 0.5 kg * 6.0 zl/kg  = 3.0 zl
- * Agrest 0.25 kg * 7.0 zl/kg  = 1.75 zl
- * Razem: 9.75 zl
- * Zawartość pojemnika "torba [ właściciel: Janek ] " :
- * Truskawki 1.0 kg
- * Banany 0.5 kg
- * Agrest 0.25 kg
+ * Na podstawie podanego zestawu pracowników i informacji o ich datach urodzenia losowo generuje haslo w postaci xxRRMMDD, gdzie xx - inicjały, RR - rok, MM- miesiąc, DD - dzień urodzaniea  i zamyka tym haslem dostęp do danych,
  * 
- * Wymagania:
- * * dodanie do powyższego programu zakupów innych rodzajów owoców (np. Winogron) ma byc bardzo łatwe; należy tylko dodać kilkuwierszową definicję nowej klasy owoców, ustalenie cen oraz ew. zakup tych owoców.
- * * należy wykorzystać klasy abstrakcyjne i polimorfizm
- * * należy zminimalizować kod klas Koszyk i Torba
- * * należy zdefiniować klasę Cennik jako singleton (możemy mieć zawsze tylko jeden cennik)
+ * Grupa A. generuje automatycznie kolejno wszystkie możliwe hasła, opierając się tylko na informacji o inicjałach pracowników oraz że hasło po inicjałach zawiera sześć dowolnych cyfr i sprawdza, czy któreś z nich pasuje do prawdziwego hasła, jeśli tak, to program kończy działanie i wypisywane jest prawdziwe haslo (tak działa siatka szpiegowska nr 1).
  * 
- * UWAGA. W sklepie mogą być owoce, których zapomniano dodać do cennika. Wtedy przy kasie są one usuwane z naszego koszyka. 
+ * Grupa B. w pętli tworzy okienka dialogowe przez które wprowadza  haslo, próbując je zgadnąć, opierając się na podanych inicjałach i datach urodzin(nie ma gwarancji że inicjały i daty odpowiadają sobie kolejnością)  (tak działa siatka szpiegowska 2).
+ * 
+ * Część A należy zrealizowac jako działąjącą współbieżnie z częścią B.
+ * 
+ * Należy przy tym  podzielić pracę w części A pomiędzy wątki, których liczba podawana jest jako argument wywołania aplikacji. Należy zmierzyć czas odnalezienia hasła w sytuacjach, gdy w części A zajmuje się tym jeden wątek, albo 2 albo 10, albo 100 albo jeszcze inna ich liczba. 
+ * Sprawdzić co ew. jest potrzebne, by większa liczba wątków szybciej mogła odnaleźć właściwe hasło. Zapewnić też, by wraz z wątkami części A działała równocześnie  część dialogowa B.
+ * 
+ * Uwaga: spróbować podzielić kod pomiędzy klasy, odpowiadające jego funkcjonalnym częściom - np. pracownicy, zasób zamknięty hasłem, automatyczny generator i sprawdzaacz haseł, część dialogowa.
  * 
  * @author s8376
- * @version $Revision$
+ * @revision $Revision$
  */
 public class Zadanie04_2 {
-	public static void main(String[] args)  {
-		Sklep s = new Sklep();
-		s.zakupyDemo("Janek");
-	}
+
 }

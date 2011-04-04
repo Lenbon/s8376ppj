@@ -19,9 +19,6 @@ public class Pracownik extends Osoba{
 	public double getPensja() {
 		return pensja;
 	}
-	public void show() {
-		super.show();
-	}
 	public String toString() {
 		return super.toString() + " " + getZawod() + " " + getPensja();
 	}

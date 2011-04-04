@@ -80,5 +80,10 @@ public class Zadanie03_2 {
 		System.out.println(pracownik.getPensja());
 		pracownik.show();
 		System.out.println(pracownik.toString());
+		
+		
+		Osoba osoba2 = new Pracownik();
+		System.out.println( ((Pracownik) osoba2).getZawod());
+		
 	}
 }

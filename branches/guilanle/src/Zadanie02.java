@@ -1,4 +1,3 @@
-
 import zadanie02.*;
 
 /**
@@ -55,22 +54,40 @@ import zadanie02.*;
  */
 public class Zadanie02 {
 
-    public static void main(String[] args) {
-        Punkt p1 = new Punkt(0, 0), p2 = new Punkt(3, 4), p3 = new Punkt(2, 3), p4 = new Punkt(4, 0);
+	public static void main(String[] args) {
+		Punkt p1 = new Punkt(0, 0), p2 = new Punkt(3, 4), p3 = new Punkt(2, 3), p4 = new Punkt(
+				4, 0);
 
-        Odcinek od1 = new Odcinek(p1, p2), od2 = new Odcinek(p1, p4);
-        Odcinek[] odcinki = {od1, od2, new Odcinek(p3, p4)};
+		Odcinek od1 = new Odcinek(p1, p2), od2 = new Odcinek(p1, p4);
+		Odcinek[] odcinki = { od1, od2, new Odcinek(p3, p4) };
 
-        for (Odcinek od : odcinki) {
-            System.out.println(od);
-        }
+		for (Odcinek od : odcinki) {
+			System.out.println(od);
+		}
 
-        System.out.println("Długość odcinka " + od1.numer() + " = " + od1.dlugosc());
-        System.out.println("Odległość od punktu " + p3 + " do środka odcinka " + od2.numer() + " = " + od2.odleglosc(p3));
-        System.out.println("Dłuższy odcinek to " + od2.dluzszy(odcinki[2]));
-        System.out.println("Rzut odcinka " + od1 + " na X to " + od1.rzutX());
-        System.out.println("Rzut odcinka " + od1 + " na Y to " + od1.rzutY());
-        // własna metoda najdluzszy(...) z klasy Test do napisania!
-//        System.out.println("Najdłuższy odcinek to " + najdluzszy(odcinki)); // FIXME
-    }
+		System.out.println("Długość odcinka " + od1.numer() + " = "
+				+ od1.dlugosc());
+		System.out.println("Odległość od punktu " + p3 + " do środka odcinka "
+				+ od2.numer() + " = " + od2.odleglosc(p3));
+		System.out.println("Dłuższy odcinek to " + od2.dluzszy(odcinki[2]));
+		System.out.println("Rzut odcinka " + od1 + " na X to " + od1.rzutX());
+		System.out.println("Rzut odcinka " + od1 + " na Y to " + od1.rzutY());
+		// własna metoda najdluzszy(...) z klasy Test do napisania!
+		System.out.println("Najdłuższy odcinek to " + najdluzszy(odcinki)); // FIXME
+	}
+
+	public static String najdluzszy(Odcinek[] odcinki) {
+		Odcinek longest = null;
+		boolean first = true;
+		for (Odcinek val : odcinki) {
+			if (first) {
+				longest = val;
+				first = false;
+			}
+			if (longest.dlugosc() < val.dlugosc()) {
+				longest = val;
+			}
+		}
+		return longest.toString();
+	}
 }

@@ -1,4 +1,3 @@
-
 import zadanie03.*;
 
 /**
@@ -105,76 +104,74 @@ import zadanie03.*;
  */
 public class Zadanie03 {
 
-    public static void main(String[] args) {
-        Osoba klient1 = new Osoba("jan"), klient2 = new Osoba("anna");
-        Osoba[] klienci = new Osoba[]{klient1, klient2, new Osoba("maria")};
+	public static void main(String[] args) {
+		Osoba klient1 = new Osoba("jan"), klient2 = new Osoba("anna");
+		Osoba[] klienci = new Osoba[] { klient1, klient2, new Osoba("maria") };
 
-        for (Osoba o : klienci) {
-            System.out.print(o + "  ");
-        }
-        System.out.println("\n");
+		for (Osoba o : klienci) {
+			System.out.print(o + "  ");
+		}
+		System.out.println("\n");
 
-        Rachunek konto1 = new Rachunek(klient1);
-        Rachunek konto2 = new Konto(klient2, 2);    // oprocentowanie: 2%
-        Rachunek[] konta = {konto1,
-            konto2,
-            new KontoVIP(klienci[2], 5, -100)};    // oprocentowanie: 5%, limit debetu: -100
+		Rachunek konto1 = new Rachunek(klient1);
+		Rachunek konto2 = new Konto(klient2, 2); // oprocentowanie: 2%
+		Rachunek[] konta = { konto1, konto2, new KontoVIP(klienci[2], 5, -100) }; // oprocentowanie: 5%, limit debetu: -100
 
-        konto1.wplata(500);
-        konto2.wplata(900);
-        konto2.wyplata(300);
-        konto1.przelew(konto2, 200);
+		konto1.wplata(500);
+		konto2.wplata(900);
+		konto2.wyplata(300);
+		konto1.przelew(konto2, 200);
 
-        for (Rachunek k : konta) {
-            System.out.println(k);
-        }
+		for (Rachunek k : konta) {
+			System.out.println(k);
+		}
 
-        System.out.println();
+		System.out.println();
 
-        konta[2].wyplata(101);
-        konto2.przelew(konta[2], 801);
+		konta[2].wyplata(101);
+		konto2.przelew(konta[2], 801);
 
-        System.out.println();
+		System.out.println();
 
-        konto2.przelew(konta[2], 700);
+		konto2.przelew(konta[2], 700);
 
-        konta[2].przelew(konto1, 801);
-        System.out.println();
+		konta[2].przelew(konto1, 801);
+		System.out.println();
 
-        konta[2].przelew(konto1, 800);
+		konta[2].przelew(konto1, 800);
 
-        for (Rachunek k : konta) {
-            System.out.println(k);
-        }
+		for (Rachunek k : konta) {
+			System.out.println(k);
+		}
 
-        System.out.println();
+		System.out.println();
 
-        for (Rachunek k : konta) {
-            k.aktualizuj();
-        }
+		for (Rachunek k : konta) {
+			k.aktualizuj();
+		}
 
-        System.out.println();
+		System.out.println();
 
-        // własna metoda rekord(...) z klasy Bank do napisania!
-        System.out.println("Konto z największym stanem - " + rekord(konta));
-    }
+		// własna metoda rekord(...) z klasy Bank do napisania!
+		System.out.println("Konto z największym stanem - " + rekord(konta));
+	}
 
-    public static String rekord(Rachunek[] konta) {
-        double value = 0.0;
-        String output = "";
-        boolean flag = false;
-        for (Rachunek val : konta) {
-            if (!flag) {
-                value = val.getBalance();
-                output = val.toString();
-                flag = true;
-            }
-            if (value < val.getBalance()) {
-                value = val.getBalance();
-                output = val.toString();
-            }
-        }
+	public static String rekord(Rachunek[] konta) {
+		double value = 0.0;
+		String output = "";
+		boolean flag = false;
+		for (Rachunek val : konta) {
+			if (!flag) {
+				value = val.getBalance();
+				output = val.toString();
+				flag = true;
+			}
+			if (value < val.getBalance()) {
+				value = val.getBalance();
+				output = val.toString();
+			}
+		}
 
-        return output;
-    }
+		return output;
+	}
 }

@@ -1,4 +1,3 @@
-
 import zadanie01.*;
 
 /**
@@ -48,18 +47,18 @@ import zadanie01.*;
  */
 public class Zadanie01 {
 
-    public static void main(String[] args) {
-        Wielomian w1 = new Wielomian(3, 1, 4);
-        System.out.println(w1);                             // wyświetlenie reprezentacji tekstowej obiektu-wielomianu w1
+	public static void main(String[] args) {
+		Wielomian w1 = new Wielomian(3, 1, 4);
+		System.out.println(w1); // wyświetlenie reprezentacji tekstowej obiektu-wielomianu w1
 
-        Wielomian w2 = new Wielomian(-4, 0, 5, 0, 2);
-        System.out.println(w2);
+		Wielomian w2 = new Wielomian(-4, 0, 5, 0, 2);
+		System.out.println(w2);
 
-        System.out.println(w1.dodaj(w2));           // metoda dodaj(...) zwraca nowy obiekt-wielomian będący sumą dwóch wielomianów
+		System.out.println(w1.dodaj(w2)); // metoda dodaj(...) zwraca nowy obiekt-wielomian będący sumą dwóch wielomianów
 
-        System.out.println(w1.mnoz(w2));            // metoda mnoz(...) zwraca nowy obiekt-wielomian będący iloczynem dwóch wielomianów
+		System.out.println(w1.mnoz(w2)); // metoda mnoz(...) zwraca nowy obiekt-wielomian będący iloczynem dwóch wielomianów
 
-        System.out.println(w1.wartosc(1));          // wywołanie metody wartosc(...) zwraca wartość wielomianu w1 dla podanej wartości zmiennej x=1
-        System.out.println(w2.wartosc(0));
-    }
+		System.out.println(w1.wartosc(1)); // wywołanie metody wartosc(...) zwraca wartość wielomianu w1 dla podanej wartości zmiennej x=1
+		System.out.println(w2.wartosc(0));
+	}
 }

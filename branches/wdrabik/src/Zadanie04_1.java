@@ -29,25 +29,24 @@ import zadanie04_1.*;
  * @version $Revision$
  */
 public class Zadanie04_1 {
-	public static void main(String[] args) {
-		MyThread t1 = new MyThread();
-		Thread t2 = new Thread(new MyRunnable());
-		
-		t1.start();
-		t2.start();
-		
-		JOptionPane.showMessageDialog(null, "suspend");
-		t1.suspendThread();
-		
-		JOptionPane.showMessageDialog(null, "resume");
-		t1.resumeThread();
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        Thread t2 = new Thread(new MyRunnable());
 
-		
-		JOptionPane.showMessageDialog(null, "stop");
-		t1.stopThis();
-		
-//		switch dla wyboru parametrów
-		
-//		System.exit(0);
-	}
+        t1.start();
+        t2.start();
+
+        JOptionPane.showMessageDialog(null, "suspend");
+        t1.suspendThread();
+
+        JOptionPane.showMessageDialog(null, "resume");
+        t1.resumeThread();
+
+        JOptionPane.showMessageDialog(null, "stop");
+        t1.stopThis();
+
+        //		switch dla wyboru parametrów
+
+        //		System.exit(0);
+    }
 }

@@ -1,3 +1,7 @@
+import javax.swing.JOptionPane;
+
+import zadanie04_4.*;
+
 /**
  * Zadanie-3: dane meteorologiczne
  * 
@@ -21,5 +25,10 @@
  * @version $Revision$
  */
 public class Zadanie04_4 {
-
+    public static void main(String[] args) {
+        Controller controller = new Controller();
+        controller.run();
+        
+        System.out.println("OK");
+    }
 }

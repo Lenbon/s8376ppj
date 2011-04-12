@@ -1,4 +1,4 @@
-package Timer;
+package timer;
 
 public class Timer extends Thread {
 

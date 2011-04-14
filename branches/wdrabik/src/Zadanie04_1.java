@@ -36,14 +36,14 @@ public class Zadanie04_1 {
         t1.start();
         t2.start();
 
-        JOptionPane.showMessageDialog(null, "suspend");
-        t1.suspendThread();
-
-        JOptionPane.showMessageDialog(null, "resume");
-        t1.resumeThread();
-
-        JOptionPane.showMessageDialog(null, "stop");
-        t1.stopThis();
+//        JOptionPane.showMessageDialog(null, "suspend");
+//        t1.suspendThread();
+//
+//        JOptionPane.showMessageDialog(null, "resume");
+//        t1.resumeThread();
+//
+//        JOptionPane.showMessageDialog(null, "stop");
+//        t1.stopThis();
 
         //		switch dla wyboru parametrów
 

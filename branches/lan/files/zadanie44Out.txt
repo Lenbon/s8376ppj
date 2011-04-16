@@ -1,5 +1,0 @@
-Słowo: DUMMY
-wiersz 1; wystąpień: 1
-wiersz 4; wystąpień: 3
-wiersz 7; wystąpień: 1
-wiersz 8; wystąpień: 1

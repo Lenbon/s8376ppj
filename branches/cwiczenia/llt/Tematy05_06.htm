@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta name="Author" content="TLL">
+  <meta name="GENERATOR"
+ content="Mozilla/4.76 [en] (Win98; U) [Netscape]">
+  <title>GUI 05_06</title>
+</head>
+<body>
+<b><font size="+1">Wstêp do programowania wspó³bie¿nego: w±tki</font></b>
+<b><u><br>
+<br>
+<br>
+Zadanie 09</u> (3p)</b>
+<p></p>
+<p><b>Napisaæ program symuluj±cy grê w losowanie liczb miêdzy dwoma
+graczami.
+Jeden ruch ka¿dego gracza polega na wylosowaniu jednej liczby
+ca³kowitej
+z przedzia³u [1, 100]. Miêdzy kolejnymi ruchami gracza nale¿y
+zastosowaæ
+opó¼nienia czasowe (równie¿ losowe). Arbiter daje sygna³ rozpoczêcia
+gry
+i mierzy czas. Wygrywa ten, który po up³ywie okre¶lonego czasu otrzyma
+wiêkszy rezultat bêd±cy sum± wszystkich swoich wylosowanych liczb.</b>
+</p>
+<b>Arbiter jest obiektem klasy </b>Referee<i><span
+ style="font-weight: bold;"> </span></i><b>(w±tek</b><b>),
+przy tworzeniu obiektu okre¶lony jest czas gry. Gracze s± obiektami
+klasy </b>Player<i>
+</i><b>(w±tek</b><b>) i posiadaj±
+identyfikatory-nazwy.
+W metodzie </b>main(...)<i> </i><b>klasy testuj±cej nale¿y uruchomiæ
+w±tki
+arbitra i graczy.<br>
+<br>
+W trakcie dzia³ania, program powinien wyprowadzaæ na zewn±trz jak
+najwiêcej informacji, aby mo¿na by³o ¶ledziæ przebieg gry. <br>
+</b><b><u><br>
+</u></b>
+<p><b><u>Zadanie 10</u> (3p)<br>
+(Synchronizacja w±tków)</b><b><br>
+</b></p>
+<p><b style="font-weight: bold;">Zmodyfikowaæ zadanie 3 (rachunek
+bankowy) o dodatkow± klasê </b>Kasjer<b style="font-weight: bold;">
+umo¿liwiaj±c </b>równoleg³e<b style="font-weight: bold;"> wykonanie
+operacji bankowych w ró¿nych w±tkach. Klasa </b>Kasjer<span
+ style="font-weight: bold;"> reprezentuje kasjera - w±tek, którego
+zadaniem jest wykonanie okre¶lonej liczby powtórzeñ danej operacji
+bankowej (wp³ata/wyp³ata/przelew). Nastêpuj±cy fragment kodu pokazuje
+poprawne wykonanie zadania.</span><br>
+</p>
+<b>&nbsp;&nbsp;&nbsp; </b>public static void main(String[] args)<br>
+&nbsp;&nbsp;&nbsp; {&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+// tworzenie rachunkow z stanem poczatkowym<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Rachunek ror[] = new Rachunek[] {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Rachunek(new Osoba("firma 1")),&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// stan poczatkowy = 0<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Rachunek(new Osoba("firma 2"), 1000000),&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Rachunek(new Osoba("firma 3"), 120000),&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Rachunek(new Osoba("firma 4"), 140000),<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;};<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// tworzenie
+kasjerow - watkow okreslajacych sposob dzialania<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Thread kas[] = new Kasjer[] {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Kasjer(ror[0], 10, Kasjer.WPLATA, 10000),&nbsp;&nbsp; // kasjer 1:
+10000-krotna wplata kwoty 10 na konto firmy 1 <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Kasjer(ror[0], 5, Kasjer.WPLATA, 10000),&nbsp;&nbsp; &nbsp; // kasjer
+2: 10000-krotna wplata kwoty 5 na konto firmy 1<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Kasjer(ror[1], 50, Kasjer.WYPLATA, 10000),&nbsp; // kasjer 3:
+10000-krotna wyplata kwoty 50 z konta firmy 2<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Kasjer(ror[1], 50, Kasjer.WYPLATA, 10000),&nbsp; // kasjer 4:
+10000-krotna wyplata kwoty 50 z konta firmy 2<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Kasjer(ror[2], ror[3], 5, Kasjer.PRZELEW, 10000), // kasjer 5:
+10000-krotny przelew kwoty 5 z konta firmy 3 na firmy 4<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+Kasjer(ror[3], ror[2], 5, Kasjer.PRZELEW, 10000)&nbsp; // kasjer 6:
+10000-krotny przelew kwoty 5 z konta firmy 4 na firmy 3<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;};<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// rownolegle
+uruchamianie watkow - kasjerow <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;for (Thread k : kas)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;k.start();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// czekanie na
+zakonczenie wszystkich watkow<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;try {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (Thread k
+: kas)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;k.join();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;} catch (InterruptedException e){<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;e.printStackTrace();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// poprawne
+wyniki:<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// firma 1,
+stan: 150000.0<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// firma 2,
+stan: 0.0<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// firma 3,
+stan: 120000.0<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// firma 4,
+stan: 140000.0<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;for (Rachunek r : ror) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;System.out.println(r);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;}&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<b>&nbsp;<br>
+</b><b><br>
+</b><b><u>Zadanie 11</u></b><span style="font-weight: bold;">
+(5p)<br>
+(Koordynacja w±tków)<br>
+</span><b><br>
+Klasyczny problem wspó³bie¿no¶ci: Producent - konsument.</b>
+<p><b>Producent produkuje produkty i umieszcza je w buforze, a
+konsument
+pobiera je stamt±d.</b>
+</p>
+<p><b><u>Szczegó³y:</u></b>
+</p>
+<p><b>Produkty s± liczbami ca³kowitymi wygenerowanymi (wyprodukowanymi)
+losowo przez producenta.</b>
+</p>
+<p><b>Bufor jest obiektem klasy </b>Buffer<b> zawieraj±cej
+miêdzy
+innymi metody </b>get()<i> </i><b>- pobiera liczbê z bufora i </b>put(int
+n)<b> - wstawia liczbê do bufora. Bufor, w postaci </b>tablicy<b> ma
+ograniczon± pojemno¶æ. W danej chwili dostêp do bufora mo¿e mieæ albo
+producent,
+albo konsument.</b>
+</p>
+<p><b>Producent jest obiektem klasy </b>Producer<b> (np.
+rozszerzaj±cej
+</b>Thread<b>).
+Konstruktor </b>Producer(Buffer b)<b> tworzy nowy
+obiekt - producent,
+którego zadaniem jest produkowanie i umieszczanie produktu w buforze </b>b<b>.
+Przedefiniowana metoda
+</b>run()<b>
+zawiera nieskoñczon± pêtlê:</b><i> </i><b>1. Generuje losowo jedn±
+liczbê
+ca³kowit±; 2. Umieszcza j± w buforze za pomoc± metody </b>put(int)<b>;
+3. Zasypia na losowy wybrany czas z przedzia³u od 0 do 2s.</b>
+</p>
+<p><b>Konsument jest obiektem klasy </b>Consumer<b> (np.
+rozszerzaj±cej
+</b>Thread<span style="font-weight: bold;">)</span><i>.</i><b>
+Konstruktor </b>Consumer(Buffer b)<b> tworzy nowy
+obiekt - konsument,
+którego zadaniem jest pobieranie produktu z bufora </b>b<b> i
+jego konsumowanie.
+Przedefiniowana metoda
+</b>run()<b>
+zawiera nieskoñczon± pêtlê:</b><i> </i><b>1. Pobiera jedn± liczbê z
+bufora
+za pomoc± metody </b>int get()<span style="font-weight: bold;">;</span><b>
+2. Konsumuje liczbê, czyli
+wyprowadza
+j± na konsolê; 3. Zasypia na okre¶lony sta³y czas 1s.</b>
+</p>
+<p><b><u>Testowanie:</u></b>
+</p>
+<b>1. Utworzyæ obiekt klasy </b>Buffer<span style="font-weight: bold;"></span><span
+ style="font-style: italic; font-weight: bold;">,</span><br>
+<b>2. Utworzyæ obiekty klas </b>Producer<b>, </b>Consumer<b>
+i uruchomiæ w±tki, które symuluj± dzia³anie producenta oraz konsumenta
+na danym buforze,</b>
+<br>
+<b>3. Program zakoñczy dzia³anie po okre¶lonym czasie 30s.<br>
+<br>
+</b><b> W trakcie dzia³ania, program powinien wyprowadzaæ na zewn±trz
+jak najwiêcej informacji, aby mo¿na by³o ¶ledziæ jego przebieg. </b><br>
+<p></p>
+</body>
+</html>

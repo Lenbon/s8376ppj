@@ -36,17 +36,25 @@ public class Zadanie04_1 {
         t1.start();
         t2.start();
 
-//        JOptionPane.showMessageDialog(null, "suspend");
-//        t1.suspendThread();
-//
-//        JOptionPane.showMessageDialog(null, "resume");
-//        t1.resumeThread();
-//
-//        JOptionPane.showMessageDialog(null, "stop");
-//        t1.stopThis();
+        String input;
+        while (true) {
+            input = JOptionPane
+                    .showInputDialog("Panel\nAkcje:\nS - uśpienie wątku\nW - wybudzenie wątku\nK - zakończenie wątku");
+            if (input == null) {
+                break;
+            }
+            if (input.equals("K")) {
+                // zakonczenie watku
+                t1.stopThis();
+            } else if (input.equals("S")) {
+                // uspienie watku
+//                t1.setReady(false);
+            } else if (input.equals("W")) {
+                // wybudzenie watku
+//                t1.setReady(true);
+            }
+        }
 
-        //		switch dla wyboru parametrów
-
-        //		System.exit(0);
+        System.exit(0);
     }
 }

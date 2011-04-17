@@ -2,7 +2,6 @@ package threads;
 
 //Klasa dla ustalania i pobierania tekstów
 class Teksty {
-
     String txt = null;
     boolean newTxt = false;
 
@@ -31,12 +30,10 @@ class Teksty {
         notifyAll();
         return txt;
     }
-
 }
 
 // Klasa "wypisywacza"
 class Writer extends Thread {
-
     Teksty txtArea;
 
     Writer(Teksty t) {
@@ -50,12 +47,10 @@ class Writer extends Thread {
             txt = txtArea.getTextToWrite();
         }
     }
-
 }
 
 // Klasa autora
 class Author extends Thread {
-
     Teksty txtArea;
 
     Author(Teksty t) {
@@ -63,7 +58,6 @@ class Author extends Thread {
     }
 
     public void run() {
-
         String[] s = { "Pies", "Kot", "Zebra", "Lew", "Owca", "Słoń", null };
         for (int i = 0; i < s.length; i++) {
             try { // autor zastanawia się chwilę co napisać
@@ -73,12 +67,10 @@ class Author extends Thread {
             txtArea.setTextToWrite(s[i]);
         }
     }
-
 }
 
 // Klasa testująca
 public class Koord {
-
     public static void main(String[] args) {
         Teksty t = new Teksty();
         Thread t1 = new Author(t);
@@ -86,5 +78,4 @@ public class Koord {
         t1.start();
         t2.start();
     }
-
 }

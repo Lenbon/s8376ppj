@@ -35,12 +35,6 @@ import zadanie04_1.*;
  */
 public class Zadanie04_1 {
     public static void main(String[] args) {
-
-        for (String val : args) {
-            System.out.println(val);
-        }
-        System.exit(0);
-
         MyThread t1 = new MyThread();
         Thread t2 = new Thread(new MyRunnable());
 
@@ -49,21 +43,28 @@ public class Zadanie04_1 {
 
         String input;
         while (true) {
-            input = JOptionPane
-                    .showInputDialog("Panel\nAkcje:\nI - przerwanie\nS - uśpienie wątku\nW - wybudzenie wątku\nK - zakończenie wątku");
+            input = JOptionPane.showInputDialog("Panel\nAkcje:\n"
+                    + "S - uśpienie wątku (sleep)\n"
+                    + "I - przerwanie (interupt)\n"
+                    + "H - wstrzymanie wątku (wait)\n"
+                    + "W - wybudzenie wątku (notify)\n"
+                    + "K - zakończenie wątku");
 
-            if (input.equals("S") || input.equals("s")) { // uspienie watku
-                t1.getSleep();
+            if (input == null) {
+                break;
+            } else if (input.equals("S") || input.equals("s")) { // uspienie watku
+                t1.setSleep();
+            } else if (input.equals("I") || input.equals("i")) { // wyrwanie z uspienia
+                t1.interrupt();
+            } else if (input.equals("H") || input.equals("h")) { // uspienie watku
+                t1.setWait();
             } else if (input.equals("W") || input.equals("w")) { // wybudzenie watku
                 t1.wakeUp();
             } else if (input.equals("K") || input.equals("k")) { // zakonczenie watku
                 t1.stopThis();
                 break;
-            } else if (input.equals("I") || input.equals("i")) { // wyrwanie z uspienia
-                t1.interrupt();
-            } else if (input == null) {
-                break;
             }
+
         }
 
         System.exit(0);

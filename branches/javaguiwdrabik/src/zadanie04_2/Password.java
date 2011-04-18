@@ -1,10 +1,15 @@
 package zadanie04_2;
 
 public class Password {
+    protected boolean passBroken = false;
     protected String password;
 
     public boolean compare(String password) {
         return this.password.equals(password) ? true : false;
+    }
+
+    public boolean isPassUnknown() {
+        return !passBroken;
     }
 
     public void generate(String[][] storage) {
@@ -15,5 +20,9 @@ public class Password {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassBroken() {
+        passBroken = true;
     }
 }

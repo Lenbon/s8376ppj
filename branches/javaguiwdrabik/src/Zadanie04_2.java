@@ -31,21 +31,34 @@ import zadanie04_2.*;
  */
 public class Zadanie04_2 {
     public static void main(String[] args) {
-        Employee employee = new Employee();
+        int employees;
+        int threads;
+        try {
+            employees = Integer.parseInt(args[0]); // liczba pracownikow
+        } catch (ArrayIndexOutOfBoundsException e) {
+            employees = 10;
+        }
+        try {
+            threads = Integer.parseInt(args[1]); // liczba watkow - manualna
+        } catch (ArrayIndexOutOfBoundsException e) {
+            threads = 0;
+        }
+
+        Employee employee = new Employee(employees);
         Password password = new Password();
 
         password.generate(employee.getStorage());
 
         System.out.println("Wylosowane haslo: " + password.getPassword());
-
-        GroupA groupA = new GroupA(password, employee.getInitials());
+        
+        GroupAMaster groupAMaster = new GroupAMaster(threads);
         GroupB groupB = new GroupB(password, employee.getInitials());
 
-        Timer timer = new Timer();
+        Timer timer = new Timer(password);
         timer.start();
 
-        groupA.start();
-
-        //        groupB.start();
+        groupAMaster.startGroups(password, employee.getInitials());
+        groupB.setPriority(8);
+        groupB.start();
     }
 }

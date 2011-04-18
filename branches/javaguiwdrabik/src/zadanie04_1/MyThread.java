@@ -4,9 +4,13 @@ public class MyThread extends Thread {
     protected boolean stopThisMadness = false;
     protected Integer x = 0;
     protected boolean sleep = false;
+    protected boolean wait = false;
 
-    public void getSleep() {
+    public void setSleep() {
         sleep = true;
+    }
+    public void setWait() {
+        wait = true;
     }
 
     public void stopThis() {
@@ -18,26 +22,39 @@ public class MyThread extends Thread {
             if (stopThisMadness) {
                 return;
             }
+
+            try {
+                if (sleep) {
+                    sleep(3600);
+                }
+            } catch (InterruptedException e) {
+                sleep = false;
+            }
+            
             try {
                 synchronized (this) {
-                    while (sleep) {
+                    while (wait) {
                         wait();
                     }
                 }
-
-                synchronized (x) {
-                    System.out.println("echo " + (++x));
+            } catch (InterruptedException e) {
+                synchronized (this) {
+                    wait = false;
+                    notify();
                 }
+            }
+
+            System.out.println("echo " + (++x));
+            try {
                 sleep(500);
             } catch (InterruptedException e) {
-                return;
             }
         }
     }
 
     public void wakeUp() {
-        sleep = false;
         synchronized (this) {
+            wait = false;
             notify();
         }
     }

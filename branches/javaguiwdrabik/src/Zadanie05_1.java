@@ -20,7 +20,6 @@ public class Zadanie05_1 extends JPanel {
     }
 
     public void startAnim() {
-
         while (true) {
             // odbicie
             if (x + dim > getWidth() || x < 0)
@@ -46,7 +45,6 @@ public class Zadanie05_1 extends JPanel {
     }
 
     public static void main(String[] args) {
-
         JFrame frame = new JFrame("Animacja"); //utworzenie okna ramowego
         Zadanie05_1 anim = new Zadanie05_1(); //utworzenie panelu do rysowania
         frame.getContentPane().add(anim); //dodanie panelu do okna ramowego
@@ -56,5 +54,4 @@ public class Zadanie05_1 extends JPanel {
         frame.show(); //wyswietlenie okna na ekranie       
         anim.startAnim(); // rozpoczecie animacji
     }
-
 }

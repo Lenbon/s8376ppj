@@ -24,6 +24,7 @@ public class Zadanie05_3 {
         Graph graph = new Graph("files/images/zadanie05_3a.jpg");
         frame.getContentPane().add(graph);
 
+        frame.setUndecorated(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
 

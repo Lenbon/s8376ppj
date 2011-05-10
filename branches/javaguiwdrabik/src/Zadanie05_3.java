@@ -1,3 +1,7 @@
+import javax.swing.JFrame;
+
+import zadanie05_3.*;
+
 /**
  * Zadanie 3 - Rysowanie na komponencie - obraz w ramce z podpisem
  * 
@@ -12,6 +16,11 @@
  */
 public class Zadanie05_3 {
     public static void main(String[] args) {
-        
+        JFrame frame = new JFrame("Obrazek");
+        frame.getContentPane().add(new Graph("files/images/zadanie05_3a.jpg"));
+        frame.setLocation(300, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.show();
     }
 }

@@ -1,5 +1,6 @@
 package zadanie05_3;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,8 +14,9 @@ public class Graph extends JPanel {
     boolean loaded = false;
 
     public Graph(String fileName) {
-        // TODO Auto-generated constructor stub
-//        loadImage(fileName);
+        loadImage(fileName);
+        setPreferredSize(new Dimension(img.getWidth(this) + img.getHeight(this)
+                / 2, img.getHeight(this) + img.getHeight(this) / 2));
     }
 
     private void loadImage(String imgFileName) {
@@ -29,12 +31,30 @@ public class Graph extends JPanel {
         int h = img.getHeight(this); // wysokość obrazka
         if (w != -1 && w != 0 && h != -1 && h != 0) {
             loaded = true;
-            setPreferredSize(new Dimension(w, h));
-        } else
+        } else {
             setPreferredSize(new Dimension(200, 200));
+        }
     }
 
     public void paintComponent(Graphics g) {
+        if (img != null && loaded) {
+            g.drawImage(img, img.getWidth(this) / 4, img.getHeight(this) / 4,
+                    img.getWidth(this), img.getHeight(this), this);
 
+            g.setColor(Color.black);
+            g.drawRect(0, 0, img.getWidth(this) + img.getWidth(this) / 2, img.getHeight(this) + img.getHeight(this) / 2);
+
+            //
+            
+            
+            String imageTitle = "Hello world!";
+            int imageTitleX = this.getWidth() / 2 - g.getFontMetrics().stringWidth(imageTitle) / 2,
+                imageTitleY = 10;
+
+            g.setColor(Color.gray);
+            g.drawString(imageTitle, imageTitleX + 1, imageTitleY + 1);
+            g.setColor(Color.black);
+            g.drawString(imageTitle, imageTitleX, imageTitleY);
+        }
     }
 }

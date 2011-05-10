@@ -1,3 +1,6 @@
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 import zadanie05_3.*;
@@ -17,10 +20,17 @@ import zadanie05_3.*;
 public class Zadanie05_3 {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Obrazek");
-        frame.getContentPane().add(new Graph("files/images/zadanie05_3a.jpg"));
-        frame.setLocation(300, 300);
+
+        Graph graph = new Graph("files/images/zadanie05_3a.jpg");
+        frame.getContentPane().add(graph);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation(dim.width / 2 - frame.getWidth() / 2, dim.height / 2
+                - frame.getHeight() / 2);
+
         frame.show();
     }
 }

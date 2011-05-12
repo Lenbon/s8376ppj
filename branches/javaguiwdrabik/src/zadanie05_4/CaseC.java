@@ -1,6 +1,14 @@
 package zadanie05_4;
 
+import java.awt.Color;
+
 public class CaseC extends Abstract {
+    {
+        color = Color.green;
+        x = dim / 2;
+        y = dim / 2;
+    }
+
     public void run() {
         while (true) {
             // odbicie
@@ -16,8 +24,7 @@ public class CaseC extends Abstract {
 
             try {
                 Thread.sleep(delay);
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
             }
         }
     }

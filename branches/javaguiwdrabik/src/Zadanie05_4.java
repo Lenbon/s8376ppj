@@ -98,17 +98,17 @@ public class Zadanie05_4 {
         frame.getContentPane().add(caseB);
         Thread threadCaseB = new Thread(caseB);
         
-        CaseC caseC = new CaseC();
-        frame.getContentPane().add(caseC);
-        Thread threadCaseC = new Thread(caseC);
+//        CaseC caseC = new CaseC();
+//        frame.getContentPane().add(caseC);
+//        Thread threadCaseC = new Thread(caseC);
         
         frame.setLocation(300, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
 
-        threadCaseA.start();
+//        threadCaseA.start();
         threadCaseB.start();
-        threadCaseC.start();
+//        threadCaseC.start();
 
         frame.show();
     }

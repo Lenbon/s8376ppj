@@ -1,6 +1,11 @@
 package zadanie05_4;
 
+import java.awt.Color;
+
 public class CaseA extends Abstract {
+    {
+        color = Color.blue;
+    }
     public void run() {
         while (true) {
             // odbicie

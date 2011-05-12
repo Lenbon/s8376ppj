@@ -2,9 +2,10 @@
 // okrag odbija sie od krawedzi pulpitu.   
 // przygotowanie wpólrzednych figury w watku glownym,
 // wykreslanie w watku zdarzeniowym w paintComponent().
+import javax.swing.JFrame;
 
-import java.awt.*;
-import javax.swing.*;
+import zadanie04_1.MyRunnable;
+import zadanie05_4.*;
 
 /**
  * ZADANIE-1 (9p) : Wykreślanie na komponencie, animacje, wątki
@@ -85,51 +86,30 @@ import javax.swing.*;
  * @author s8376
  * @version $Revision$
  */
-public class Zadanie05_4 extends JPanel {
-    int dim = 20; //srednica figury       
-    int x = 75, y = 75; //polozenie poczatkowe       
-    int dx = 3, dy = 5; //dlugosc kroku w kierunku x i y       
-    int delay = 40; //opoznienie odswiezania   
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.blue); //ustawienie koloru wykreslania
-        g.fillOval(x, y, dim, dim); //wypełnienie kola kolorem
-    }
-
-    public void startAnim() {
-        while (true) {
-            // odbicie
-            if (x + dim > getWidth() || x < 0)
-                dx = -dx;
-            if (y + dim > getHeight() || y < 0)
-                dy = -dy;
-            // przesuniecie wzdluz x i y
-            x += dx;
-            y += dy;
-
-            repaint(); //wstawienie paintComponent() do watku zdarzeniowego
-
-            try {
-                Thread.sleep(delay);
-            } //uspienie watku
-            catch (InterruptedException e) {
-            }
-        }
-    }
-
-    public Dimension getPreferredSize() {
-        return new Dimension(200, 200);
-    }
-
+public class Zadanie05_4 {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Animacja"); //utworzenie okna ramowego
-        Zadanie05_4 anim = new Zadanie05_4(); //utworzenie panelu do rysowania
-        frame.getContentPane().add(anim); //dodanie panelu do okna ramowego
-        frame.setLocation(300, 300); //lokalizacja okna na ekranie
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //obsługa zamkniecia okna
-        frame.pack(); //upakowanie okna
-        frame.show(); //wyswietlenie okna na ekranie       
-        anim.startAnim(); // rozpoczecie animacji
+        JFrame frame = new JFrame("Animacja");
+        
+        CaseA caseA = new CaseA();
+        frame.getContentPane().add(caseA);
+        Thread threadCaseA = new Thread(caseA);
+        
+        CaseB caseB = new CaseB();
+        frame.getContentPane().add(caseB);
+        Thread threadCaseB = new Thread(caseB);
+        
+        CaseC caseC = new CaseC();
+        frame.getContentPane().add(caseC);
+        Thread threadCaseC = new Thread(caseC);
+        
+        frame.setLocation(300, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+
+        threadCaseA.start();
+        threadCaseB.start();
+        threadCaseC.start();
+
+        frame.show();
     }
 }

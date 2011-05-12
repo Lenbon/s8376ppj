@@ -1,4 +1,4 @@
-package zadanie05_1;
+package zadanie05_2;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,13 +9,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
-//Rysowanie na komponencie
-//Na komponencie mozna rysowac i wypelniac: 
-//proste figury geometryczne,napisy,obrazy (umozliwiaja to metody klasy Graphics);
-//w ciele metody paintComponent() mamy dostep do obiektu wykreslajacego klasy Graphics  
 public class Graph extends JPanel {
-    int dim = 20; //srednica figury
-    int x = 75, y = 75; //polozenie             
     Image img;
     boolean loaded = false;
 
@@ -23,12 +17,15 @@ public class Graph extends JPanel {
         img = Toolkit.getDefaultToolkit().getImage(imgFileName);
         MediaTracker mt = new MediaTracker(this);
         mt.addImage(img, 1);
+
         try {
             mt.waitForID(1);
         } catch (InterruptedException exc) {
         }
+
         int w = img.getWidth(this); // szerokość obrazka
         int h = img.getHeight(this); // wysokość obrazka
+
         if (w != -1 && w != 0 && h != -1 && h != 0) {
             loaded = true;
             setPreferredSize(new Dimension(w, h));
@@ -37,14 +34,14 @@ public class Graph extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g); //wykreslanie komponentu JPanel                           
-        g.setColor(Color.blue); //ustawienie koloru wykreslania
-        g.fillOval(x, y, dim, dim); //wypelnianie kola
+        super.paintComponent(g);
+        
+        g.setColor(Color.blue);
+        g.fillOval(x, y, dim, dim);
 
-        // wyrysować obraz z pliku graficznego
         loadImage("files/images/zadanie05_1_1.jpg");
         if (img != null && loaded) {
-            g.drawImage(img, getWidth() / 3 * 2, 0, img.getWidth(this), img.getHeight(this),
+            g.drawImage(img, 0, 0, img.getWidth(this), img.getHeight(this),
                     this);
         }
 

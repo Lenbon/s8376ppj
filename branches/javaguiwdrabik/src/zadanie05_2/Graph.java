@@ -37,7 +37,7 @@ public class Graph extends JPanel {
         super.paintComponent(g);
         
         g.setColor(Color.blue);
-        g.fillOval(x, y, dim, dim);
+        g.fillOval(50, 50, 75, 75);
 
         loadImage("files/images/zadanie05_1_1.jpg");
         if (img != null && loaded) {

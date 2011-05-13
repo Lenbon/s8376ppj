@@ -8,6 +8,17 @@ import javax.swing.JPanel;
 
 abstract public class Abstract extends JPanel implements Runnable {
     /**
+     * Kierunki przesuwania sie obiektu
+     * 
+     * n-orth, s-outh, w-est, e-ast
+     */
+    char directionInit, directionCurrent, directionLast;
+    /**
+     * Granice przesuniecia w kierunkach
+     */
+    int eGauge, sGauge;
+    char[] directions = { 'e', 's', 'w', 's' };
+    /**
      * srednica figury
      */
     int dim = 20;
@@ -40,5 +51,45 @@ abstract public class Abstract extends JPanel implements Runnable {
 
     public Dimension getPreferredSize() {
         return new Dimension(200, 200);
+    }
+    public void run() {
+        
+        int lastX = x, lastY = y;
+        
+        boolean directionFlag = true;
+        
+        while (true) {
+            for (int directionKey = 0; directionKey < directions.length; directionKey++) {
+                directionFlag = true;
+                while (directionFlag) {
+                    if (directions[directionKey] == 'e') {
+                        x += dx;
+                        if (x + dim > eGauge + lastX) {
+                            lastX = x;
+                            directionFlag = false;
+                        }
+                    } else if (directions[directionKey] == 's') {
+                        y += dy;
+                        if (y + dy > sGauge + lastY) {
+                            lastY = y;
+                            directionFlag = false;
+                        }
+                    } else if (directions[directionKey] == 'w') {
+                        x -= dx;
+                        if (x - dim < 0) {
+                            lastX = x;
+                            directionFlag = false;
+                        }
+                    }
+
+                    repaint();
+
+                    try {
+                        Thread.sleep(delay);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        }
     }
 }

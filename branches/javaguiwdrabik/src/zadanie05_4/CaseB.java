@@ -1,56 +1,49 @@
 package zadanie05_4;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 public class CaseB extends Abstract {
+    int vDistance = 30;
     {
-        color = Color.red;
+        color = Color.green;
+
         x = dim / 2;
         y = dim / 2;
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.red);
-        g.fillOval(x, y, dim, dim);
-    }
-
     public void run() {
-        String direct = "right";
-        String lastDirect = "left";
+        // l left, r right, v vertically
+        char direction = 'r';
+        char lastDirection = 'v';
+        int directionChangeInY = y;
         
-
         while (true) {
-            // odbicie
-            if (direct.equals("left")) {
-                if (x - dim < getWidth() || x < 0) {
-                    lastDirect = "right";
-                    direct = "down";
+            if (direction == 'r') {
+                x += dx;
+                if (x + dim > getWidth()) {
+                    lastDirection = direction;
+                    directionChangeInY = y;
+                    direction = 'v';
                 }
-            } else if (direct.equals("right")) {
-                if (x + dim > getWidth() || x < 0) {
-                    lastDirect = "left";
-                    direct = "down";
+            } else if (direction == 'l') {
+                x -= dx;
+                if (x - dim < 0) {
+                    lastDirection = direction;
+                    directionChangeInY = y;
+                    direction = 'v';
                 }
-            } else if (direct.equals("down")) {
+            } else if (direction == 'v') {
+                y += dy;
                 if (y + dim > getHeight()) {
+                    // koniec obszaru, koncze rysowanie
                     return;
                 }
-                direct = lastDirect;
+                if (y + dy > directionChangeInY + vDistance) {
+                    direction = lastDirection == 'l' ? 'r' : 'l';
+                    lastDirection = 'v';
+                }
             }
-            
-            // przesuniecie
-            if (direct.equals("left")) {
-                x -= dx;
-            } else if (direct.equals("right")) {
-                x += dx;
-            } else if (direct.equals("down")) {
-                y += dy;
-            }
-            
-            
-            
+
             repaint();
 
             try {

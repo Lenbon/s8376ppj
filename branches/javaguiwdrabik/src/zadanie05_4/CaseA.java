@@ -5,7 +5,11 @@ import java.awt.Color;
 public class CaseA extends Abstract {
     {
         color = Color.blue;
+
+        x = 75;
+        y = 75;
     }
+
     public void run() {
         while (true) {
             // odbicie
@@ -17,12 +21,11 @@ public class CaseA extends Abstract {
             x += dx;
             y += dy;
 
-            repaint();
+            repaint(); //wstawienie paintComponent() do watku zdarzeniowego
 
             try {
                 Thread.sleep(delay);
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
             }
         }
     }

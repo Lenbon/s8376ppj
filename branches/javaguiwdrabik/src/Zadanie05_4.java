@@ -4,7 +4,6 @@
 // wykreslanie w watku zdarzeniowym w paintComponent().
 import javax.swing.JFrame;
 
-import zadanie04_1.MyRunnable;
 import zadanie05_4.*;
 
 /**
@@ -92,24 +91,24 @@ public class Zadanie05_4 {
         
         CaseA caseA = new CaseA();
         frame.getContentPane().add(caseA);
-        Thread threadCaseA = new Thread(caseA);
+        Thread caseAThread = new Thread(caseA);
         
         CaseB caseB = new CaseB();
         frame.getContentPane().add(caseB);
-        Thread threadCaseB = new Thread(caseB);
+        Thread caseBThread = new Thread(caseB);
         
-//        CaseC caseC = new CaseC();
-//        frame.getContentPane().add(caseC);
-//        Thread threadCaseC = new Thread(caseC);
+        CaseC caseC = new CaseC();
+        frame.getContentPane().add(caseC);
+        Thread caseCThread = new Thread(caseC);
         
         frame.setLocation(300, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         frame.pack();
-
-//        threadCaseA.start();
-        threadCaseB.start();
-//        threadCaseC.start();
-
-        frame.show();
+        frame.setVisible(true);
+        
+        caseAThread.start();
+        caseBThread.start();
+        caseCThread.start();
     }
 }

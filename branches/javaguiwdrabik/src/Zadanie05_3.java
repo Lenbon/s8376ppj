@@ -32,6 +32,6 @@ public class Zadanie05_3 {
         frame.setLocation(dim.width / 2 - frame.getWidth() / 2, dim.height / 2
                 - frame.getHeight() / 2);
 
-        frame.show();
+        frame.setVisible(true);
     }
 }

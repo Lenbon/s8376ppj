@@ -24,8 +24,10 @@
  * Przy przydziale punktów będzie uwzględniany sposób oprogramowania
  * 
  * @author s8376
- * @version $Revision$
+ * @version $Id$
  */
 public class Zadanie06_2 {
+    public static void main(String[] args) {
 
+    }
 }

@@ -1,3 +1,19 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.io.ObjectInputStream.GetField;
+
+import net.miginfocom.swing.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 /**
  * Zadanie 2. Kombinowanie rozkładów (max. 6p)
  * 
@@ -8,8 +24,46 @@
  * i położenie (tuż nad edytorem - wyrównane do prawej strony)
  *  
  * @author s8376
- * @version $Revision$
+ * @version $Id$
  */
 public class Zadanie06_5 {
+    public static void main(String[] args) {
+        // okno
+        JFrame frame = new JFrame();
+        frame.setTitle("Terminal");
+        frame.setLocation(250, 250);
+        frame.setPreferredSize(new Dimension(300, 300));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
 
+        frame.setLayout(new MigLayout("", "[grow][][][right]"));
+
+        // A, B, C w piśmie "wytłuszczona kursywa".
+        Font font = new Font("Dialog", Font.BOLD + Font.ITALIC, 14);
+
+        // przyciski
+        JButton buttonA = new JButton("A");
+        buttonA.setFont(font);
+        frame.add(buttonA, "skip 1");
+
+        JButton buttonB = new JButton("B");
+        buttonB.setFont(font);
+        frame.add(buttonB, "right align");
+
+        JButton buttonC = new JButton("C");
+        buttonC.setFont(font);
+        frame.add(buttonC, "right align, wrap");
+
+        // textarea
+        JTextArea textArea = new JTextArea();
+        textArea.setPreferredSize(new Dimension(9999, 9999));
+        textArea.setForeground(Color.white);
+        textArea.setBackground(Color.black);
+        JScrollPane scroll = new JScrollPane(textArea);
+        frame.add(scroll, "grow, span");
+
+        // pakowanie i wyswietlanie okienka
+        frame.pack();
+        frame.setVisible(true);
+    }
 }

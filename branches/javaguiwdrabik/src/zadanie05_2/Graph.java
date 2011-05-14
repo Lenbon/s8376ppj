@@ -23,8 +23,8 @@ public class Graph extends JPanel {
         } catch (InterruptedException exc) {
         }
 
-        int w = img.getWidth(this); // szerokość obrazka
-        int h = img.getHeight(this); // wysokość obrazka
+        int w = img.getWidth(this);
+        int h = img.getHeight(this);
 
         if (w != -1 && w != 0 && h != -1 && h != 0) {
             loaded = true;
@@ -35,39 +35,42 @@ public class Graph extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-        g.setColor(Color.blue);
-        g.fillOval(50, 50, 75, 75);
 
         loadImage("files/images/zadanie05_1_1.jpg");
         if (img != null && loaded) {
-            g.drawImage(img, 0, 0, img.getWidth(this), img.getHeight(this),
+            g.drawImage(img, 0, 0, getWidth() / 2, getHeight() / 2,
                     this);
         }
+        
+        g.setColor(Color.blue);
+        g.fillOval(getWidth() / 4, getHeight() / 4, getWidth() / 4, getWidth() / 4);
 
         // wyrysować i ewentualnie wypełnić inne figury geometryczne o wymiarach podanych w pikslach
         // linię
         g.setColor(Color.red);
-        g.drawLine(25, 25, 175, 25);
+        g.drawLine(getWidth() / 8, (getHeight() / 8) * 7, (getWidth() / 8) * 7,
+                (getHeight() / 8) * 7);
+
         // prostokąt
-        g.setColor(Color.black);
-        g.drawRect(25, 100, 25, 25);
         g.setColor(Color.green);
-        g.fillRect(25, 100, 25, 25);
+        g.drawRect((getWidth() / 4) * 3, getHeight() / 4, getHeight() / 4,
+                getHeight() / 4);
+
         // trójkąt
-        int[] tabX = { 50, 75, 25 }, tabY = { 50, 25, 25 };
-        g.setColor(Color.black);
-        g.drawPolygon(tabX, tabY, 3);
         g.setColor(Color.cyan);
-        g.fillPolygon(tabX, tabY, 3);
+        g.fillPolygon(new int[]{ getWidth() / 6, (getWidth() / 6) * 2, (getWidth() / 6) * 3 }, new int[]{ getHeight() / 3, (getHeight() / 3) * 2, getHeight() / 3 }, 3);
+
         // wycinek koła
         g.setColor(Color.gray);
-        g.fillArc(150, 150, 50, 50, 0, 255);
+        g.fillArc((getWidth() / 8) * 5, (getHeight() / 6) * 4, getWidth() / 8,
+                getWidth() / 8, 0, 255);
+
         // wyrysować określony napis w odpowiednim położeniu
         g.setColor(Color.black);
-        g.drawString("Hello world!", 26, 176);
+        g.drawString("Hello world!", getWidth() / 4 + 1,
+                (getHeight() / 4) * 3 + 1);
         g.setColor(Color.orange);
-        g.drawString("Hello world!", 25, 175);
+        g.drawString("Hello world!", getWidth() / 4, (getHeight() / 4) * 3);
     }
 
     public Dimension getPreferredSize() {

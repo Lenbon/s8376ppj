@@ -8,7 +8,7 @@
  * to w oknie aplikacji mają pojawiać się co 5 sekund kolejne obrazki z tych plików:
  * 
  * @author s8376
- * @version $Revision$
+ * @version $Id$
  */
 public class Zadanie06_3 {
 

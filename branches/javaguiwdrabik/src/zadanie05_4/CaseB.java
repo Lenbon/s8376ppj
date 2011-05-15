@@ -8,10 +8,8 @@ public class CaseB extends Abstract {
         sGauge = 30;
 
         color = Color.green;
-
-        x = dim / 2;
-        y = dim / 2;
-
-        directionInit = 'e';
+    }
+    public CaseB() {
+        super(new char[]{ 'e', 's', 'w', 's' });
     }
 }

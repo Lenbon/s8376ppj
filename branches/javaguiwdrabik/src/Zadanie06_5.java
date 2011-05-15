@@ -52,6 +52,7 @@ public class Zadanie06_5 {
         // textarea
         JTextArea textArea = new JTextArea();
         textArea.setPreferredSize(new Dimension(9999, 9999));
+        textArea.setFont(new Font(Font.MONOSPACED, 0, 12));
         textArea.setForeground(Color.white);
         textArea.setBackground(Color.black);
         JScrollPane scroll = new JScrollPane(textArea);

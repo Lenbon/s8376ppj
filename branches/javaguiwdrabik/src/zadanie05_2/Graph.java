@@ -43,7 +43,7 @@ public class Graph extends JPanel {
         }
         
         g.setColor(Color.blue);
-        g.fillOval(getWidth() / 4, getHeight() / 4, getWidth() / 4, getWidth() / 4);
+        g.fillOval(getWidth() / 4, getHeight() / 4, getWidth() / 4, getHeight() / 4);
 
         // wyrysować i ewentualnie wypełnić inne figury geometryczne o wymiarach podanych w pikslach
         // linię
@@ -53,7 +53,7 @@ public class Graph extends JPanel {
 
         // prostokąt
         g.setColor(Color.green);
-        g.drawRect((getWidth() / 4) * 3, getHeight() / 4, getHeight() / 4,
+        g.drawRect((getWidth() / 4) * 3, getHeight() / 4, getWidth() / 4,
                 getHeight() / 4);
 
         // trójkąt
@@ -63,7 +63,7 @@ public class Graph extends JPanel {
         // wycinek koła
         g.setColor(Color.gray);
         g.fillArc((getWidth() / 8) * 5, (getHeight() / 6) * 4, getWidth() / 8,
-                getWidth() / 8, 0, 255);
+                getHeight() / 8, 0, 255);
 
         // wyrysować określony napis w odpowiednim położeniu
         g.setColor(Color.black);

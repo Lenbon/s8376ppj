@@ -9,6 +9,9 @@ public class CaseA extends Abstract {
         x = 75;
         y = 75;
     }
+    public CaseA() {
+        super(new char[]{});
+    }
 
     public void run() {
         while (true) {

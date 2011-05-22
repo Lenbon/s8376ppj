@@ -1,3 +1,5 @@
+import zadanie06_2.*;
+
 /**
  * Zad. 2. Wykres paskowy (max. 10 p)
  * 
@@ -28,6 +30,11 @@
  */
 public class Zadanie06_2 {
     public static void main(String[] args) {
-//        Wprowadź typ rozkładu(A-G)").charAt(0);
+        try {
+            Painter painter = new Painter(new Parser("files/zadanie06_2.txt"));
+            painter.display();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 }

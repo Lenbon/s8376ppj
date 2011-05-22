@@ -31,8 +31,8 @@ import zadanie04_2.*;
  */
 public class Zadanie04_2 {
     public static void main(String[] args) {
-        int employees;
-        int threads;
+        int employees, threads;
+        
         try {
             employees = Integer.parseInt(args[0]); // liczba pracownikow
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -50,7 +50,7 @@ public class Zadanie04_2 {
         password.generate(employee.getStorage());
 
         System.out.println("Wylosowane haslo: " + password.getPassword());
-        
+
         GroupAMaster groupAMaster = new GroupAMaster(threads);
         GroupB groupB = new GroupB(password, employee.getInitials());
 

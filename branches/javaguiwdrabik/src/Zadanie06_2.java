@@ -28,6 +28,6 @@
  */
 public class Zadanie06_2 {
     public static void main(String[] args) {
-
+//        Wprowadź typ rozkładu(A-G)").charAt(0);
     }
 }

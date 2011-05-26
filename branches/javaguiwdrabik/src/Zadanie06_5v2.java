@@ -1,7 +1,7 @@
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -31,54 +31,57 @@ public class Zadanie06_5v2 {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(400, 350));
-        frame.setLocation(300, 300);
-        frame.setLayout(new GridLayout(3, 1));
+        frame.setLocation(1600, 200);
+        frame.setLayout(new GridBagLayout());
 
-        JButton c1, c2, c3, c4, c5, c6, c7, c8, c9;
-        JTextField tf1, tf2, tf3;
-        JTextArea ta1;
-
-        // przyciski panel gorny
-        JPanel panelTopLeft = new JPanel();
-        panelTopLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
-        panelTopLeft.add(new JButton("A1"));
-        panelTopLeft.add(new JButton("A2"));
-        panelTopLeft.add(new JButton("A3"));
-
-        JPanel panelTopRight = new JPanel();
-        panelTopRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        panelTopRight.add(new JButton("B1"));
-        panelTopRight.add(new JButton("B2"));
-        panelTopRight.add(new JButton("B3"));
-
-        JPanel panelTopContainer = new JPanel();
-        panelTopContainer.setLayout(new GridLayout(1, 2));
-        panelTopContainer.add(panelTopLeft);
-        panelTopContainer.add(panelTopRight);
-
-        frame.add(panelTopContainer);
+        GridBagConstraints c = new GridBagConstraints();
         
-        frame.add(new JTextArea());
+        // gorny panel
+        JPanel top = new JPanel();
 
-        // przyciski panel dolny
-        JPanel panelBottomLeft = new JPanel();
-        panelBottomLeft.setLayout(new GridLayout(3, 3));
-        for (int x = 1; x < 10; x++) {
-            panelBottomLeft.add(new JButton("" + x));
+        JPanel topLeft = new JPanel();
+        topLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
+        topLeft.add(new JButton("A1"));
+        topLeft.add(new JButton("A2"));
+        topLeft.add(new JButton("A3"));
+        top.add(topLeft);
+
+        JPanel topRight = new JPanel();
+        topRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        topRight.add(new JButton("B1"));
+        topRight.add(new JButton("B2"));
+        topRight.add(new JButton("B3"));
+        top.add(topRight);
+
+        frame.add(top);
+
+        // srodkowy panel
+        JPanel middle = new JPanel();
+        middle.add(new JTextArea());
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridwidth = 2;
+        
+        frame.add(middle, c);
+
+        // dolny panel
+        JPanel bottom = new JPanel();
+
+        JPanel bottomLeft = new JPanel();
+        bottomLeft.setLayout(new GridLayout(0, 3));
+        for (int x = 0; x < 10; x++) {
+            bottomLeft.add(new JButton("" + (x + 1)));
         }
+        bottom.add(bottomLeft);
 
-        JPanel panelBottomRight = new JPanel();
-        panelBottomRight.setLayout(new GridLayout(3, 1));
-        for (int x = 0; x < 3; x++) {
-            panelBottomRight.add(new JTextField());
-        }
+        JPanel bottomRight = new JPanel();
+        bottomRight.setLayout(new GridLayout(0, 1));
+        bottomRight.add(new JTextField());
+        bottomRight.add(new JTextField());
+        bottomRight.add(new JTextField());
+        bottom.add(bottomRight);
 
-        JPanel panelBottomContainter = new JPanel();
-        panelBottomContainter.setLayout(new GridLayout(1, 2));
-        panelBottomContainter.add(panelBottomLeft);
-        panelBottomContainter.add(panelBottomRight);
-
-        frame.add(panelBottomContainter);
+        frame.add(bottom);
 
         frame.pack();
         frame.setVisible(true);

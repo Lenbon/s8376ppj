@@ -28,6 +28,9 @@ import javax.swing.JTextField;
  */
 public class Zadanie06_5v2 {
     public static void main(String[] args) {
+        
+        //(02:57:22 PM) <font size="3">Jacek Głogosz: całość na gridlayout (02:57:30 PM) Jacek Głogosz: u góry 2x flowlayout (02:57:41 PM) Jacek Głogosz: na dole po lewej gridlayout (02:57:54 PM) Jacek Głogosz: (całośc na gridbag layout, a nie grid) (02:57:34 PM) Filip: uuuuuu (02:57:41 PM) Filip: zmienia to postać rzeczy :D (02:58:54 PM) Jacek Głogosz: i po prawej na dole, też gridlayout (02:59:03 PM) Jacek Głogosz: wszystko oczywiście ma dodatkowe ustawienia :)</font>
+        
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(400, 350));

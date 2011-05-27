@@ -32,8 +32,9 @@ public class Zadanie06_5v2 {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(400, 350));
         frame.setLocation(1600, 200);
-        frame.setLayout(new GridBagLayout());
-
+//        frame.setLayout(new GridBagLayout());
+        frame.setLayout(new GridLayout(3, 3));
+        
         GridBagConstraints c = new GridBagConstraints();
         
         // gorny panel
@@ -59,17 +60,14 @@ public class Zadanie06_5v2 {
         JPanel middle = new JPanel();
         middle.add(new JTextArea());
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridwidth = 2;
-        
-        frame.add(middle, c);
+        frame.add(middle);
 
         // dolny panel
         JPanel bottom = new JPanel();
 
         JPanel bottomLeft = new JPanel();
         bottomLeft.setLayout(new GridLayout(0, 3));
-        for (int x = 0; x < 10; x++) {
+        for (int x = 0; x < 9; x++) {
             bottomLeft.add(new JButton("" + (x + 1)));
         }
         bottom.add(bottomLeft);

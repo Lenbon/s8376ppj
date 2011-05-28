@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en"><html><head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+   <meta name="Author" content="Krzysztof Barteczko">
+   <meta name="GENERATOR" content="Microsoft FrontPage 6.0"><title>Krzysztof Barteczko, WPR - cwicenia z2</title></head><body>
+ 
+<center><b>Zadania do wykonania - podsumowanie obiektowości</b></center>
+<HR>
+<p><b>
+<a href="#Zadanie%201.%20%20Sklep%20owocowy%20%28max%205" style="text-decoration: none">Zadanie 1. 
+Sklep owocowy A (max   5 punktów)</a></b><br>
+<b><a href="#Zadanie%202" style="text-decoration: none">Zadanie 2.  Sklep owocowy B (max   7 punktów)</a></b>
+<br>
+<b>
+<a href="#Zadanie%203%20%28modyfikacja%20zadania%202%20-%20max%2010" style="text-decoration: none">Zadanie 3.  Sklep owocowy B z nową metodą zakupy(...) [max. 10 punktów]</a></b>
+</p><hr width="100%">
+<p><b>Uwaga</b>:<br>
+Zadania są do wyboru. <br>
+Dla zrozumienia zadania 3 należy przeczytać (i może wykonać) zadanie 2.<br>
+Dla realizacji każdego z zadań warto skorzystać z <b><a
+ href="#Pomoc%201%20%28Hashtable%29">POMOCY</a></b>.</p>
+<p>Zadanie 1 daje pierwsze przybliżenie o co może chodzić<br>
+Dalsze zadania są jego doskonaleniem.</p>
+<hr width="100%"><br>
+<a name="Zadanie 1.  Sklep owocowy (max 5"></a><b><FONT color="#0000FF">Zadanie
+1.  Sklep owocowy (max 5 punktów)</FONT></b>
+<p>Napisać aplikację, która symuluje zakupy w sklepie z owocami.<br>
+Aplikacja wymaga zdefiniowania kilku klas i umiejętnego ich użycia, w taki
+sposób by następujący program działał poprawnie.<br>
+<b>Uwaga</b>: w pokazanym tekście programu  występują odwołania do klas:
+<b>Cennik, Koszyk, Truskawki, Banany, Agrest, Mandarynki, Kasa, Torba</b>,
+ale nie występuje jeszcze (co najmniej!) jedna ważna klasa potrzebna do spełnienia
+wymagań postawionych przed programem.</p>
+<p>class Sklep  {<br>
+  public static void main(String[] args)  {</p>
+<p>   <B> // Na poczatku dnia ustalany jest cennik</B></p>
+<p>    Cennik cennik = new Cennik();<br>
+    cennik.set("Truskawki", 5);      // ceny owoców w zł<br>
+    cennik.set("Banany", 6);<br>
+    cennik.set("Agrest", 7);</p>
+<p>    <B>// Wchodzimy do sklepu i bierzemy koszyk</B><br>
+    Koszyk koszyk = new Koszyk();</p>
+<p>    <B>// Dodajemy do koszyka kilo truskawek<br>
+    // pol kilo bananow, cwierc kilo agrestu<br>
+    // i 2 kilo mandarynek</B></p>
+<p>    koszyk.add(new Truskawki(1));<br>
+    koszyk.add(new Banany(0.5));<br>
+    koszyk.add(new Agrest(0.25));<br>
+    koszyk.add(new Mandarynki(2));  <B>// dziwnym trafem sprzedawca zapomnial
+<br>
+                                                            // ustalic ich
+ceny, ale my o tym nie wiemy</B></p>
+<p>    <B>// podchodzimy do kasy nr 1,<br>
+    // pokazujemy zawartość koszyka<br>
+    // a kasa nas rozlicza wg obowiązującego cennika</B></p>
+<p>    Kasa kasa = new Kasa(1);<br>
+    koszyk.showContent();               <B> // pokazuje zawartość koszyka</B><br>
+    kasa.printBill(koszyk, cennik);    <B>// wydruk rachunku</B></p>
+<p>   <B> // placimy (czego program juz nie pokazuje)<br>
+    // i przekladamy zawartosc koszyka do torby</B></p>
+<p>    Torba torba = new Torba();<br>
+    torba.loadFrom(koszyk);       <B>// przelozenie owocow z koszyka do torby</B>
+</p>
+<p>   <B> // Przychodzimy do domu i pokazujemy co kupilismy</B></p>
+<p>    torba.showContent();  <B>// drukuje zawartosc torby</B></p>
+<p>  }<br>
+}</p>
+<p>Powyższy program powinien wyprowadzić coś w rodzaju następującego listingu:
+</p>
+<p>Zawartość koszyka:<br>
+Truskawki 1.0 kg<br>
+Banany 0.5 kg<br>
+Agrest 0.25 kg<br>
+Mandarynki 2.0 kg</p>
+<p>Kasa nr 1 (rachunek)<br>
+Truskawki 1.0 kg * 5.0 zl/kg  = 5.0 zl<br>
+Banany 0.5 kg * 6.0 zl/kg  = 3.0 zl<br>
+Agrest 0.25 kg * 7.0 zl/kg  = 1.75 zl<br>
+Razem: 9.75 zl</p>
+<p>Zawartość torby<br>
+Truskawki 1.0 kg<br>
+Banany 0.5 kg<br>
+Agrest 0.25 kg<br>
+&nbsp;</p>
+<p><b>Wymaganie:</b><br>
+<b>dodanie do powyższego programu zakupów innych rodzajów owoców (np. Winogron)
+ma byc bardzo łatwe.</b></p>
+<p>Potrzeba tylko :</p>
+<ul>
+  <li>zdefiniowac nową klasę np. Winogrona, przy czym ma to być jak najbardziej
+oszczędna definicja (kilka wierszy kodu)</li>
+  <li>dodać odpowiedni kod do funkcji main (np. cennik.set("Winogrona", 8); 
+koszyk.add(new Winogrona(0.5)); )</li>
+</ul>
+<b>Przy dodaniu nowego rodzaju owoców nie wolno modyfikować żadnych innych
+klas programu.</b>
+<p>UWAGA. W sklepie mogą być owoce, których zapomniano dodać do cennika. Wtedy
+przy kasie są one usuwane z naszego koszyka.</p>
+<p></p>
+<hr width="100%"><br>
+<a name="Zadanie 2"></a><b><FONT color="#0000FF">Zadanie 2 (sklep owocowy
+B - max 7 punktów)</FONT></b>
+<p>Napisać aplikację, która symuluje zakupy w sklepie z owocami.<br>
+Aplikacja wymaga zdefiniowania kilku klas i umiejętnego ich użycia, w taki
+sposób by następujący program działał poprawnie.<br>
+<b>Uwaga</b>: w pokazanym tekście programu  występują odwołania do klas:
+<b>Cennik, Koszyk, Truskawki, Banany, Agrest, Mandarynki, Kasa, Torba</b>,
+ale nie występuje jeszcze dwie ważne klasy potrzebne do spełnienia wymagań
+postawionych przed programem.</p>
+<p>class Sklep  {</p>
+<p>  private Kasa kasa;</p>
+<p>  Sklep() {<br>
+    <B>// Na poczatku dnia ustalany jest cennik<br>
+    // i otwierana jest kasa</B><br>
+    Cennik cennik = Cennik.getCennik();<br>
+    cennik.set("Truskawki", 5);<br>
+    cennik.set("Banany", 6);<br>
+    cennik.set("Agrest", 7);<br>
+    kasa = new Kasa();<br>
+  }<br>
+ <br>
+ public void zakupyDemo(String osoba) {</p>
+<p>   <B> // Podana osoba wchodzi do sklepu i bierze koszyk<br>
+    // Każdy koszyk ma swój numer<br>
+    // Liczba koszyków jest nieograniczona</B></p>
+<p>    Koszyk koszyk = new Koszyk();<br>
+    System.out.println(osoba + " bierze " + koszyk);<br>
+ <br>
+ <br>
+    <B>// Dodaje do koszyka kilo truskawek<br>
+    // pol kilo bananow, cwierc kilo agrestu<br>
+    // i 2 kilo mandarynek</B><br>
+    koszyk.add(new Truskawki(1));<br>
+    koszyk.add(new Banany(0.5));<br>
+    koszyk.add(new Agrest(0.25));<br>
+    koszyk.add(new Mandarynki(2));  <B>// dziwnym trafem sprzedawca zapomnial
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // ustalic ich ceny, ale kupujacy o tym nie
+wie<br>
+ </B><br>
+&nbsp;&nbsp;<B>&nbsp; // podchodzi do kasy<br>
+    // pokazuje zawartość koszyka<br>
+    // a kasa go rozlicza wg ustalonego cennika</B></p>
+<p>    koszyk.showContent();<br>
+    kasa.printBill(koszyk);  // wydruk rachunku<br>
+ <br>
+    <B>// placi i ...<br>
+    // przeklada zawartosc koszyka do torby</B><br>
+    Torba torba = new Torba(osoba);<br>
+    torba.loadFrom(koszyk);<br>
+ <br>
+   <B> // Przychodzi do domu i pokazuje co kupil(a)</B><br>
+    torba.showContent();</p>
+<p>  }<br>
+}</p>
+<p><B>// Klasa testująca klasę Sklep</B><br>
+class Test {<br>
+  public static void main(String[] args)  {<br>
+    Sklep s = new Sklep();<br>
+    s.zakupyDemo("Janek");<br>
+  }</p>
+<p>Wydruk:<br>
+Janek bierze koszyk sklepowy nr 1<br>
+Zawartość pojemnika "koszyk sklepowy nr 1" :<br>
+Truskawki 1.0 kg<br>
+Banany 0.5 kg<br>
+Agrest 0.25 kg<br>
+Mandarynki 2.0 kg<br>
+Kasa - rachunek za [ koszyk sklepowy nr 1 ] :<br>
+Truskawki 1.0 kg * 5.0 zl/kg  = 5.0 zl<br>
+Banany 0.5 kg * 6.0 zl/kg  = 3.0 zl<br>
+Agrest 0.25 kg * 7.0 zl/kg  = 1.75 zl<br>
+Razem: 9.75 zl<br>
+Zawartość pojemnika "torba [ właściciel: Janek ] " :<br>
+Truskawki 1.0 kg<br>
+Banany 0.5 kg<br>
+Agrest 0.25 kg<br>
+ <br>
+&nbsp;</p>
+<p><b>Wymagania:</b></p>
+<ul>
+  <li><b>dodanie do powyższego programu zakupów innych rodzajów owoców (np.
+Winogron) ma byc bardzo łatwe; należy tylko dodać kilkuwierszową definicję
+nowej klasy owoców, ustalenie cen oraz ew. zakup tych owoców.</b></li>
+  <li>należy wykorzystać klasy abstrakcyjne i polimorfizm</li>
+  <li>należy zminimalizować kod klas Koszyk i Torba</li>
+  <li>należy zdefiniować klasę Cennik jako singleton (możemy mieć zawsze
+tylko jeden cennik)</li>
+</ul>
+UWAGA. W sklepie mogą być owoce, których zapomniano dodać do cennika. Wtedy
+przy kasie są one usuwane z naszego koszyka.
+<hr width="100%"><br>
+<a name="Zadanie 3 (modyfikacja zadania 2 - max 10"></a><b><FONT color="#0000FF">Zadanie 3 (modyfikacja zadania 2 - max 10 punktów)</FONT></b>
+<br>
+Po wykonaniu zadania 2 usunąć metodę <B> zakupyDemo(...) </B> z klasy <B> Sklep,</B> a zamiast
+niej zdefiniować metodę <B> void zakupy(...)</B>, tak by następujący kod:
+<p>class Sklep  {</p>
+<p>  private Kasa kasa;</p>
+<p>  Sklep() {<br>
+    /<B>/ Na poczatku dnia ustalany jest cennik<br>
+    // i otwierana jest kasa</B><br>
+    Cennik cennik = Cennik.getCennik();<br>
+    cennik.set("Truskawki", 5);<br>
+    cennik.set("Banany", 6);<br>
+    cennik.set("Agrest", 7);<br>
+    kasa = new Kasa();<br>
+  }<br>
+ <br>
+  <B>// tu definicja metody zakupy(....)</B><br>
+  <br>
+}</p>
+<p>class Test {<br>
+  public static void main(String[] args)  {<br>
+    Sklep s = new Sklep();<br>
+    s.zakupy("Janek",<br>
+              new Owoce[] { new Truskawki(1), new Banany(0.5),<br>
+                            new Agrest(0.25), new Mandarynki(1) }<br>
+            );</p>
+<p>    s.zakupy("Małgosia",<br>
+              new Owoce[] { new Truskawki(5), new Banany(3) }  );<br>
+  }<br>
+}</p>
+<p>dał w wyniku wydruk:</p>
+<p>Janek bierze koszyk sklepowy nr 1<br>
+Zawartość pojemnika "koszyk sklepowy nr 1" :<br>
+Truskawki 1.0 kg<br>
+Banany 0.5 kg<br>
+Agrest 0.25 kg<br>
+Mandarynki 1.0 kg<br>
+Kasa - rachunek za [ koszyk sklepowy nr 1 ] :<br>
+Truskawki 1.0 kg * 5.0 zl/kg  = 5.0 zl<br>
+Banany 0.5 kg * 6.0 zl/kg  = 3.0 zl<br>
+Agrest 0.25 kg * 7.0 zl/kg  = 1.75 zl<br>
+Razem: 9.75 zl<br>
+Zawartość pojemnika "torba [ właściciel: Janek ] " :<br>
+Truskawki 1.0 kg<br>
+Banany 0.5 kg<br>
+Agrest 0.25 kg<br>
+Małgosia bierze koszyk sklepowy nr 2<br>
+Zawartość pojemnika "koszyk sklepowy nr 2" :<br>
+Truskawki 5.0 kg<br>
+Banany 3.0 kg<br>
+Kasa - rachunek za [ koszyk sklepowy nr 2 ] :<br>
+Truskawki 5.0 kg * 5.0 zl/kg  = 25.0 zl<br>
+Banany 3.0 kg * 6.0 zl/kg  = 18.0 zl<br>
+Razem: 43.0 zl<br>
+Zawartość pojemnika "torba [ właściciel: Małgosia ] " :<br>
+Truskawki 5.0 kg<br>
+Banany 3.0 kg<br>
+&nbsp;</p>
+<p></p>
+<hr width="100%"><a name="Pomoc 1 (Hashtable)"></a><b>Pomoc 1 (Hashtable)</b>
+<p>Przy ustalaniu cen skorzystać z klasy Hashtable, która umożliwia łatwe
+odnajdywanie informacji wg kluczy.<br>
+Do Hashtable dodajemy za pomocą metody <b>put -</b> pary (klucz, wartość),
+które są odniesieniami do obiektów typu Object.<br>
+Np. jeśli chcemy dodać pod kluczem "Ala" wartość typu double, to musimy z
+double zrobić obiekt (do czego służy klasa Double):</p>
+<p>Hashtable ht = new Hashtable();<br>
+double d = 1.7;<br>
+String s = "Ala";<br>
+ht.put(s, new Double(d));    // dodanie wartości (reprezentowanej przez obiekt
+Double, który zawiera wartośc double 1.7) pod kluczem s ("Ala")</p>
+<p>Z tablicy uzyskujemy wartości (<b>które są odniesieniami do obiektów formalnego
+typu Object</b>) "po kluczu" za pomocą odwołania get(key) np. aby uzyskać
+wartość zapisaną uprzednio (w wierszach wyżej) pod kluczem "Ala":</p>
+<p>Object o = ht.get(s);  // s wskazuje na "Ala" i jest kluczem<br>
+                                  // jeżeli w tablicy nie będzie klucza s
+("Ala") to metoda zwraca <b>null</b></p>
+<p>Double val = (Double) o;  // obowiązkowa konwersja, by na uzyskanym obiekcie
+stosować metody klasy Double</p>
+<p>double dv = val.doubleValue();  // uzyskujemy wartość typu double, zapisaną
+w obiekcie typu Double<br>
+&nbsp;</p>
+<p><b>Pomoc 2 (Vector)</b></p>
+<p>Dodawanie do koszyka i torby można oprogramować wykorzystując klasę Vector.
+<br>
+Obiekt klasy Vector to dynamiczna (zmieniająca swoje rozmiary w trakcie wykonania)
+tablica dowolnych obiektów (typ Object).<br>
+Metody:<br>
+add(Object o) - dodaje referencję do obiektu o jako nowy element wektora,
+<br>
+Object get(int i) - zwraca referencję do obiektu, która zapisana jest w i-ym
+lemencie wektora<br>
+remove(Object o) - usuwa referencję do obiektu o z wektora<br>
+int size() - zwraca aktualną liczbę elementów wektora</p>
+<p><b>Pomoc 3 (dla realizacji zadania 2 -- singleton)</b></p>
+<p>Singleton - to klasa, którą można wykorzystać do stworzenia (w danym programie)
+tylko jednego obiektu.<br>
+Typowa realizacja:</p>
+<ul>
+  <li>prywatny konstruktor,</li>
+  <li>metoda statyczna get...(), która zwraca JEDYNY utworzony obiekt tej
+klasy (jeśli jeszcze nie został utworzony, to go tworzy)</li>
+</ul>
+<b>Pomoc 4 (przypomnienie - dla realizacji zadania 3)</b>
+<p>Wykorzystać symulację wywołania funkcji (metody) ze zmienną liczbą argumentów.
+<br>
+Wywołanie jest pokazane - przypomnieć sobie co oznacza ono dla definicji funkcji
+(metody)<br>
+ <br>
+&nbsp;</p>
+<HR>
+<HR>
+<p></p>
+</body></html>

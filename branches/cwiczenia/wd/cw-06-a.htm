@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0041)http://edu.pjwstk.edu.pl/mat/609/Zad3.htm -->
+<HTML><HEAD><TITLE>Zadania</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="Microsoft FrontPage 4.0" name=GENERATOR><!-- (c) Krzysztof Barteczko -->
+<STYLE type=text/css media=screen>PRE {
+	BORDER-RIGHT: #800000 1px solid; PADDING-RIGHT: 2%; BORDER-TOP: #800000 1px solid; DISPLAY: block; PADDING-LEFT: 2%; PADDING-BOTTOM: 2%; BORDER-LEFT: #800000 1px solid; COLOR: black; PADDING-TOP: 2%; BORDER-BOTTOM: #800000 1px solid; WHITE-SPACE: pre; BACKGROUND-COLOR: #fffff7
+}
+</STYLE>
+</HEAD>
+<BODY>
+<CENTER><B><FONT size="4">Zadania domowe (GUI-1)<BR></FONT></B>
+<DIV align=left>
+<HR width="100%" SIZE=2>
+<BR><B>Zad 1. W&#322;a&#347;ciwo&#347;ci komponentów (max. 5p)</B>
+<P>Stworzy&#263; okno ramowe <B>JFrame</B> z tytu&#322;em &quot;Prosty
+edytor&quot;, zawieraj&#261;ce komponent <B>JTextArea</B> (wielowierszowe pole
+edycyjne).<BR>
+Zapewni&#263; mo&#380;liwo&#347;&#263; ustawiania z wiersza polece&#324; (przy
+uruchamianiu aplikacji) rodzaju i rozmiaru pisma oraz kolorów t&#322;a i pisma.</P>
+<P>Argumenty wywo&#322;ania:</P>
+<UL>
+  <LI>typ pisma (np. &quot;Dialog&quot;, &quot;Serif&quot;,
+    &quot;Monospaced&quot;)
+  <LI>rozmiar pisma
+  <LI>trójka RGB, okre&#347;laj&#261;ca kolor t&#322;a
+  <LI>trójka RGB, okre&#347;laj&#261;ca kolor pisma Domy&#347;lne warto&#347;ci&nbsp;</LI>
+</UL>
+Je&#347;li w wywo&#322;aniu nie podano argumentów, domy&#347;lne warto&#347;ci
+winny by&#263; takie:
+<P>typ pisma = &quot;Dialog&quot;<BR>
+rozmiar pisma = 14<BR>
+kolor t&#322;a = niebieski<BR>
+kolor pisma = bia&#322;y</P>
+<P>Wywo&#322;anie aplikacji powinno by&#263; mo&#380;liwe:</P>
+<UL>
+  <LI>bez argumentów
+  <LI>tylko rodzaj pisma
+  <LI>rodzaj pisma i rozmiar pisma
+  <LI>jw. + kolor t&#322;a (trzy liczby)
+  <LI>jw. + kolor pisma (trzy liczby)</LI>
+</UL>
+Np.<BR>
+java Zad1 -&gt; niebieski edytor z pismem Dialog 14 w kolorze bia&#322;ym<BR>
+java Zad1 Monospaced -&gt; niebieski edytor z pismem Monospaced 14 w kolorze bia&#322;ym<BR>
+java Zad1 Dialog 18&nbsp; -&gt; niebieski edytor z pismem Dialog 18 w kolorze
+bia&#322;ym<BR>
+java Zad1 Dialog 18 0 0 0 -&gt; czarny edytor z pismem Dialog 18 w kolorze bia&#322;ym<BR>
+java Zad1 Dialog 18 255 255 255 0 0 0 -&gt; bia&#322;y edytor z pismem jw.<BR>
+  <HR>
+  <P><B>Zad. 2. Wykres paskowy (max. 10 p)</B><BR>
+  <BR>
+  Napisa&#263; aplikacj&#281;, która wczytuje plik tekstowy.<BR>
+  Aplikacja ma zlicza&#263; cz&#281;stotliwo&#347;&#263; wyst&#261;pienia
+  poszczególnych znaków w pliku i poda&#263; wynik graficznie - w postaci
+  wykresu s&#322;upkowego, na którym szeroko&#347;&#263; s&#322;upków jest
+  proporcjonalna do cz&#281;sto&#347;ci wyst&#281;powania znaków, przy czym
+  minimalna cz&#281;sto&#347;&#263; jest oznaczana kolorem szarym, maksymalna -
+  czerwonym, a posrednie - niebieskim. Za s&#322;upkami na wykresie pokaza&#263;
+  liczby, oznaczaj&#261;ce odpowiednie cz&#281;sto&#347;ci. Obrazuje to poni&#380;szy
+  rysunek.<BR>
+  <BR>
+  <IMG height="689" alt="r" src="images/cwiczRys1.jpg" width="445"><BR>
+  </P>
+<P>Przetestowa&#263; aplikacj&#281; na&nbsp; pliku tekstowym, zawieraj&#261;cym
+du&#380;y fragment polskiego tekstu.</P>
+Rozwi&#261;zanie zadania winno spe&#322;nia&#263; nast&#281;puj&#261;ce warunki:
+<OL>
+  <LI>zmienia&#263; szeroko&#347;&#263; s&#322;upków wraz z rozmiarami okna
+    aplikacji (wizualizacja najcz&#281;sciej wyst&#281;puj&#261;cej litery
+    powinna zawsze mniej wi&#281;c pokrywa&#263; aktualn&#261; szeroko&#347;&#263;
+    okna),
+  <LI>zapewni&#263; przewijanie pionowe, gdy liczba &quot;wierszy&quot;
+    wizualizacji nie mie&#347;ci si&#281; w oknie (pomoc: wykorzysta&#263; <B>JScrollPane</B>),
+  <LI>uwzgl&#281;dnia&#263; porz&#261;dek polskich liter (pomoc: wykorzysta&#263;
+    klas&#281; <B>Collator</B> z pakietu <B>java.text</B>).</LI>
+</OL>
+<P>Punktacja:</P>
+<UL>
+  <LI>za poprawnie dzia&#322;aj&#261;cy program (niekoniecznie spe&#322;niaj&#261;cy
+    warunki 1-3) - max 3 punkty,
+  <LI>za spe&#322;nienie warunku 1 &nbsp;- max dodatkowo 2 punkty,
+  <LI>za spe&#322;nienie warunku 2 &nbsp;- max dodatkowo 2 punkty,
+  <LI>za spelnienie warunku 3 - max dodatkowe 3 punkty.</LI>
+</UL>
+Przy przydziale punktów b&#281;dzie uwzgl&#281;dniany sposób oprogramowania<BR>
+<HR>
+<P><B>Zad. 3. &nbsp;Obrazki (max. 10p)</B><BR>
+<BR>
+Napisa&#263; program, który wy&#347;wietla kolejno co 5 sekund pliki graficzne
+znajduj&#261;ce si&#281; w podanym katalogu.<BR>
+Np. je&#347;li w podanym katalogu znajduj&#261; si&#281; pliki pool1.jpg,
+pool2.jpg i bview2.jpg, to w oknie aplikacji maj&#261; pojawia&#263; si&#281; co
+5 sekund kolejne obrazki z tych plików:<BR>
+<BR>
+<IMG height="235" alt="r" src="images/cwiczRys2.jpg" width="308"><BR>
+<IMG height="235" alt="r" src="images/cwiczRys3.jpg" width="308"><BR>
+<IMG height="235" alt="r" src="images/cwiczRys4.jpg" width="308"><BR>
+</P>
+  <HR>
+  <HR>
+  <P><BR><BR><BR>&nbsp;<BR><BR><BR><BR><BR></DIV></CENTER>
+<CENTER></CENTER></BODY></HTML>

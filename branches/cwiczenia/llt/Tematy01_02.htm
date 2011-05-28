@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta name="Author" content="TLL">
+  <meta name="GENERATOR"
+ content="Mozilla/4.76 [en] (Win98; U) [Netscape]">
+  <title>GUI 01_02</title>
+</head>
+<body>
+<b><font size="+1">Klasy. Ponowne wykorzystanie klas i polimorfizm</font></b><br>
+&nbsp; <br>
+<p><b><u>Zadanie 1</u> (3p)</b>
+</p>
+<b>Zaprojektowaæ i testowaæ klasê</b><b> </b>Wielomian<span
+ style="font-weight: bold;"> reprezentuj±c± wielomiany zmiennej x.</span><b><br>
+Tworz±c nowy wielomian u¿ytkownik podaje w konstruktorze argumenty
+bêd±ce wspó³czynnikami wielomianu </b><b>(od najni¿szego rzêdu potêgi
+x)</b><b>, przy czym ilo¶æ argumentów mo¿e byæ dowoln± liczb± naturaln±
+dodatni±.<br>
+<br>
+</b><span style="font-weight: bold;">Stworzyæ w/w klasê w taki sposób,
+aby
+nastêpuj±cy program:<br>
+<br>
+</span>Wielomian w1=new Wielomian(3,1,4);<br>
+System.out.println(w1);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // wy¶wietlenie reprezentacji
+tekstowej obiektu-wielomianu w1<br>
+<br>
+Wielomian w2=new Wielomian(-4,0,5,0,2);<br>
+System.out.println(w2);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp; <br>
+<br>
+System.out.println(w1.dodaj(w2));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; // metoda dodaj(...) zwraca <b>nowy</b>
+obiekt-wielomian
+bêd±cy sum± dwóch wielomianów<br>
+<br>
+System.out.println(w1.mnoz(w2));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; // metoda mnoz(...) zwraca <b>nowy</b>
+obiekt-wielomian
+bêd±cy iloczynem dwóch wielomianów<br>
+<br>
+System.out.println(w1.wartosc(1));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; // wywo³anie metody wartosc(...) zwraca warto¶æ
+wielomianu w1 dla
+podanej warto¶ci zmiennej x=1<br>
+System.out.println(w2.wartosc(0));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; <br>
+<b><u><br>
+</u></b><span style="font-weight: bold;">wyprowadzi³ na konsolê
+poni¿sze
+wyniki:</span><br>
+<br>
+4x^2+x+3<br>
+<br>
+2x^4+5x^2-4<br>
+<br>
+2x^4+9x^2+x-1<br>
+<br>
+8x^6+2x^5+26x^4+5x^3-x^2-4x-12<br>
+<br>
+8<br>
+-4<br>
+<b><u><br>
+<br>
+Zadanie 2</u></b><b> (3p)</b>
+<b><br>
+<br>
+Zaprojektowaæ i testowaæ klasy </b>Punkt<span
+ style="font-weight: bold;"> </span><b>(punkty na
+p³aszczy¼nie) oraz </b>Odcinek<b> (odcinki na </b><b>p³aszczy¼nie) </b><b>zawieraj±c±
+m. in. nastêpuj±ce metody:</b><span style="font-style: italic;"><br>
+<br>
+</span>double dlugosc()<b>: oblicza d³ugo¶æ </b><b>odcinka,</b><br>
+double odleglosc(Punkt p)<b>: oblicza odleg³o¶æ od
+¶rodka </b><b>odcinka do punktu </b>p<b>,</b><br>
+Odcinek dluzszy(Odcinek od)<b>: zwraca d³u¿szy z 2 odcinków</b><b>,<br>
+</b>int numer()<b>: zwraca numer odcinka</b>,<br>
+Odcinek rzutX()<b>, </b>Odcinek rzutY()<b>:</b><i> </i><b>zwracaj±
+rzuty </b><b>odcinka na os. X, Y,</b><br>
+public String toString()<b>:
+</b><b>wyprowadza informacje o odcinku (</b><b>przedefiniowanie metody </b>toString()<b>
+z klasy </b>Object<b>).<br>
+</b><b><br>
+Ka¿dy odcinek powinien mieæ swój unikalny
+numer</b> <b>(zaczynaj±c od 1), nadany automatycznie przy jego
+tworzeniu.</b><br>
+<br>
+<span style="font-weight: bold;">Stworzyæ w/w klasy w taki sposób, aby
+nastêpuj±cy program:</span><br>
+<br>
+public class Test {<br>
+<br>
+&nbsp;&nbsp;&nbsp; public static void main(String[] args)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Punkt p1 = new Punkt(0,0), p2 =
+new Punkt(3,4), p3 = new Punkt(2,3), p4 = new Punkt(4,0);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Odcinek od1 = new Odcinek(p1,
+p2), od2 = new Odcinek(p1, p4);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Odcinek[] odcinki = {od1, od2,
+new Odcinek(p3, p4)};<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; for (Odcinek od : odcinki)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+System.out.println(od);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; System.out.println("D³ugo¶æ
+odcinka " + od1.numer() + " = " + od1.dlugosc());<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; System.out.println("Odleg³o¶æ od
+punktu " +&nbsp; p3 + " do ¶rodka odcinka " + od2.numer() + " = " +
+od2.odleglosc(p3));<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; System.out.println("D³u¿szy
+odcinek to " + od2.dluzszy(odcinki[2]));<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; System.out.println("Rzut odcinka
+" + od1 + " na X to " + od1.rzutX());<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; System.out.println("Rzut odcinka
+" + od1 + " na Y to " + od1.rzutY());<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+w³asna metoda najdluzszy(...) z klasy Test do napisania!<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; System.out.println("Najd³u¿szy
+odcinek to " + najdluzszy(odcinki));<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}<br>
+<br>
+<span style="font-weight: bold;">wyprowadzi³ na konsolê poni¿sze
+wyniki:<br>
+<br>
+</span>1:(0,0)-(3,4)<br>
+2:(0,0)-(4,0)<br>
+3:(2,3)-(4,0)<br>
+D³ugo¶æ odcinka 1 = 5.0<br>
+Odleg³o¶æ od punktu (2,3) do ¶rodka odcinka 2 = 3.0<br>
+D³u¿szy odcinek to 2:(0,0)-(4,0)<br>
+Rzut odcinka 1:(0,0)-(3,4) na X to 4:(0,0)-(3,0)<br>
+Rzut odcinka 1:(0,0)-(3,4) na Y to 5:(0,0)-(0,4)<br>
+Najd³u¿szy odcinek to 1:(0,0)-(3,4)<span style="font-weight: bold;"><br>
+<br>
+</span>
+<p><b><span style="text-decoration: underline;">Zadanie 3</span> (4p)<br>
+</b></p>
+<b>Napisaæ program symuluj±cy operacje na prostych kontach
+bankowych ró¿nych typów.<br>
+<br>
+Ka¿de konto - obiekt klasy </b>Rachunek<b> </b><b>posiada w³a¶ciciela
+(obiekt klasy </b>Osoba<b>) oraz stan konta. </b><b>Dostêpne s±&nbsp;
+3 operacje na koncie: wp³ata, wyp³ata, przelew.<br>
+Klasa </b>Konto<b> (dziedzicz±ca z klasy </b>Rachunek<span
+ style="font-weight: bold;">) </span><b>reprezetuje konta, które
+dodatkowo posiadaj± mo¿liwo¶æ doliczenia do stanu kont odsetek na
+podstawie podanego oprocentowania.<br>
+Ka¿de konto - obiekt klasy </b>KontoVIP<b> (dziedzicz±cej z klasy </b>Konto<b>)
+posiada dodatkowo limit debetu. </b><span style="font-weight: bold;"><br>
+<br>
+Konto posiada mo¿liwo¶æ aktualizacji, w szczególno¶ci: dla konta typu </span>Konto
+<span style="font-weight: bold;">dolicza odsetki do stanu, dla
+konta typu </span>KontoVIP<span style="font-weight: bold;"> dodatkowo
+podaje ilo¶æ prób przekroczenia limitu debetu</span><span
+ style="font-weight: bold;">.<br>
+<br>
+Ka¿de konto powinien mieæ </span><b>swój unikalny
+numer</b> <b>(zaczynaj±c od 1), nadany automatycznie przy jego
+tworzeniu.</b><br>
+<span style="font-weight: bold;"><br>
+Stworzyæ w/w klasy w taki sposób, aby nastêpuj±cy program:<br>
+<br>
+</span><b></b>public class Bank {<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp; public static void main(String[] args)<br>
+&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Osoba klient1 = new Osoba("jan"),
+klient2 = new Osoba("anna");<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Osoba[] klienci = new Osoba[]
+{klient1, klient2, new Osoba("maria")};<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;for (Osoba o: klienci)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;System.out.print(o + "&nbsp; ");<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;System.out.println("\n");<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Rachunek konto1 = new
+Rachunek(klient1); <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Rachunek konto2 = new
+Konto(klient2, 2);&nbsp;&nbsp; &nbsp;// oprocentowanie: 2%<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Rachunek[] konta = {konto1, <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;konto2, <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;new
+KontoVIP(klienci[2], 5, -100)};&nbsp;&nbsp; &nbsp;// oprocentowanie:
+5%, limit debetu: -100<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konto1.wplata(500);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konto2.wplata(900);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konto2.wyplata(300);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konto1.przelew(konto2, 200);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;for (Rachunek k: konta)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;System.out.println(k);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;System.out.println();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konta[2].wyplata(101);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konto2.przelew(konta[2], 801);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;System.out.println();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konto2.przelew(konta[2], 700);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konta[2].przelew(konto1, 801);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;System.out.println();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;konta[2].przelew(konto1, 800);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;for (Rachunek k: konta)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;System.out.println(k);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;System.out.println();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;for (Rachunek k: konta)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;k.aktualizuj();<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;System.out.println();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+w³asna metoda rekord(...) z klasy Bank do napisania!<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;System.out.println("Konto z
+najwiêkszym stanem - " + rekord(konta));<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+<p><span style="font-weight: bold;">wyprowadzi³ na konsolê poni¿sze
+wyniki:</span><br>
+</p>
+<p>jan&nbsp; anna&nbsp; maria&nbsp; <br>
+<br>
+Konto nr 1: jan, stan 300.0<br>
+Konto nr 2: anna, stan 800.0, oprocentowanie 2.0<br>
+Konto nr 3: maria, stan 0.0, oprocentowanie 5.0, limit debetu -100.0<br>
+<br>
+Konto nr 3: maria, stan 0.0, oprocentowanie 5.0, limit debetu -100.0 -
+nie dozwolona operacja: wyp³ata!<br>
+Konto nr 2: anna, stan 800.0, oprocentowanie 2.0 - nie dozwolona
+operacja: przelew!<br>
+<br>
+Konto nr 3: maria, stan 700.0, oprocentowanie 5.0, limit debetu -100.0
+- nie dozwolona operacja: przelew!<br>
+<br>
+Konto nr 1: jan, stan 1100.0<br>
+Konto nr 2: anna, stan 100.0, oprocentowanie 2.0<br>
+Konto nr 3: maria, stan -100.0, oprocentowanie 5.0, limit debetu -100.0<br>
+<br>
+Konto nr 1: jan, stan 1100.0<br>
+Konto nr 2: anna, stan 102.0<br>
+Konto nr 3: maria, stan -100.0 - ilo¶æ prób przekroczenia debetu&nbsp;
+2!<br>
+<br>
+Konto z najwiêkszym stanem - Konto nr 1: jan, stan 1100.0<span
+ style="font-weight: bold;"><br>
+<br>
+</span></p>
+<b></b>
+<p><b><u>Zadanie 4</u> (5p)</b>
+</p>
+<p><b>Rozbudowaæ zadanie 3 o dodatkowe klasy obs³uguj±ce banki oraz
+bankomaty:</b>
+</p>
+<b>
+Ka¿dy bank ma m. in. nazwê, unikalny identyfikator oraz listê kont
+(ró¿nych typów).<br>
+Ka¿de konto posiada dodatkowo informacjê o banku, do którego
+nale¿y.&nbsp; <br>
+Bankomat obs³uguje konta niektórych banków. U¿ytkownik powinien mieæ
+mo¿liwo¶æ </b><b>zmodyfikowania</b><b> listy obs³ugiwanych banków
+przez dany bankomat. Bankomat
+wydaje pieni±dze z
+konta, o ile stan konta na to pozwala, w banknotach o okre¶lonych
+nomina³ach. U¿ytkownik powinien mieæ mo¿liwo¶æ zmodyfikowania stanu
+bankomatu, dotyczy to ilo¶ci pieniêdzy dostêpnych w bankomacie, w
+jakich nomina³ach oraz dla ka¿dego nomina³u w jakiej ilo¶ci.<br>
+<br>
+Napisaæ program testuj±cy dzia³anie w/w klas.<br>
+</b>
+<p></p>
+</body>
+</html>

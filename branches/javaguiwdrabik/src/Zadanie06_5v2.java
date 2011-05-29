@@ -68,7 +68,7 @@ topRight.setBackground(Color.RED);
 
         // panel srodkowy
         JPanel middle = new JPanel();
-        JTextArea textarea = new JTextArea();
+        JTextArea textarea = new JTextArea("To jest JTextArea");
         textarea.setPreferredSize(new Dimension(200, 200));
         middle.add(textarea);
 middle.setBackground(Color.gray);
@@ -91,9 +91,9 @@ bottomLeft.setBackground(Color.pink);
         JPanel bottomRight = new JPanel();
 bottomRight.setBackground(Color.blue);
         bottomRight.setLayout(new BoxLayout(bottomRight, BoxLayout.Y_AXIS));
-        bottomRight.add(new JTextField());
-        bottomRight.add(new JTextField());
-        bottomRight.add(new JTextField());
+        bottomRight.add(new JTextField("To jest JTextField"));
+        bottomRight.add(new JTextField("To jest JTextField"));
+        bottomRight.add(new JTextField("To jest JTextField"));
         c.gridx = 2;
         c.gridy = 3;
         frame.add(bottomRight, c);

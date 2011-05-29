@@ -11,14 +11,14 @@ import java.util.HashMap;
  * @version $Id$
  */
 public class Parser {
-    HashMap<Character, Integer> container = null;
+    HashMap<String, Integer> container = null;
     String file;
 
     public Parser(String file) {
         this.file = file;
     }
 
-    HashMap<Character, Integer> getData() throws Exception {
+    HashMap<String, Integer> getData() throws Exception {
         if (container == null) {
             loadData(file);
         }
@@ -28,17 +28,17 @@ public class Parser {
     void loadData(String file) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-            container = new HashMap<Character, Integer>();
+            String line, letter;
+            container = new HashMap<String, Integer>();
 
             while ((line = br.readLine()) != null) {
-                for (char val : line.toCharArray()) {
-                    if ((int) val != 32) { // jesli nie jest spacja
-                        if (container.containsKey((Character) val)) {
-                            container.put((Character) val, container
-                                    .get((Character) val) + 1);
+                for (int x = 0; x < line.length(); x++) {
+                    letter = line.substring(x, x + 1);
+                    if (!letter.equals(" ")) { // jesli nie jest spacja
+                        if (container.containsKey(letter)) {
+                            container.put(letter, container.get(letter) + 1);
                         } else {
-                            container.put((Character) val, 1);
+                            container.put(letter, 1);
                         }
                     }
                 }

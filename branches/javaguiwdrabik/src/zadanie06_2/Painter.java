@@ -1,14 +1,14 @@
 package zadanie06_2;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.Graphics;
+import java.text.Collator;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.List;
+import java.util.Locale;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -17,73 +17,65 @@ import javax.swing.JPanel;
  * @author s8376
  * @version $Id$
  */
-public class Painter {
+public class Painter extends JPanel {
     Parser parser;
+    int counterMin = 0, counterMax = 0;
+    List<Object> keysList;
+    HashMap<String, Integer> container;
 
     public Painter(Parser parser) {
         this.parser = parser;
-    }
-
-    public void display() throws Exception {
-        HashMap<Character, Integer> container = parser.getData();
-
-        SortedSet<Character> sortedset = new TreeSet<Character>(container
-                .keySet());
-        Iterator<Character> it = sortedset.iterator();
-        
-        Character key;
-        int counterMin = 0, counterMax = 0;
         boolean first = true;
 
-        // ustalam najwieksze/najmniejsze wartosci
-        while (it.hasNext()) {
-            key = it.next();
+        try {
+            container = this.parser.getData();
+            keysList = Arrays.asList(container.keySet().toArray());
+            Collections.sort(keysList, Collator
+                    .getInstance(Locale.getDefault()));
 
-            if (first) {
-                counterMin = container.get(key);
-                counterMax = container.get(key);
-                first = false;
+            // obliczam wartosci najmniejsze i najwieksze
+            for (Object key : keysList.toArray()) {
+                if (first) {
+                    counterMin = container.get(key);
+                    counterMax = container.get(key);
+                    first = false;
+                }
+                if ((int) container.get(key) < counterMin) {
+                    counterMin = (int) container.get(key);
+                }
+                if ((int) container.get(key) > counterMax) {
+                    counterMax = (int) container.get(key);
+                }
             }
-            if ((int) container.get(key) < counterMin) {
-                counterMin = (int) container.get(key);
-            }
-            if ((int) container.get(key) > counterMax) {
-                counterMax = (int) container.get(key);
-            }
+        } catch (Exception e) {
+            e.getStackTrace();
         }
+    }
 
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(100, 100);
-        frame.setPreferredSize(new Dimension(400, 700));
-        frame.setLayout(new GridLayout(0, 1));
-        frame.setTitle("Wykres");
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        try {
+            Panel panel;
 
-        Panel panel;
-        it = sortedset.iterator();
+            // przekazuje dane do widoku
+            for (Object key : keysList.toArray()) {
+                panel = new Panel();
+                panel.setLineWidth((100 * ((int) container.get(key)))
+                        / counterMax);
 
-        frame.add(new JPanel());
-        
-        // przekazuje dane do widoku
-        while (it.hasNext()) {
-            key = it.next();
+                panel.setTitle("" + key);
+                panel.setCounter(container.get(key));
 
-            panel = new Panel();
-            panel.setLineWidth((100 * ((int) container.get(key))) / counterMax);
+                if ((int) container.get(key) == counterMin) {
+                    panel.setColor(Color.gray);
+                } else if ((int) container.get(key) == counterMax) {
+                    panel.setColor(Color.red);
+                }
 
-            panel.setTitle("" + key);
-            panel.setCounter(container.get(key));
-
-            if ((int) container.get(key) == counterMin) {
-                panel.setColor(Color.gray);
-            } else if ((int) container.get(key) == counterMax) {
-                panel.setColor(Color.red);
+                add(panel);
             }
-
-            frame.add(panel);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        frame.pack();
-        frame.setVisible(true);
     }
 }

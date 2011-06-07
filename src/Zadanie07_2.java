@@ -1,0 +1,75 @@
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+/**
+ * Zadanie 2 (max 4 punkty)
+ * 
+ * W oknie umieszczone są dwa przyciski z napisami "Przycisk 1" i "Przycisk 2".
+ * 
+ * Kliknięcie w każdy z nich zwiększa rozmiar pisma na przycisku o 1 pkt.
+ * 
+ * Zapewnić:
+ * aby zmiany pisma były widoczne natychmiast na przyciskach,
+ * aby zawsze w oknie były widoczne oba całe  przyciski (niedopuszczalne jest,
+ * by na skutek zwiększenia pisma w oknie była widoczna tylko część przycisku). 
+ * 
+ * @author s8376
+ * @version $Id$
+ */
+public class Zadanie07_2 extends JFrame implements ActionListener {
+    JButton button1, button2;
+
+    Zadanie07_2() {
+        super("GUI Zadanie 2");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(200, 100));
+        setLocation(200, 200);
+        setLayout(new FlowLayout());
+
+        Font font = new Font("Dialog", Font.PLAIN, 12);
+
+        button1 = new JButton("Przycisk 1");
+        button1.setFont(font);
+        button1.addActionListener(this);
+        add(button1);
+
+        button2 = new JButton("Przycisk 2");
+        button2.setFont(font);
+        button2.addActionListener(this);
+        add(button2);
+        
+        setSize(getDimension());
+        
+        pack();
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        JButton handler = (JButton) e.getSource();
+        Font font = new Font("Dialog", 0, handler.getFont().getSize() + 1);
+        button1.setFont(font);
+        button2.setFont(font);
+
+        setSize(getDimension());
+    }
+
+    Dimension getDimension() {
+        return new Dimension(button1.getWidth() + button2.getWidth() + 20,
+                button1.getHeight() + button2.getHeight() + 40);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Zadanie07_2();
+            }
+        });
+    }
+}

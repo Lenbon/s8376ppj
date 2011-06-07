@@ -64,6 +64,7 @@ public class Zadanie07_3 extends JFrame implements ActionListener {
     JMenuItem menuEditAddressWork, menuEditAddressShool, menuEditAddressHome;
     JTextArea textArea;
     Hashtable<String, Color> colors;
+    Hashtable<String, Integer> fonts;
     {
         colors = new Hashtable<String, Color>();
 
@@ -74,6 +75,18 @@ public class Zadanie07_3 extends JFrame implements ActionListener {
         colors.put("White", Color.WHITE);
         colors.put("Black", Color.BLACK);
         colors.put("Green", Color.GREEN);
+
+        fonts = new Hashtable<String, Integer>();
+
+        fonts.put("8 pts", 8);
+        fonts.put("10 pts", 10);
+        fonts.put("12 pts", 12);
+        fonts.put("14 pts", 14);
+        fonts.put("16 pts", 16);
+        fonts.put("18 pts", 18);
+        fonts.put("20 pts", 20);
+        fonts.put("22 pts", 22);
+        fonts.put("24 pts", 24);
     }
 
     Zadanie07_3() {
@@ -87,8 +100,13 @@ public class Zadanie07_3 extends JFrame implements ActionListener {
         container.setBackground(Color.RED);
         container.setLayout(null);
 
-        // listeners
-        //        ActionListener listenerDefault = new ListenerDefault(this);
+        // textarea
+        textArea = new JTextArea();
+        textArea.setBounds(10, 30, 300, 200);
+        textArea.setToolTipText("Word processor");
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        container.add(textArea);
 
         // menubar
         JMenuBar menu = new JMenuBar();
@@ -136,18 +154,18 @@ public class Zadanie07_3 extends JFrame implements ActionListener {
         JMenu menuOptionsForeground = new JMenu("Foreground");
         // getColorItems
         JMenuItem menuItem;
-        
+
         ListenerForeground listenerForeground = new ListenerForeground(textArea);
-        for(String key : colors.keySet()) {
+        for (String key : colors.keySet()) {
             menuItem = new JMenuItem(key, new MyIcon(colors.get(key)));
             menuItem.addActionListener(listenerForeground);
             menuOptionsForeground.add(menuItem);
         }
         menuOptions.add(menuOptionsForeground);
-        
+
         JMenu menuOptionsBackground = new JMenu("Background");
         ListenerBackground listenerBackground = new ListenerBackground(textArea);
-        for(String key : colors.keySet()) {
+        for (String key : colors.keySet()) {
             menuItem = new JMenuItem(key, new MyIcon(colors.get(key)));
             menuItem.addActionListener(listenerBackground);
             menuOptionsBackground.add(menuItem);
@@ -156,19 +174,16 @@ public class Zadanie07_3 extends JFrame implements ActionListener {
 
         JMenu menuOptionsFont = new JMenu("Font size");
         // getFontItems
+        for (String key : fonts.keySet()) {
+            menuItem = new JMenuItem(key);
+            menuItem.addActionListener(null);
+            menuOptionsFont.add(menuItem);
+        }
         menuOptions.add(menuOptionsFont);
 
         menu.add(menuOptions);
 
         container.add(menu);
-
-        // textarea
-        textArea = new JTextArea();
-        textArea.setBounds(10, 30, 300, 200);
-        textArea.setToolTipText("Word processor");
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        container.add(textArea);
 
         pack();
         setVisible(true);
@@ -199,11 +214,11 @@ public class Zadanie07_3 extends JFrame implements ActionListener {
                     .getCaretPosition());
         }
 
-//        if (e.getSource() == testColotOption) {
-//            //            textArea.setBackground(Color.RED);
-//            textArea.setForeground(Color.RED);
-//
-//        }
+        //        if (e.getSource() == testColotOption) {
+        //            //            textArea.setBackground(Color.RED);
+        //            textArea.setForeground(Color.RED);
+        //
+        //        }
         //        Font font = new Font("Serif", Font.ITALIC, 20);
 
     }

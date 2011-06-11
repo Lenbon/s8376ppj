@@ -2,11 +2,7 @@
 
 read -p "Tryb1 - nowa linia / znak (t/f): " mode1
 read -p "Tryb2 - wielkie litery (t/f): " mode2
-
-
-
-#read -p "Ciag znakow: " string
-string="Ala ma Kota"
+read -p "Ciag znakow: " string
 
 export mode1="$mode1"
 

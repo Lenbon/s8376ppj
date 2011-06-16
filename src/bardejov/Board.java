@@ -11,7 +11,7 @@ public class Board extends JPanel {
 
     public Board() {
         ImageIcon ii = new ImageIcon(this.getClass().getResource(
-                "files/img/bardejov.jpg"));
+                "files/img/z9787596F.jpg"));
         bardejov = ii.getImage();
     }
 

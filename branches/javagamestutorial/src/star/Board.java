@@ -20,7 +20,7 @@ public class Board extends JPanel implements ActionListener {
     public Board() {
         setBackground(Color.BLACK);
 
-        ImageIcon ii = new ImageIcon(this.getClass().getResource("star.png"));
+        ImageIcon ii = new ImageIcon(this.getClass().getResource("750196912.png"));
         star = ii.getImage();
 
         setDoubleBuffered(true);

@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class FirstStep extends JFrame {
-
     public FirstStep() {
         setTitle("Simple example");
         setSize(300, 200);

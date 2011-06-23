@@ -26,7 +26,7 @@ public class Toolbar extends JFrame {
 
         JToolBar toolbar = new JToolBar();
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("../../files/img/exit.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("exit.png"));
 
         JButton exitButton = new JButton(icon);
         toolbar.add(exitButton);

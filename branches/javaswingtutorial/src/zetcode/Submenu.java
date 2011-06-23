@@ -13,7 +13,6 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 public class Submenu extends JFrame {
-
     public Submenu() {
         initUI();
     }

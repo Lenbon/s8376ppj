@@ -11,7 +11,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 public class PopupMenu extends JFrame {
-
     private JPopupMenu menu;
     private Toolkit toolkit;
 
@@ -64,6 +63,5 @@ public class PopupMenu extends JFrame {
                 pm.setVisible(true);
             }
         });
-
     }
 }

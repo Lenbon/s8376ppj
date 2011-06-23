@@ -9,13 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class QuitButton extends JFrame {
-
     public QuitButton() {
         initUI();
     }
 
     public final void initUI() {
-
         JPanel panel = new JPanel();
         getContentPane().add(panel);
 

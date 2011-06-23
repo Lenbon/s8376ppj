@@ -6,13 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Tooltip extends JFrame {
-
     public Tooltip() {
         initUI();
     }
 
     public final void initUI() {
-
         JPanel panel = new JPanel();
         getContentPane().add(panel);
 

@@ -1,20 +1,40 @@
 import zadanie07_3.*;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.TreeSet;
 
+import javax.sound.midi.SysexMessage;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Zadanie 3 (max 12 punktów)
@@ -59,12 +79,14 @@ import javax.swing.SwingUtilities;
  * @author s8376
  * @version $Id$
  */
-public class Zadanie07_3 extends JFrame implements ActionListener {
-    JMenuItem menuFileOpen, menuFileSave, menuFileSaveAs, menuFileExit;
-    JMenuItem menuEditAddressWork, menuEditAddressShool, menuEditAddressHome;
+public class Zadanie07_3 extends JFrame {
+    boolean isChange = false;
+    JPanel panel;
     JTextArea textArea;
+    String titlePrefix = "Word processor - ", titleSufix,
+            titleSufixDefault = "bez tytułu";
     Hashtable<String, Color> colors;
-    Hashtable<String, Integer> fonts;
+    HashMap<Integer, String> fonts;
     {
         colors = new Hashtable<String, Color>();
 
@@ -76,151 +98,198 @@ public class Zadanie07_3 extends JFrame implements ActionListener {
         colors.put("Black", Color.BLACK);
         colors.put("Green", Color.GREEN);
 
-        fonts = new Hashtable<String, Integer>();
+        fonts = new HashMap<Integer, String>();
 
-        fonts.put("8 pts", 8);
-        fonts.put("10 pts", 10);
-        fonts.put("12 pts", 12);
-        fonts.put("14 pts", 14);
-        fonts.put("16 pts", 16);
-        fonts.put("18 pts", 18);
-        fonts.put("20 pts", 20);
-        fonts.put("22 pts", 22);
-        fonts.put("24 pts", 24);
+        fonts.put(8, "8 pts");
+        fonts.put(10, "10 pts");
+        fonts.put(12, "12 pts");
+        fonts.put(14, "14 pts");
+        fonts.put(16, "16 pts");
+        fonts.put(18, "18 pts");
+        fonts.put(20, "20 pts");
+        fonts.put(22, "22 pts");
+        fonts.put(24, "24 pts");
     }
 
     Zadanie07_3() {
-        super("Word processor - bez tytułu");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 300));
-        //        setResizable(false);
-        setLocation(100, 100);
+        initElements();
+        initUI();
+    }
 
-        Container container = getContentPane();
-        container.setBackground(Color.RED);
-        container.setLayout(null);
+    protected void initElements() {
+        // components
+        panel = new JPanel();
 
-        // textarea
         textArea = new JTextArea();
-        textArea.setBounds(10, 30, 300, 200);
-        textArea.setToolTipText("Word processor");
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        container.add(textArea);
+        textArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
 
-        // menubar
-        JMenuBar menu = new JMenuBar();
-        setJMenuBar(menu);
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                isChange = true;
+            }
 
-        // menubar - file
-        JMenu menuFile = new JMenu("File");
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+        });
+        add(new JScrollPane(textArea));
 
-        menuFileOpen = new JMenuItem("Open");
-        menuFile.add(menuFileOpen);
-        menuFileSave = new JMenuItem("Save");
-        menuFile.add(menuFileSave);
-        menuFileSaveAs = new JMenuItem("Save as");
-        menuFile.add(menuFileSaveAs);
-        //        menuFile.add(new JMenuItem("Open", 1)); // separator // FIXME
-        menuFile.addSeparator();
-        menuFileExit = new JMenuItem("Exit");
-        menuFileExit.addActionListener(this);
-        menuFile.add(menuFileExit);
+        // menu: file
+        JMenu file = new JMenu("File");
 
-        menu.add(menuFile);
+        JMenuItem fileOpen = new JMenuItem("Open");
+        fileOpen.setToolTipText("Otwórz plik");
+        fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+                ActionEvent.CTRL_MASK));
+        fileOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileopen = new JFileChooser();
+                fileopen.addChoosableFileFilter(new FileNameExtensionFilter(
+                        "pliki tekstowe", "txt"));
 
-        // menubar - edit
-        JMenu menuEdit = new JMenu("Edit");
-        JMenu menuEditAddress = new JMenu("Adres");
+                int ret = fileopen.showDialog(panel, "Otwórz plik");
+                if (ret == JFileChooser.APPROVE_OPTION) {
+                    File file = fileopen.getSelectedFile();
+//                    textArea.setText(readFile(file));
+                }
+            }
+        });
 
-        menuEditAddressWork = new JMenuItem("Praca");
-        menuEditAddressWork.addActionListener(this);
-        menuEditAddress.add(menuEditAddressWork);
+        JMenuItem fileSave = new JMenuItem("Save");
+        fileSave.setToolTipText("Zapisz do pliku");
+        fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+                ActionEvent.CTRL_MASK));
 
-        menuEditAddressShool = new JMenuItem("Szkoła");
-        menuEditAddressShool.addActionListener(this);
-        menuEditAddress.add(menuEditAddressShool);
+        JMenuItem fileSaveas = new JMenuItem("Save As");
+        fileSaveas.setToolTipText("Zapisz do nowego pliku");
+        fileSaveas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
+                ActionEvent.CTRL_MASK));
 
-        menuEditAddressHome = new JMenuItem("Dom");
-        menuEditAddressHome.addActionListener(this);
-        menuEditAddress.add(menuEditAddressHome);
+        JMenuItem fileExit = new JMenuItem("Exit");
+        fileExit.setToolTipText("Wyjście z edytora");
+        fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+                ActionEvent.CTRL_MASK));
+        fileExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (isChange == false)
+                    System.exit(0);
 
-        menuEdit.add(menuEditAddress);
-        menu.add(menuEdit);
+                int choice = JOptionPane.showConfirmDialog(null,
+                        "Zakończyć pracę? Niezapisane zmiany zostaną utracone",
+                        "Wyjście z programu", 2);
+                if (choice == JOptionPane.OK_OPTION) {
+                    System.exit(0);
+                } else {
+                    return;
+                }
+            }
+        });
 
-        // menubar - options
-        JMenu menuOptions = new JMenu("Options");
+        file.add(fileOpen);
+        file.add(fileSave);
+        file.add(fileSaveas);
+        file.addSeparator();
+        file.add(fileExit);
 
-        JMenu menuOptionsForeground = new JMenu("Foreground");
-        // getColorItems
+        // menu: edit
+        JMenu edit = new JMenu("Edit");
+        JMenu editAddresses = new JMenu("Adresy");
+
+        JMenuItem editAddressesWork = new JMenuItem("Praca");
+        editAddressesWork.setToolTipText("Wstaw adres miejsca zatrudnienia");
+        editAddressesWork.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
+                ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+        editAddressesWork.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.insert("Warszawa, Domaniewska 39", textArea
+                        .getCaretPosition());
+            }
+        });
+
+        JMenuItem editAddressesHome = new JMenuItem("Dom");
+        editAddressesHome.setToolTipText("Wstaw adres miejsca zamieszkania");
+        editAddressesHome.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+                ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+        editAddressesHome.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.insert("Konstancin, Kwiatowa 15", textArea
+                        .getCaretPosition());
+            }
+        });
+
+        JMenuItem editAddressesSchool = new JMenuItem("Szkoła");
+        editAddressesSchool.setToolTipText("Wstaw adres uczelni");
+        editAddressesSchool.setAccelerator(KeyStroke.getKeyStroke(
+                KeyEvent.VK_D, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+        editAddressesSchool.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.insert("Warszawa, Koszykowa 86", textArea
+                        .getCaretPosition());
+            }
+        });
+
+        editAddresses.add(editAddressesWork);
+        editAddresses.add(editAddressesHome);
+        editAddresses.add(editAddressesSchool);
+        edit.add(editAddresses);
+
+        // menu: options
+        JMenu options = new JMenu("Options");
         JMenuItem menuItem;
 
+        JMenu optionsForeground = new JMenu("Foreground");
         ListenerForeground listenerForeground = new ListenerForeground(textArea);
         for (String key : colors.keySet()) {
             menuItem = new JMenuItem(key, new MyIcon(colors.get(key)));
             menuItem.addActionListener(listenerForeground);
-            menuOptionsForeground.add(menuItem);
+            optionsForeground.add(menuItem);
         }
-        menuOptions.add(menuOptionsForeground);
 
-        JMenu menuOptionsBackground = new JMenu("Background");
+        JMenu optionsBackground = new JMenu("Background");
         ListenerBackground listenerBackground = new ListenerBackground(textArea);
         for (String key : colors.keySet()) {
             menuItem = new JMenuItem(key, new MyIcon(colors.get(key)));
             menuItem.addActionListener(listenerBackground);
-            menuOptionsBackground.add(menuItem);
+            optionsBackground.add(menuItem);
         }
-        menuOptions.add(menuOptionsBackground);
 
-        JMenu menuOptionsFont = new JMenu("Font size");
-        // getFontItems
-        for (String key : fonts.keySet()) {
-            menuItem = new JMenuItem(key);
-            menuItem.addActionListener(null);
-            menuOptionsFont.add(menuItem);
+        JMenu optionsFontsize = new JMenu("Font size");
+        TreeSet<Integer> sortedSet = new TreeSet<Integer>(
+                new ArrayList<Integer>(fonts.keySet()));
+        for (Object key : sortedSet.toArray()) {
+            menuItem = new JMenuItem(fonts.get(key));
+            menuItem.addActionListener(new ListenerFontSize(textArea,
+                    (Integer) key));
+            optionsFontsize.add(menuItem);
         }
-        menuOptions.add(menuOptionsFont);
 
-        menu.add(menuOptions);
+        options.add(optionsForeground);
+        options.add(optionsBackground);
+        options.add(optionsFontsize);
 
-        container.add(menu);
+        JMenuBar menu = new JMenuBar();
+        menu.add(file);
+        menu.add(edit);
+        menu.add(options);
 
-        pack();
-        setVisible(true);
+        setJMenuBar(menu);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        // file menu
-        if (e.getSource() == menuFileExit) {
-            int wybor = JOptionPane.showConfirmDialog(null, "Zakończyć pracę?",
-                    "Wyjście z programu", 2);
-            if (wybor == JOptionPane.OK_OPTION) {
-                System.exit(0);
-            } else {
-                return;
-            }
-        }
+    protected void initUI() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(new Dimension(300, 300));
+        setLocationRelativeTo(null);
+        setTitle(titlePrefix + titleSufixDefault);
 
-        if (e.getSource() == menuEditAddressWork) {
-            textArea.insert("Warszawa, Domaniewska 39", textArea
-                    .getCaretPosition());
-        }
-        if (e.getSource() == menuEditAddressShool) {
-            textArea.insert("Warszawa, Koszykowa 86", textArea
-                    .getCaretPosition());
-        }
-        if (e.getSource() == menuEditAddressHome) {
-            textArea.insert("Konstancin, Kwiatowa 15", textArea
-                    .getCaretPosition());
-        }
-
-        //        if (e.getSource() == testColotOption) {
-        //            //            textArea.setBackground(Color.RED);
-        //            textArea.setForeground(Color.RED);
-        //
-        //        }
-        //        Font font = new Font("Serif", Font.ITALIC, 20);
-
+        setVisible(true);
     }
 
     public static void main(String[] args) {

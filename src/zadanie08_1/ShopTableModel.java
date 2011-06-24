@@ -2,6 +2,12 @@ package zadanie08_1;
 
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * ShopTableModel
+ * 
+ * @author      s8376
+ * @version     $Id$
+ */
 public class ShopTableModel extends AbstractTableModel {
     private final static String[] columnNames = { "Numer porządkowy",
             "Nazwa towaru", "Producent", "Cena" };

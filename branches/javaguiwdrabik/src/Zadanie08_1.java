@@ -29,8 +29,8 @@ import javax.swing.SwingUtilities;
  * Kolumna cena powinna być jako jedyna edytowalna żeby umożliwić szybkie uaktualnianie cen.
  * Pola tej kolumny należy ustawić w kolorze żółtym a wartości czerwone.
  * 
- * @author s8376
- * @version $Id$
+ * @author      s8376
+ * @version     $Id$
  */
 public class Zadanie08_1 extends JFrame {
 
@@ -41,7 +41,7 @@ public class Zadanie08_1 extends JFrame {
     }
 
     public void init() {
-        
+
         add(new JScrollPane(new JTable(new ShopTableModel())));
     }
 

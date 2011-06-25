@@ -29,7 +29,7 @@ public class Zadanie07_2 extends JFrame implements ActionListener {
     Zadanie07_2() {
         super("GUI Zadanie 2");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(200, 100));
+        setPreferredSize(new Dimension(160, 110));
         setLocation(200, 200);
         setLayout(new FlowLayout());
 
@@ -62,7 +62,7 @@ public class Zadanie07_2 extends JFrame implements ActionListener {
 
     Dimension getDimension() {
         return new Dimension(button1.getWidth() + button2.getWidth() + 20,
-                button1.getHeight() + button2.getHeight() + 40);
+                button1.getHeight() + button2.getHeight() + 60);
     }
 
     public static void main(String[] args) {

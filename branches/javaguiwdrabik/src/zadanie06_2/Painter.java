@@ -1,5 +1,6 @@
 package zadanie06_2;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.text.Collator;
@@ -22,6 +23,7 @@ public class Painter extends JPanel {
     int counterMin = 0, counterMax = 0;
     List<Object> keysList;
     HashMap<String, Integer> container;
+    Panel[] panels;
 
     public Painter(Parser parser) {
         this.parser = parser;
@@ -33,6 +35,10 @@ public class Painter extends JPanel {
             Collections.sort(keysList, Collator
                     .getInstance(Locale.getDefault()));
 
+            Panel panel;
+            int x = 0;
+            panels = new Panel[keysList.size()];
+            
             // obliczam wartosci najmniejsze i najwieksze
             for (Object key : keysList.toArray()) {
                 if (first) {
@@ -46,19 +52,9 @@ public class Painter extends JPanel {
                 if ((int) container.get(key) > counterMax) {
                     counterMax = (int) container.get(key);
                 }
-            }
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
-    }
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        try {
-            Panel panel;
-
-            // przekazuje dane do widoku
-            for (Object key : keysList.toArray()) {
+                
+                
+                
                 panel = new Panel();
                 panel.setLineWidth((100 * ((int) container.get(key)))
                         / counterMax);
@@ -71,9 +67,24 @@ public class Painter extends JPanel {
                 } else if ((int) container.get(key) == counterMax) {
                     panel.setColor(Color.red);
                 }
-
+                
                 add(panel);
+                panels[x] = panel;
+                x++;
             }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        try {
+            // przekazuje dane do widoku
+//            for (Panel panel : panels) {
+//                panel.setLineWidth(100 * getWidth())
+//                        / counterMax);
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }

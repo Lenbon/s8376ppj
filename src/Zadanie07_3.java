@@ -1,90 +1,61 @@
 import zadanie07_3.*;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.TreeSet;
 
-import javax.sound.midi.SysexMessage;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Zadanie 3 (max 12 punktów)
  * 
- * Stworzyć prosty edytor tekstu z opcjami umieszczonymi w menu rozwijalnym
- * File
- *  Open - otwiera plik wybrany w dialogu wynoru plików i wczytuje plik do edytora
- *  Save - zapisuje zawartość edytora do bieżącego pliku (jeśli nie ma pliku, to dialog)
- *  Save As... zapisuje zawartość do pliku wybranego z dialogu
- *  Exit   - zamknięcie okna i zakończenie działania aplikacji
+ * Stworzyć prosty edytor tekstu z opcjami umieszczonymi w menu rozwijalnym File
+ * Open - otwiera plik wybrany w dialogu wynoru plików i wczytuje plik do
+ * edytora Save - zapisuje zawartość edytora do bieżącego pliku (jeśli nie ma
+ * pliku, to dialog) Save As... zapisuje zawartość do pliku wybranego z dialogu
+ * Exit - zamknięcie okna i zakończenie działania aplikacji
  * 
- * Edit
- *  Adresy
- *      Dom      - dopisuje do edytora adres domowy
- *      Szkoła    - dopisuje do edytora adres szkoły
- *      Firma     - dopisuje do edutora adres służbowy
- *      
- * Options
- *  Foreground     - zmienia kolor pisma na wybraną opcję
- *      kolor1
- *      ...
- *      kolorN
- *  Background    - zmienia kolor tła na wybraną opcję
- *      kolor1
- *      ...
- *      kolorN
- *  Font size          - zmienia rozmiar pisma na wybraną opcję
- *      8
- *      10
- *      ...
- *      24
- *      
- * Zapewnić:
- * mnemoniki i akceleratory dla opcji Open, Save, Save As..., Exit, Dom, Szkoła, Firma
- * pokazywanie kolorów w opcjach wyboru koloru (tła i pierwszego planu) w postaci kolorowych kółek
- * pokazywanie nazwy edytowanego pliku an pasku tytułu (jeślie nie ma pliku - "bez tytułu") 
+ * Edit Adresy Dom - dopisuje do edytora adres domowy Szkoła - dopisuje do
+ * edytora adres szkoły Firma - dopisuje do edutora adres służbowy
  * 
- * Uwagi:
- * łatwe umieszczenie kolorów = własna klasa implementująca Icon
- * należy napisać kilka metod uniwersalnych (np. tworzące opcje menu z zadanymi charakterystykami), w przeciwnym razie kod będzie duży i słabo czytelny
- *  
+ * Options Foreground - zmienia kolor pisma na wybraną opcję kolor1 ... kolorN
+ * Background - zmienia kolor tła na wybraną opcję kolor1 ... kolorN Font size -
+ * zmienia rozmiar pisma na wybraną opcję 8 10 ... 24
+ * 
+ * Zapewnić: mnemoniki i akceleratory dla opcji Open, Save, Save As..., Exit,
+ * Dom, Szkoła, Firma pokazywanie kolorów w opcjach wyboru koloru (tła i
+ * pierwszego planu) w postaci kolorowych kółek pokazywanie nazwy edytowanego
+ * pliku an pasku tytułu (jeślie nie ma pliku - "bez tytułu")
+ * 
+ * Uwagi: łatwe umieszczenie kolorów = własna klasa implementująca Icon należy
+ * napisać kilka metod uniwersalnych (np. tworzące opcje menu z zadanymi
+ * charakterystykami), w przeciwnym razie kod będzie duży i słabo czytelny
+ * 
  * @author s8376
  * @version $Id$
  */
 public class Zadanie07_3 extends JFrame {
     boolean isChange = false;
-    JPanel panel;
     JTextArea textArea;
     String titlePrefix = "Word processor - ", titleSufix,
             titleSufixDefault = "bez tytułu";
+    FileManager fileManager;
     Hashtable<String, Color> colors;
     HashMap<Integer, String> fonts;
     {
@@ -112,14 +83,14 @@ public class Zadanie07_3 extends JFrame {
     }
 
     Zadanie07_3() {
+
         initElements();
         initUI();
     }
 
     protected void initElements() {
-        // components
-        panel = new JPanel();
 
+        // components
         textArea = new JTextArea();
         textArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -136,6 +107,8 @@ public class Zadanie07_3 extends JFrame {
             }
         });
         add(new JScrollPane(textArea));
+        
+        fileManager = new FileManager(textArea);
 
         // menu: file
         JMenu file = new JMenu("File");
@@ -147,15 +120,8 @@ public class Zadanie07_3 extends JFrame {
         fileOpen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileopen = new JFileChooser();
-                fileopen.addChoosableFileFilter(new FileNameExtensionFilter(
-                        "pliki tekstowe", "txt"));
-
-                int ret = fileopen.showDialog(panel, "Otwórz plik");
-                if (ret == JFileChooser.APPROVE_OPTION) {
-                    File file = fileopen.getSelectedFile();
-//                    textArea.setText(readFile(file));
-                }
+                fileManager.read();
+                setTitleText(fileManager.getName());
             }
         });
 
@@ -163,11 +129,24 @@ public class Zadanie07_3 extends JFrame {
         fileSave.setToolTipText("Zapisz do pliku");
         fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
                 ActionEvent.CTRL_MASK));
+        fileSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileManager.save();
+            }
+        });
 
         JMenuItem fileSaveas = new JMenuItem("Save As");
         fileSaveas.setToolTipText("Zapisz do nowego pliku");
         fileSaveas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
                 ActionEvent.CTRL_MASK));
+        fileSaveas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileManager.saveAs();
+                setTitleText(fileManager.getName());
+            }
+        });
 
         JMenuItem fileExit = new JMenuItem("Exit");
         fileExit.setToolTipText("Wyjście z edytora");
@@ -284,6 +263,7 @@ public class Zadanie07_3 extends JFrame {
     }
 
     protected void initUI() {
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(new Dimension(300, 300));
         setLocationRelativeTo(null);
@@ -292,7 +272,13 @@ public class Zadanie07_3 extends JFrame {
         setVisible(true);
     }
 
+    protected void setTitleText(String sufix) {
+        titleSufix = sufix;
+        setTitle(titlePrefix + titleSufix);
+    }
+
     public static void main(String[] args) {
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new Zadanie07_3();

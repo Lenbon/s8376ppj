@@ -1,8 +1,6 @@
 package zadanie06_2;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.text.Collator;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,10 +13,11 @@ import javax.swing.JPanel;
 /**
  * Painter
  * 
- * @author s8376
- * @version $Id$
+ * @author      s8376
+ * @version     $Id$
  */
 public class Painter extends JPanel {
+
     Parser parser;
     int counterMin = 0, counterMax = 0;
     List<Object> keysList;
@@ -26,6 +25,7 @@ public class Painter extends JPanel {
     Panel[] panels;
 
     public Painter(Parser parser) {
+        
         this.parser = parser;
         boolean first = true;
 
@@ -76,17 +76,18 @@ public class Painter extends JPanel {
             e.getStackTrace();
         }
     }
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        try {
-            // przekazuje dane do widoku
-//            for (Panel panel : panels) {
-//                panel.setLineWidth(100 * getWidth())
-//                        / counterMax);
-//            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//
+//    public void paintComponent(Graphics g) {
+//        
+//        super.paintComponent(g);
+//        try {
+//            // przekazuje dane do widoku
+////            for (Panel panel : panels) {
+////                panel.setLineWidth(100 * getWidth())
+////                        / counterMax);
+////            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

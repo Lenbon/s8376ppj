@@ -22,16 +22,20 @@ public class ShopTableModel extends AbstractTableModel {
 
     private final static String[] columnNames = { ID_NAME, NAME_NAME,
             PRODUCER_NAME, PRICE_NAME };
-    private String[][] products = { { null, "Proszek do prania", "Ajax", "4" },
-            { null, "Kawa mielona", "Java", "8" },
-            { null, "Pasta do butów", "Polish", "3" },
-            { null, "Spinacz biurowy", "Biurex", "1" },
-            { null, "Ołówek", "Biurex", "1" },
-            { null, "Grzebień", "Badzieweks", "1" },
-            { null, "Szczoteczka do zębów", "Badzieweks", "2" },
-            { null, "Pani domu", "Wydawnictwo ABC", "5" },
-            { null, "Gotowanie", "Wydawnictwo ABC", "4" },
-            { null, "Horoskopy", "Wydawnictwo ABC", "4" } };
+    private Object[][] products = { { null, "Proszek do prania", "Ajax", 4.5 },
+            { null, "Kawa mielona", "Java", 8.0 },
+            { null, "Pasta do butów", "Polish", 3.2 },
+            { null, "Spinacz biurowy", "Biurex", 0.01 },
+            { null, "Ołówek", "Biurex", 0.3 },
+            { null, "Grzebień", "Badzieweks", 1.0 },
+            { null, "Szczoteczka do zębów", "Badzieweks", 2.85 },
+            { null, "Pani domu", "Wydawnictwo ABC", 5.3 },
+            { null, "Gotowanie", "Wydawnictwo ABC", 4.75 },
+            { null, "Horoskopy", "Wydawnictwo ABC", 3.99 } };
+
+    public ShopTableModel() {
+        addTableModelListener(new ShopTableModelListener());
+    }
 
     @Override
     public int getColumnCount() {

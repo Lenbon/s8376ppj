@@ -6,8 +6,8 @@ import javax.swing.table.TableCellRenderer;
 /**
  * BookTable
  * 
- * @author s8376
- * @version $Id$
+ * @author      s8376
+ * @version     $Id$
  */
 public class BookTable extends JTable {
 

@@ -45,12 +45,13 @@ public class Zadanie08_1 extends JFrame {
     public void init() {
         
         JTable table = new JTable(new ShopTableModel());
-        add(new JScrollPane(table));
-        
+
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setBackground(Color.YELLOW);
         renderer.setForeground(Color.RED);
         table.getColumn(ShopTableModel.PRICE_NAME).setCellRenderer(renderer);
+        
+        add(new JScrollPane(table));
     }
 
     public void initGUI() {

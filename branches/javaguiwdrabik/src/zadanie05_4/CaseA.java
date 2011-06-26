@@ -9,11 +9,13 @@ public class CaseA extends Abstract {
         x = 75;
         y = 75;
     }
+
     public CaseA() {
-        super(new char[]{});
+        super(new char[] {});
     }
 
     public void run() {
+        
         while (true) {
             // odbicie
             if (x + dim > getWidth() || x < 0)

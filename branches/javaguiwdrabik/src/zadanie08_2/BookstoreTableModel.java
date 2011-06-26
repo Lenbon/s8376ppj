@@ -10,15 +10,22 @@ import javax.swing.table.AbstractTableModel;
  */
 public class BookstoreTableModel extends AbstractTableModel {
 
-    private final static int ID_IDX = 0;
-    private final static int AUTHOR_IDX = 1;
-    private final static int TITLE_IDX = 2;
-    private final static int PUBLISHINGHOUSE_IDX = 3;
-    private final static int PRICE_IDX = 4;
-    private final static int FRONTPAGE_IDX = 5;
+    public final static int ID_IDX = 0;
+    public final static int AUTHOR_IDX = 1;
+    public final static int TITLE_IDX = 2;
+    public final static int PUBLISHINGHOUSE_IDX = 3;
+    public final static int PRICE_IDX = 4;
+    public final static int FRONTPAGE_IDX = 5;
 
-    private final static String[] columnNames = { "ID", "Autora", "Tytuł",
-            "Wydawnictwo", "Cena", "Strona tytułowa" };
+    public final static String ID_NAME = "ID";
+    public final static String AUTHOR_NAME = "Autor";
+    public final static String TITLE_NAME = "Tytuł";
+    public final static String PUBLISHINGHOUSE_NAME = "Wydawnictwo";
+    public final static String PRICE_NAME = "Cena";
+    public final static String FRONTPAGE_NAME = "Strona tytułowa";
+
+    private final static String[] columnNames = { ID_NAME, AUTHOR_NAME,
+            TITLE_NAME, PUBLISHINGHOUSE_NAME, PRICE_NAME, FRONTPAGE_NAME };
     private Object[] products;
 
     public BookstoreTableModel(String pathToStorageFile) {

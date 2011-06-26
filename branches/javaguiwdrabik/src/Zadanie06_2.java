@@ -36,8 +36,8 @@ import zadanie06_2.*;
  * 
  * Przy przydziale punktów będzie uwzględniany sposób oprogramowania
  * 
- * @author s8376
- * @version $Id$
+ * @author      s8376
+ * @version     $Id$
  */
 public class Zadanie06_2 extends JFrame {
 
@@ -52,7 +52,6 @@ public class Zadanie06_2 extends JFrame {
     }
 
     public void init() {
-
         add(new JScrollPane(new Painter(new Parser("files/zadanie06_2.txt"))),
                 BorderLayout.CENTER);
     }

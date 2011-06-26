@@ -1,10 +1,13 @@
 import zadanie08_2.*;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * Zadanie 1
@@ -37,8 +40,19 @@ public class Zadanie08_2 extends JFrame {
     }
 
     public void init() {
-        add(new JScrollPane(new BookTable(new BookstoreTableModel(
-                "files/zadanie08_2/data.txt"))));
+
+        JTable table = new JTable(new BookstoreTableModel(
+                "files/zadanie08_2/data.txt"));
+
+        table.setAutoCreateRowSorter(true);
+
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setBackground(Color.YELLOW);
+        renderer.setForeground(Color.RED);
+        table.getColumn(BookstoreTableModel.PRICE_NAME).setCellRenderer(
+                renderer);
+
+        add(new JScrollPane(table));
     }
 
     public void initGUI() {

@@ -6,13 +6,17 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
- * @author s8376
- * @version $Id$
+ * Panel
+ * 
+ * @author      s8376
+ * @version     $Id$
  */
 public class Panel extends JPanel {
+
     Color color = Color.blue;
     String title;
-    int counter, lineWidth = 10, lineHeight = 10, margin = 10, lineMargin = 30, rectMaxSize = 310;
+    int counter, lineWidth = 10, lineHeight = 10, margin = 10, lineMargin = 30,
+            rectMaxSize = 310;
 
     public int getCounter() {
         return counter;
@@ -23,6 +27,7 @@ public class Panel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
+
         g.setColor(color);
         g.drawString(title, margin, lineHeight);
         g.fillRect(lineMargin, 0, lineWidth, lineHeight);

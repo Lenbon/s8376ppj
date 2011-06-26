@@ -7,8 +7,8 @@ import java.util.HashMap;
 /**
  * Parser
  * 
- * @author s8376
- * @version $Id$
+ * @author      s8376
+ * @version     $Id$
  */
 public class Parser {
     HashMap<String, Integer> container = null;

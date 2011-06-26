@@ -7,6 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
+/**
+ * BookPriceRenederer
+ * 
+ * @author      s8376
+ * @version     $Id$
+ */
 public class BookPriceRenederer extends JLabel implements TableCellRenderer {
 
     boolean isBordered;

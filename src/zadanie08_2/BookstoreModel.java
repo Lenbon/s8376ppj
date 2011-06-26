@@ -17,7 +17,6 @@ public class BookstoreModel {
     private String path;
 
     public BookstoreModel(String path) {
-
         this.path = path;
     }
 

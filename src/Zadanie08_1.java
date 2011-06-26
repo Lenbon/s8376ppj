@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 
 import zadanie08_1.*;
@@ -6,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * Zadanie 1
@@ -41,8 +43,14 @@ public class Zadanie08_1 extends JFrame {
     }
 
     public void init() {
-
-        add(new JScrollPane(new JTable(new ShopTableModel())));
+        
+        JTable table = new JTable(new ShopTableModel());
+        add(new JScrollPane(table));
+        
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setBackground(Color.YELLOW);
+        renderer.setForeground(Color.RED);
+        table.getColumn(ShopTableModel.PRICE_NAME).setCellRenderer(renderer);
     }
 
     public void initGUI() {
@@ -58,7 +66,6 @@ public class Zadanie08_1 extends JFrame {
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 new Zadanie08_1();

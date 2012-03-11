@@ -12,41 +12,45 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Board extends JPanel implements ActionListener {
-    Image star;
-    Timer timer;
-    int x, y;
+public class Board extends JPanel implements ActionListener
+{
+	Image star;
+	Timer timer;
+	int x, y;
 
-    public Board() {
-        setBackground(Color.BLACK);
+	public Board() {
+		setBackground(Color.BLACK);
 
-        ImageIcon ii = new ImageIcon(this.getClass().getResource("750196912.png"));
-        star = ii.getImage();
+		ImageIcon ii = new ImageIcon(this.getClass().getResource(
+				"750196912.png"));
+		star = ii.getImage();
 
-        setDoubleBuffered(true);
+		setDoubleBuffered(true);
 
-        x = y = 10;
-        timer = new Timer(25, this);
-        timer.start();
-    }
+		x = y = 10;
+		timer = new Timer(25, this);
+		timer.start();
+	}
 
-    public void paint(Graphics g) {
-        super.paint(g);
+	public void paint(Graphics g)
+	{
+		super.paint(g);
 
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(star, x, y, this);
-        Toolkit.getDefaultToolkit().sync();
-        g.dispose();
-    }
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawImage(star, x, y, this);
+		Toolkit.getDefaultToolkit().sync();
+		g.dispose();
+	}
 
-    public void actionPerformed(ActionEvent e) {
-        x += 1;
-        y += 1;
+	public void actionPerformed(ActionEvent e)
+	{
+		x += 1;
+		y += 1;
 
-        if (y > 240) {
-            y = -45;
-            x = -45;
-        }
-        repaint();
-    }
+		if (y > 240) {
+			y = -45;
+			x = -45;
+		}
+		repaint();
+	}
 }

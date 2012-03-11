@@ -6,17 +6,19 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class Board extends JPanel {
-    Image bardejov;
+public class Board extends JPanel
+{
+	Image bardejov;
 
-    public Board() {
-        ImageIcon ii = new ImageIcon(this.getClass().getResource(
-                "files/img/z9787596F.jpg"));
-        bardejov = ii.getImage();
-    }
+	public Board() {
+		ImageIcon ii = new ImageIcon(this.getClass().getResource(
+				"files/img/z9787596F.jpg"));
+		bardejov = ii.getImage();
+	}
 
-    public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(bardejov, 10, 10, null);
-    }
+	public void paint(Graphics g)
+	{
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawImage(bardejov, 10, 10, null);
+	}
 }

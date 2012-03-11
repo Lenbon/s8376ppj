@@ -2,45 +2,51 @@ package spaceinvaders;
 
 import javax.swing.ImageIcon;
 
-public class Alien extends Sprite {
-    private Bomb bomb;
-    private final String shot = "files/spacepix/alien.png";
+public class Alien extends Sprite
+{
+	private Bomb bomb;
+	private final String shot = "files/spacepix/alien.png";
 
-    public Alien(int x, int y) {
-        this.x = x;
-        this.y = y;
+	public Alien(int x, int y) {
+		this.x = x;
+		this.y = y;
 
-        bomb = new Bomb(x, y);
-        ImageIcon ii = new ImageIcon(this.getClass().getResource(shot));
-        setImage(ii.getImage());
-    }
+		bomb = new Bomb(x, y);
+		ImageIcon ii = new ImageIcon(this.getClass().getResource(shot));
+		setImage(ii.getImage());
+	}
 
-    public void act(int direction) {
-        this.x += direction;
-    }
+	public void act(int direction)
+	{
+		this.x += direction;
+	}
 
-    public Bomb getBomb() {
-        return bomb;
-    }
+	public Bomb getBomb()
+	{
+		return bomb;
+	}
 
-    public class Bomb extends Sprite {
-        private final String bomb = "files/spacepix/bomb.png";
-        private boolean destroyed;
+	public class Bomb extends Sprite
+	{
+		private final String bomb = "files/spacepix/bomb.png";
+		private boolean destroyed;
 
-        public Bomb(int x, int y) {
-            setDestroyed(true);
-            this.x = x;
-            this.y = y;
-            ImageIcon ii = new ImageIcon(this.getClass().getResource(bomb));
-            setImage(ii.getImage());
-        }
+		public Bomb(int x, int y) {
+			setDestroyed(true);
+			this.x = x;
+			this.y = y;
+			ImageIcon ii = new ImageIcon(this.getClass().getResource(bomb));
+			setImage(ii.getImage());
+		}
 
-        public void setDestroyed(boolean destroyed) {
-            this.destroyed = destroyed;
-        }
+		public void setDestroyed(boolean destroyed)
+		{
+			this.destroyed = destroyed;
+		}
 
-        public boolean isDestroyed() {
-            return destroyed;
-        }
-    }
+		public boolean isDestroyed()
+		{
+			return destroyed;
+		}
+	}
 }

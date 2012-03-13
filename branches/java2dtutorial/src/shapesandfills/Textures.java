@@ -23,9 +23,9 @@ public class Textures extends JPanel
 
     public Textures() {
         try {
-            slate = ImageIO.read(this.getClass().getResource("files/textures/slate.png"));
-            java = ImageIO.read(this.getClass().getResource("files/textures/java.png"));
-            pane = ImageIO.read(this.getClass().getResource("files/textures/pane.png"));
+            slate = ImageIO.read(this.getClass().getResource("textures/slate.png"));
+            java = ImageIO.read(this.getClass().getResource("textures/java.png"));
+            pane = ImageIO.read(this.getClass().getResource("textures/pane.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

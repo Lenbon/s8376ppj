@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -24,7 +25,7 @@ public class ClippingShapes extends JPanel implements ActionListener
     private double delta[] = { 1, 1 };
 
     public ClippingShapes() {
-        timer = new Timer(10, this);
+        timer = new Timer(500, this);
         timer.start();
     }
 

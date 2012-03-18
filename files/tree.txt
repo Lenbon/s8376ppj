@@ -1,0 +1,20 @@
+[ZarzadzanieInf] ->
+[SztukaNowychMediow] ->
+[Informatyka] ->
+	[Dzienne] ->
+		sat.class
+		gui.class
+		mad.class
+		rok2.java
+		rok1.java
+	[Zaoczne] ->
+		gui.class
+		mad.class
+		am.class
+	[Wieczorowe] ->
+		dane.txt
+		egz.class
+		kol.txt
+		[Test] ->
+			test.class
+	xxx.txt

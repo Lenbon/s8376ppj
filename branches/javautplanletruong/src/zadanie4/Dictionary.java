@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import java.util.Map;
 public class Dictionary
 {
     private String _path;
-    private Map<Integer, List<String>> _collection;
+    private Map<String, List<String>> _collection;
 
     /**
      * Konstruktor
@@ -29,43 +30,65 @@ public class Dictionary
     public Dictionary(String path) throws IOException
     {
         _path = path;
+        _collection = new HashMap<String, List<String>>();
+        read();
+    }
 
+    /**
+     * Czyta zadany plik zapisujac dane do kolekcji
+     * 
+     * @throws IOException
+     * @return void
+     */
+    public void read() throws IOException
+    {
         FileReader fr = new FileReader(_path);
         BufferedReader br = new BufferedReader(fr);
 
-        HashMap<String, ArrayList<String>> _collection = new HashMap<String, ArrayList<String>>();
+        String line, key, value;
+        while ((line = br.readLine()) != null) {
+            try {
+                String[] split = line.split("(={1})");
+                key = split[0].trim();
+                value = split[1].trim();
 
-        String line;
-        while (true) {
-            line = br.readLine();
-            if (line == null) {
-                break;
+                if (_collection.containsKey(key)) {
+                    _collection.get(key).add(value);
+                } else {
+                    ArrayList<String> newValue = new ArrayList<String>();
+                    newValue.add(value);
+                    _collection.put(key, newValue);
+                }
+            } catch (Exception e) {
+                //System.out.println("skipping");
             }
-
-            String[] split = line.split("([ =]+)");
-
-//System.out.println(line);
-
-            ArrayList<String> list = new ArrayList<String>();
-            list.add(split[1]);
-
-            _collection.put(split[0], list);
         }
-
-        System.out.println(_collection);
 
         br.close();
     }
 
     /**
-     * Dla danego hasła podaje listę dostępnych, ponumerowanych definicji. 
+     * Dla danego hasła podaje listę dostępnych, ponumerowanych definicji.
      * Lista ta jest posortowana według porządku leksykograficznego definicji.
      * 
+     * @param key
      * @return void
      */
-    public void lookup()
+    public void lookup(String key)
     {
+        if (_collection.containsKey(key)) {
+            int no = 0;
+            
 
+// TODO sortowanie
+            
+            
+            for (String string : _collection.get(key)) {
+                System.out.println((++no) + ". " + string);
+            }
+        } else {
+            System.out.println("Nie ma takiego hasła: " + key);
+        }
     }
 
     /**
@@ -110,9 +133,13 @@ public class Dictionary
         FileWriter fw = new FileWriter(_path + "BKP");
         BufferedWriter bw = new BufferedWriter(fw);
 
-// _collection
+        for (String key : _collection.keySet()) {
+            for (String value : _collection.get(key)) {
+                bw.write(key + " = " + value);
+                bw.newLine();
+            }    
+        }
 
         bw.close();
     }
-
 }

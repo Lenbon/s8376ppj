@@ -44,7 +44,7 @@ public class Dictionary
     public Dictionary(String path) throws IOException
     {
         _path = path;
-        _collection = new HashMap<String, List<String>>();
+        _collection = new HashMap<String, List<String>>(); // TreeMap - doczytać. TODO
         read();
     }
 
@@ -175,7 +175,6 @@ public class Dictionary
     public void save() throws IOException
     {
         FileWriter fw = new FileWriter(_path + "BKP");
-//        FileWriter fw = new FileWriter(_path);
         BufferedWriter bw = new BufferedWriter(fw);
 
         for (String key : _collection.keySet()) {

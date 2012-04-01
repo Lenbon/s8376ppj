@@ -28,14 +28,29 @@ import zadanie4.Dictionary;
  */
 public class Zadanie4
 {
-
     public static void main(String[] args)
     {
         try {
-            Dictionary dictionary = new Dictionary("files/zadanie4.txt");
+            // konstruktor - tworzy słownik czytając plik wejściowy, zawierący hasła z definicjami. Niepoprawne (składniowo) wiersze pliku wejściowego są ignorowane podczas czytania.
+            Dictionary dictionary = new Dictionary("files/zadanie4_dev.txt");
+            // lookup - dla danego hasła podaje listę dostępnych, ponumerowanych definicji. Lista ta jest posortowana według porządku leksykograficznego definicji.
+            dictionary.lookup("Lorem ipsum");
+            // add - dodaje do słownika hasło z definicją (o ile nie było ich wcześniej w słowniku).
+            // delete - usuwa ze słownika podane hasło z definicją, wskazaną np. przez numer porządkowy (patrz. punkt b.).
+            // update - aktualizuje słownik, zamieniając starą definicję na nową dla podanego hasła.
+            // save - zapisuje aktualny stan słownika do pliku wyjściowego.
+            dictionary.save();
+
+            
+
+            
+            //add
+            //delete
+            //update
+            
+
         } catch (Exception e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
-
 }

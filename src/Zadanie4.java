@@ -36,12 +36,12 @@ public class Zadanie4
             // lookup - dla danego hasła podaje listę dostępnych, ponumerowanych definicji. Lista ta jest posortowana według porządku leksykograficznego definicji.
             dictionary.lookup("Lorem ipsum");
             // add - dodaje do słownika hasło z definicją (o ile nie było ich wcześniej w słowniku).
-//            dictionary.add("abcd", "lorem ipsum");
-//            dictionary.add("abcd", "lorem ipsum");
+            dictionary.add("abcd", "lorem ipsum");
+            dictionary.add("abcd", "lorem ipsum");
             // delete - usuwa ze słownika podane hasło z definicją, wskazaną np. przez numer porządkowy (patrz. punkt b.).
-//            dictionary.delete("Lorem ipsum", 0);
+            dictionary.delete("Lorem ipsum", 0);
             // update - aktualizuje słownik, zamieniając starą definicję na nową dla podanego hasła.
-//            dictionary.update("Lorem ipsum", 1, "NOWA DEFINICJA");
+            dictionary.update("Lorem ipsum", 1, "NOWA DEFINICJA");
 
             // po zmianach
             dictionary.lookup("Lorem ipsum");

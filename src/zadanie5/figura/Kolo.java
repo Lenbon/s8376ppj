@@ -2,9 +2,14 @@ package zadanie5.figura;
 
 public class Kolo extends Figura
 {
-    @Override
-    public int compareTo(Figura o)
+    private final int r;
+
+    public Kolo(int r)
     {
-        return 0;
+        super();
+
+        this.r = r;
+        o = (int) (2 * 3.14 * r);
+        p = (int) (3.14 * (r * r));
     }
 }

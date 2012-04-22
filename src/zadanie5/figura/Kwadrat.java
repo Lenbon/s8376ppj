@@ -2,9 +2,14 @@ package zadanie5.figura;
 
 public class Kwadrat extends Figura
 {
-    @Override
-    public int compareTo(Figura o)
+    private final int a;
+
+    public Kwadrat(int a)
     {
-        return 0;
+        super();
+
+        this.a = a;
+        o = 4 * a;
+        p = a * a;
     }
 }

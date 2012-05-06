@@ -18,6 +18,11 @@ public class Dummy extends Parent
         this(value, "noname");
     }
 
+    public Dummy(String value)
+    {
+        this(0, value);
+    }
+
     public Dummy(int value, String name)
     {
         _protectedOne = value;

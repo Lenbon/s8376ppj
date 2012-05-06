@@ -58,8 +58,15 @@ public class Zadanie6
             }
         }
 
+        try {
+            Constructor cconstructor = c
+                    .getConstructor(java.lang.String.class);
+            Dummy cc = (Dummy) cconstructor.newInstance("lipsum");
 
-//        Class cc = new constructors[2](1, "abc");// TODO
+            System.out.println(cc.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args)

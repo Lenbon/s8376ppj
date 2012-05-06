@@ -1,0 +1,6 @@
+frame setTitle JReflection
+frame setLocation 400 400
+frame setDefaultCloseOperation 3
+textField1 setEnabled false
+button1 setText First
+button2 setEnabled false

@@ -3,19 +3,26 @@ import java.lang.reflect.*;
 
 /**
  * Zadanie 9
- * 
+ *
  * (Łączenie z bazą danych i uzyskiwanie metainformacji o bazie danych)
- * 
+ *
  * Program pokazuje, że do połączenia z BD potrzebne są dwa kroki:
  * - załadowanie odpowiedniej klasy sterownika
  * - uzyskanie połączenie poprzez uzyskanie obiektu typu Connection
- * Od obiektu Connection możemy otrzymać metainformacje związane ze sterownikiem, systemem zarządzania BD i samą BD poprzez  uzyskanie obiektu typu DatabaseMetaData, który możemy odpytywać za pomocą wielu  metod interfejsu DatabaseMetaData.
- * Należy napisać program, łączący się z bazą danych książek i uzyskujący niektóre informacje o bazie danych.
- * Częściowy gotowy program (bez części odpowiedzialnej za połączenie z bazą i uzyskanie metainformacji) jest pokazany poniżej. Należy go uzupełnić o brakujące fragmenty kodu.
- * 
+ * Od obiektu Connection możemy otrzymać metainformacje związane
+ * ze sterownikiem, systemem zarządzania BD i samą BD poprzez uzyskanie obiektu
+ * typu DatabaseMetaData, który możemy odpytywać za pomocą wielu metod
+ * interfejsu DatabaseMetaData.
+ * Należy napisać program, łączący się z bazą danych książek i uzyskujący
+ * niektóre informacje o bazie danych.
+ * Częściowy gotowy program (bez części odpowiedzialnej za połączenie z bazą
+ * i uzyskanie metainformacji) jest pokazany poniżej. Należy go uzupełnić
+ * o brakujące fragmenty kodu.
+ *
  * @version     $Id$
  */
-public class Zadanie9 {
+public class Zadanie9
+{
     static {
         System.setProperty("derby.system.home", "Z:/DerbyAid");
     }
@@ -26,7 +33,8 @@ public class Zadanie9 {
     Connection con;
     DatabaseMetaData md;
 
-    public Zadanie9() {
+    public Zadanie9()
+    {
         try {
             Class.forName(driverName);
             con = DriverManager.getConnection(url);
@@ -39,19 +47,19 @@ public class Zadanie9 {
     }
 
     /**
-     * Metoda raportująca informacje zebrane w DatabaseMetaData
-     * w wywołaniach metody info podano jako argumenty nazwy metod tego interfejsu
-     a w metodzie info korszystamy z metod refleksji;
-     ten sposób oprogramowania jest zaawansowany, ale wygodny, bo dużo mniej pisania
-     i kod jest bardziej klarowny
-     klauzula throws SQLException mówi o tym, że w trakcie działania reportInfo może powstać wyjątek
-     SQLException, ale nie będziemy go tu obsługiwać, obsługę przekażemy do miejsca wywołania
-     czyli bloku try w konstruktorze
+     * Metoda raportująca informacje zebrane w DatabaseMetaData w wywołaniach
+     * metody info podano jako argumenty nazwy metod tego interfejsu
+     * a w metodzie info korszystamy z metod refleksji; ten sposób
+     * oprogramowania jest zaawansowany, ale wygodny, bo dużo mniej pisania
+     * i kod jest bardziej klarowny klauzula throws SQLException mówi o tym,
+     * że w trakcie działania reportInfo może powstać wyjątek SQLException,
+     * ale nie będziemy go tu obsługiwać, obsługę przekażemy do miejsca
+     * wywołania czyli bloku try w konstruktorze.
      *
      * @throws SQLException
      */
-
-    void reportInfo() throws SQLException {
+    void reportInfo() throws SQLException
+    {
         info("getDatabaseProductName");
         info("getDatabaseProductVersion");
         info("getDriverName");
@@ -79,8 +87,13 @@ public class Zadanie9 {
                 + md.updatesAreDetected(ResultSet.TYPE_SCROLL_INSENSITIVE));
     }
 
-    // Metoda info korzysta z metod refleksji do wywołania metod podanych "przez" nazwy.
-    void info(String metName) {
+    /**
+     * Metoda info korzysta z metod refleksji do wywołania metod podanych "przez" nazwy.
+     *
+     * @param metName
+     */
+    void info(String metName)
+    {
         Class mdc = DatabaseMetaData.class;
         Class[] paramTypes = {};
         Object[] params = {};
@@ -97,7 +110,8 @@ public class Zadanie9 {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         new Zadanie9();
     }
 }

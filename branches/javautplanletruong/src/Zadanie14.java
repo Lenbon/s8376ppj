@@ -69,7 +69,7 @@ public class Zadanie14 extends JFrame
 System.out.println(lang);
 
 
-        msgs = ResourceBundle.getBundle("files/dictionary/EditorMessages", new Locale(lang));
+        msgs = ResourceBundle.getBundle("EditorMessages", new Locale(lang));
 
         titlePrefix = msgs.getString("title_prefix");
         titleSufixDefault = msgs.getString("title_sufix_default");
@@ -321,7 +321,7 @@ System.out.println(lang);
         try {
             tmpLang = args[0];
         } catch (Exception e) {
-            tmpLang = "pl";
+            tmpLang = "en";
         }
 
         final String lang = tmpLang;

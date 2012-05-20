@@ -28,10 +28,10 @@ public class Zadanie13 extends JPanel
 
         setPreferredSize(new Dimension(800, 200));
 
-        add(new Location("Warszawa", "pl", "PL"));
-        add(new Location("Nowy Jork", "en", "US"));
-        add(new Location("Londyn", "en", "GB"));
-        add(new Location("Moskwa", "ru", "RU"));
+        add(new Location("Warszawa", "pl", "PL", "Europe/Warsaw"));
+        add(new Location("Nowy Jork", "en", "US", "America/New_York"));
+        add(new Location("Londyn", "en", "GB", "Europe/London"));
+        add(new Location("Moskwa", "ru", "RU", "Europe/Moscow"));
     }
 
     @Override

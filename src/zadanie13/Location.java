@@ -1,6 +1,5 @@
 package zadanie13;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.text.DateFormat;
@@ -32,7 +31,7 @@ public class Location extends JPanel
                 .getTimeInstance(DateFormat.DEFAULT, locale);
         _dateFormatTime.setTimeZone(timeZone);
 
-        setPreferredSize(new Dimension(200, 200));
+//        setPreferredSize(new Dimension(200, 200));
         setLayout(new GridLayout(3, 1));
 
         _name = new JLabel(locationName);

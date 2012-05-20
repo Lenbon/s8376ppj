@@ -26,7 +26,7 @@ public class Zadanie13 extends JPanel
     {
         setLayout(new GridLayout(1, 4));
 
-        setPreferredSize(new Dimension(800, 200));
+        setPreferredSize(new Dimension(600, 100));
 
         add(new Location("Warszawa", "pl", "PL", "Europe/Warsaw"));
         add(new Location("Nowy Jork", "en", "US", "America/New_York"));
